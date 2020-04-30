@@ -2,7 +2,7 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on zzhang-blog</title>
-    <link>https://z-zhang-nm.github.io/categories.html</link>
+    <link>https://z-zhang-nm.github.io/categories/</link>
     <description>Recent content in Categories on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
@@ -13,10 +13,10 @@
     
     <item>
       <title>ros</title>
-      <link>https://z-zhang-nm.github.io/categories/ros.html</link>
+      <link>https://z-zhang-nm.github.io/categories/ros/</link>
       <pubDate>Thu, 30 Apr 2020 10:01:03 +0800</pubDate>
       
-      <guid>https://z-zhang-nm.github.io/categories/ros.html</guid>
+      <guid>https://z-zhang-nm.github.io/categories/ros/</guid>
       <description></description>
     </item>
     
