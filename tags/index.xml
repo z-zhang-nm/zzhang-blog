@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on zzhang-blog</title>
-    <link>https://z-zhang-nm.github.io/tags/</link>
+    <link>https://z-zhang-nm.github.io/zzhang-blog/tags.html</link>
     <description>Recent content in Tags on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 30 Apr 2020 10:01:03 +0800</lastBuildDate>
     
-	<atom:link href="https://z-zhang-nm.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://z-zhang-nm.github.io/zzhang-blog/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>rosbag</title>
-      <link>https://z-zhang-nm.github.io/tags/rosbag/</link>
+      <link>https://z-zhang-nm.github.io/zzhang-blog/tags/rosbag.html</link>
       <pubDate>Thu, 30 Apr 2020 10:01:03 +0800</pubDate>
       
-      <guid>https://z-zhang-nm.github.io/tags/rosbag/</guid>
+      <guid>https://z-zhang-nm.github.io/zzhang-blog/tags/rosbag.html</guid>
       <description></description>
     </item>
     
