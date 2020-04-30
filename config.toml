@@ -14,6 +14,7 @@
 
 baseURL = "https://z-zhang-nm.github.io/zzhang-blog/"
 relativeURLs = true
+uglyURLs = true
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"
 title = "zzhang-blog"
