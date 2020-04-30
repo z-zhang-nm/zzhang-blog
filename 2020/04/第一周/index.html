@@ -7,36 +7,36 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="zzhang">
-<meta name="keywords" content="">
-<meta name="description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+<meta name="keywords" content="tech">
+<meta name="description" content="">
 
 
-<meta property="og:description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+<meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Rosbag Struct Parser">
-<meta name="twitter:title" content="Rosbag Struct Parser">
-<meta property="og:url" content="https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser/">
-<meta property="twitter:url" content="https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser/">
+<meta property="og:title" content="第一周">
+<meta name="twitter:title" content="第一周">
+<meta property="og:url" content="https://z-zhang-nm.github.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/">
+<meta property="twitter:url" content="https://z-zhang-nm.github.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/">
 <meta property="og:site_name" content="zzhang-blog">
-<meta property="og:description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
-<meta name="twitter:description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2020-04-30T10:01:03">
+    <meta property="article:published_time" content="2020-04-30T18:38:02">
   
   
-    <meta property="article:modified_time" content="2020-04-30T10:01:03">
+    <meta property="article:modified_time" content="2020-04-30T18:38:02">
   
-  
-  
-    
-      <meta property="article:section" content="ros">
-    
   
   
     
-      <meta property="article:tag" content="rosbag">
+      <meta property="article:section" content="Python教程">
+    
+  
+  
+    
+      <meta property="article:tag" content="妹妹">
     
   
 
@@ -57,14 +57,14 @@
   <meta property="twitter:image" content="https://z-zhang-nm.github.io/zzhang-blog/Profile/profile.jpg">
 
 
-    <title>Rosbag Struct Parser</title>
+    <title>第一周</title>
 
     <link rel="icon" href="https://z-zhang-nm.github.io/zzhang-blog/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser/">
+    <link rel="canonical" href="https://z-zhang-nm.github.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -194,13 +194,13 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      Rosbag Struct Parser
+      第一周
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-04-30T10:01:03&#43;08:00">
+      <time itemprop="datePublished" datetime="2020-04-30T18:38:02&#43;08:00">
         
   四月 30, 2020
 
@@ -211,7 +211,7 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://z-zhang-nm.github.io/zzhang-blog/categories/ros">ros</a>
+      <a class="category-link" href="https://z-zhang-nm.github.io/zzhang-blog/categories/python%e6%95%99%e7%a8%8b">Python教程</a>
     
   
 
@@ -221,12 +221,7 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(<a href="http://wiki.ros.org/Bags/Format/2.0">Format</a>)，对rosbag的结构进行解析。</p>
-<h1 id="rosbag-结构">Rosbag 结构</h1>
-<p>一个bag文件由record序列组成，文件第一行为格式标准版本信息。</p>
-<pre><code>#ROSBAG V2.0
-&lt;record 1&gt;&lt;record 2&gt;....&lt;record N&gt;
-</code></pre><h2 id="records">Records</h2>
+              
               
             </div>
           </div>
@@ -238,7 +233,7 @@
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://z-zhang-nm.github.io/zzhang-blog/tags/rosbag/">rosbag</a>
+  <a class="tag tag--primary tag--small" href="https://z-zhang-nm.github.io/zzhang-blog/tags/%E5%A6%B9%E5%A6%B9/">妹妹</a>
 
                   </div>
                 
@@ -251,7 +246,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang-nm.github.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/" data-tooltip="第一周">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -259,7 +254,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser/" data-tooltip="Rosbag Struct Parser">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -309,7 +304,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang-nm.github.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/" data-tooltip="第一周">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -317,7 +312,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser/" data-tooltip="Rosbag Struct Parser">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
