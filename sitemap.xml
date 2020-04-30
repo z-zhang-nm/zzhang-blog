@@ -3,32 +3,32 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/categories.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/categories/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/post.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/post/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/categories/ros.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/categories/ros/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/tags/rosbag.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/tags/rosbag/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/tags.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/tags/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/zzhang-blog/archives.html</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/archives/</loc>
   </url>
   
 </urlset>
