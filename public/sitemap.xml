@@ -3,42 +3,42 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://z-zhang-nm.github.io/categories/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/categories.html</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/post/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/post.html</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/categories/ros/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/categories/ros.html</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/tags/rosbag/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/tags/rosbag.html</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/2020/04/rosbag-struct-parser/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/2020/04/rosbag-struct-parser.html</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/tags/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/tags.html</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/</loc>
     <lastmod>2020-04-30T10:01:03+08:00</lastmod>
   </url>
   
   <url>
-    <loc>https://z-zhang-nm.github.io/archives/</loc>
+    <loc>https://z-zhang-nm.github.io/zzhang-blog/archives.html</loc>
   </url>
   
 </urlset>
