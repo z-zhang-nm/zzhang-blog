@@ -13,6 +13,8 @@
 # use grunt task `build` to synchronize assets
 
 baseURL = "https://z-zhang-nm.github.io/"
+relativeURLs = true
+uglyURLs = true
 languageCode = "zh-cn"
 defaultContentLanguage = "zh-cn"
 title = "zzhang-blog"
