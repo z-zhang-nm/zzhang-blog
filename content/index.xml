@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>zzhang-blog</title>
-    <link>https://z-zhang.gitee.io/zzhang-blog/</link>
-    <description>Recent content on zzhang-blog</description>
+    <title>Contents on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/content/</link>
+    <description>Recent content in Contents on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <lastBuildDate>Thu, 07 May 2020 11:49:15 +0800</lastBuildDate>
     
-	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/content/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -17,15 +17,6 @@
       <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>四元数转欧拉角</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</link>
-      <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</guid>
       <description></description>
     </item>
     
@@ -39,29 +30,11 @@
     </item>
     
     <item>
-      <title>Cmake编译</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/cmake%E7%BC%96%E8%AF%91/</link>
-      <pubDate>Wed, 06 May 2020 16:44:12 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/cmake%E7%BC%96%E8%AF%91/</guid>
-      <description>&lt;p&gt;CMake官网(&lt;a href=&#34;https://cmake.org/overview/&#34;&gt;CMake&lt;/a&gt;)介绍CMake是一个操作系统平台无关和编译器无关的用于管理编译（构建）过程的一个可扩展、开源系统，使用CMake可以简单的生成动态库，静态库和可执行文件。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
       <title>遍历文件夹</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/content/post/c&#43;&#43;/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%A4%B9/</link>
       <pubDate>Wed, 06 May 2020 16:34:32 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/c&#43;&#43;/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%A4%B9/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>遍历文件夹</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%A4%B9/</link>
-      <pubDate>Wed, 06 May 2020 16:34:32 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E9%81%8D%E5%8E%86%E6%96%87%E4%BB%B6%E5%A4%B9/</guid>
       <description></description>
     </item>
     
@@ -75,15 +48,6 @@
     </item>
     
     <item>
-      <title>第二周</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%BA%8C%E5%91%A8/</link>
-      <pubDate>Wed, 06 May 2020 10:03:30 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%BA%8C%E5%91%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>第一周</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/content/post/python/%E7%AC%AC%E4%B8%80%E5%91%A8/</link>
       <pubDate>Thu, 30 Apr 2020 18:38:02 +0800</pubDate>
@@ -93,29 +57,11 @@
     </item>
     
     <item>
-      <title>第一周</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/</link>
-      <pubDate>Thu, 30 Apr 2020 18:38:02 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Rosbag Struct Parser</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/rosbag_struct_parser/</link>
       <pubDate>Thu, 30 Apr 2020 10:01:03 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/rosbag_struct_parser/</guid>
-      <description>&lt;p&gt;　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(&lt;a href=&#34;http://wiki.ros.org/Bags/Format/2.0&#34;&gt;Format&lt;/a&gt;)，对rosbag的结构进行解析。&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Rosbag Struct Parser</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/04/rosbag-struct-parser/</link>
-      <pubDate>Thu, 30 Apr 2020 10:01:03 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/04/rosbag-struct-parser/</guid>
       <description>&lt;p&gt;　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(&lt;a href=&#34;http://wiki.ros.org/Bags/Format/2.0&#34;&gt;Format&lt;/a&gt;)，对rosbag的结构进行解析。&lt;/p&gt;</description>
     </item>
     
