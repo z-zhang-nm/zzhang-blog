@@ -8,18 +8,18 @@
 <meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
 <meta name="author" content="zzhang">
 <meta name="keywords" content="tech">
-<meta name="description" content="">
+<meta name="description" content="　　字符串、正则表达式">
 
 
-<meta property="og:description" content="">
+<meta property="og:description" content="　　字符串、正则表达式">
 <meta property="og:type" content="article">
 <meta property="og:title" content="第二周">
 <meta name="twitter:title" content="第二周">
 <meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%BA%8C%E5%91%A8/">
 <meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%BA%8C%E5%91%A8/">
 <meta property="og:site_name" content="zzhang-blog">
-<meta property="og:description" content="">
-<meta name="twitter:description" content="">
+<meta property="og:description" content="　　字符串、正则表达式">
+<meta name="twitter:description" content="　　字符串、正则表达式">
 <meta property="og:locale" content="zh-cn">
 
   
@@ -221,7 +221,110 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              
+              <p>　　<strong>字符串、正则表达式</strong></p>
+<h1 id="第二周">第二周</h1>
+<h3 id="字符串"><strong>字符串</strong></h3>
+<ul>
+<li>单引号、双引号或三引号包围的单个或多个字符</li>
+<li><code>*</code>重复输出</li>
+<li>可进行切片操作(再写一下滚动横幅?)</li>
+<li><code>in</code> 和 <code>not in</code></li>
+<li>可包含转义字符(换行符、制表符)</li>
+<li>原生字符串 <code>r'str'</code>(一般用在)</li>
+<li>常用方法：<code>len(), find(), rfind(), strip(), split(), title(), upper(), lower(), startswith(), join()等</code></li>
+<li>格式化输出<code>%s, %d, %f, %.nf</code></li>
+<li><code>format</code>格式化(<code>{}</code>和<code>:</code>代替<code>%</code>)
+<ul>
+<li><code>{}</code>里可以指定位置，若不指定位置，则按默认顺序</li>
+<li>可设置关键字参数</li>
+<li>可通过字典设置参数</li>
+<li>可通过列表索引设置参数</li>
+<li>数字格式化(<code>{index:.2f}, {:+.2f}, {:.0f}, {:,}, {:.2%}, {:.2e}, {:x&lt;4d}, {:0&gt;2d}</code>)</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">a, b <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> * </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> = </span><span style="color:#e6db74">%d</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> (a, b, a <span style="color:#f92672">*</span> b))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} * {} = {}&#39;</span><span style="color:#f92672">.</span>format(a, b, a <span style="color:#f92672">*</span> b))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{1} * {0} * {1}&#39;</span><span style="color:#f92672">.</span>format(a,b))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;my name is {name}&#39;</span><span style="color:#f92672">.</span>format(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;zz&#39;</span>))
+my_dict <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;name&#39;</span>: <span style="color:#e6db74">&#39;zz&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>: <span style="color:#ae81ff">18</span>}
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;my name is {name}, i am {age}&#39;</span><span style="color:#f92672">.</span>format(<span style="color:#f92672">**</span>my_dict))
+my_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;zz&#39;</span>,<span style="color:#ae81ff">18</span>]
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;my name is {0[0]}, i am {0[1]}&#39;</span><span style="color:#f92672">.</span>format(my_list))
+</code></pre></div><ul>
+<li>练习
+<ol>
+<li>写一个返回给定文件名的后缀名的函数，并由参数控制是否需要带点</li>
+<li>输入一个只含字母和空格的字符串(相邻单词只有一个空格，前后可能有空格)，将句中单词位置翻转，并输出翻转后的句子</li>
+</ol>
+</li>
+</ul>
+<h3 id="正则表达式"><strong>正则表达式</strong></h3>
+<h3 id="python正则模块re"><strong>Python正则模块re</strong></h3>
+<ul>
+<li>正则四大功能
+<ul>
+<li>匹配：查看一个字符串是否符合正则表达式的语法</li>
+<li>获取：提取字符串中符合要求的文本</li>
+<li>替换：查找字符串中符合正则表达式的文本，并用相应的字符串替换</li>
+<li>分割：用正则表达式对字符串进行分割</li>
+</ul>
+</li>
+<li>正则表达式常用方法
+<ul>
+<li><code>re.compile(strPattern[, flag])</code>：将字符串形式的正则表达式编译为Pattern对象</li>
+<li><code>findall(string[, start_pos[, end_pos]])</code>：返回匹配到的所有子串到列表，若正则表达式有一个以上分组，则列表中每一个元素为一个元组，元组中包含子分组中匹配到的内容</li>
+<li><code>search(string, [, start_pos[, end_pos]])</code>：扫描整个字符串并返回第一个成功的匹配</li>
+<li><code>match(string, [, start_pos[, end_pos]])</code>：从字符串的起始位置匹配</li>
+<li><code>sub(replace_string, string[, count=0])</code>：替换字符串中的匹配项，count指定替换的最大次数，默认0表示替换所有， replace_string位置可以是一个函数，可以对匹配的内容经过函数处理后再替换</li>
+<li><code>split(string[, maxsplit=0])</code>：用正则表达式匹配到的内容对字符串进行分割，若正则表达式存在分组，则把分组匹配到的内容保留在列表中(与str.split的区别)</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\d+)\d(\w)&#39;</span>)
+pat<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;sghdvfjah1235hsdaf,kajh17982374aaa&#39;</span>)
+pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;sghdvfjah1235hsdaf,kajh17982374aaa&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#删除字符串后面的注释</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(matched):
+    value <span style="color:#f92672">=</span> int(matched<span style="color:#f92672">.</span>group(<span style="color:#e6db74">&#39;val&#39;</span>))
+    <span style="color:#66d9ef">return</span> str(value <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;#.*$&#39;</span>)
+pat<span style="color:#f92672">.</span>sub(<span style="color:#e6db74">&#39;&#39;</span>, <span style="color:#e6db74">&#39;2004-959-559 # 这是一个电话号码&#39;</span>)
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(?P&lt;val&gt;\d+)&#39;</span>)
+pat<span style="color:#f92672">.</span>sub(double, <span style="color:#e6db74">&#39;A23G4HFD50&#39;</span>)
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\W&#39;</span>)
+pat<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;haha</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">hahaha&#39;</span>)
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\W)&#39;</span>)
+pat<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;haha</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">hahaha&#39;</span>)
+</code></pre></div><ul>
+<li>练习：
+<ul>
+<li><code>findall</code>去掉数字间的逗号<code>abc,123,456,789,cde</code></li>
+<li>输入一个只含字母和空格的字符串(相邻单词可能有多个空格，前后可能有空格)，将句中单词位置翻转，并输出翻转后的句子(相邻单词间一个空格)</li>
+</ul>
+</li>
+<li>匹配对象常用方法
+<ul>
+<li>group([group1, &hellip;])：返回编号或组名匹配到的内容，当要获得整个匹配的子串时，可直接使用 group() 或 group(0)</li>
+<li>groupdict()：返回一个字典，键值是所有命名的分组名，值为命名组捕获到的内容</li>
+<li>start([group])：当前匹配对象的子分组是从字符串的哪个位置开始匹配的,如果当前组没有参与匹配就返回-1</li>
+<li>end([group]) ：当前匹配对象的子分组是从字符串的哪个位置匹配结束的(子串最后一个字符的索引+1)，如果当前组没有参与匹配就返回-1</li>
+<li>span([group])：返回一个二元组，内容分别是m.start(g)和m.end(g)的返回值</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\w+)-(\w+)&#39;</span>)
+pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;i-am-a-boy&#39;</span>)
+pat<span style="color:#f92672">.</span>group(<span style="color:#ae81ff">1</span>)
+
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(?P&lt;num&gt;\d+)-(?P&lt;string&gt;\w+)-(\w+)&#39;</span>)
+pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;007-hahaha-12sfa&#39;</span>)
+pat<span style="color:#f92672">.</span>groupdict()
+
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;www&#39;</span>)
+search(<span style="color:#e6db74">&#39;www.pornhub.com&#39;</span>)<span style="color:#f92672">.</span>span()
+</code></pre></div>
               
             </div>
           </div>

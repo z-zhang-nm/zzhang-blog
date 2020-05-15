@@ -6,10 +6,28 @@
     <description>Recent content in Contents on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 14 May 2020 21:41:56 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 15 May 2020 10:26:14 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/content/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>AddTwoNumbers</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/content/post/leetcode/addtwonumbers/</link>
+      <pubDate>Fri, 15 May 2020 10:26:14 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/leetcode/addtwonumbers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TwoSum</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/content/post/leetcode/twosum/</link>
+      <pubDate>Fri, 15 May 2020 10:22:31 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/leetcode/twosum/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>第三周</title>

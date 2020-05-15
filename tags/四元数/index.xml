@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>四元数 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/%E5%9B%9B%E5%85%83%E6%95%B0/</link>
+    <description>Recent content in 四元数 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Thu, 07 May 2020 11:49:15 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%9B%9B%E5%85%83%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>四元数转欧拉角</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</link>
+      <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
