@@ -7,7 +7,6 @@ tags:
 - cmake
 keywords:
 - tech
-#thumbnailImage: //example.com/image.jpg
 ---
 CMake官网([CMake](https://cmake.org/overview/))介绍CMake是一个操作系统平台无关和编译器无关的用于管理编译（构建）过程的一个可扩展、开源系统，使用CMake可以简单的生成动态库，静态库和可执行文件。
 <!--more-->
