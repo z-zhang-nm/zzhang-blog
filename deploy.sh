@@ -3,7 +3,7 @@
 if [[ $(git status -s) ]]
 then
     echo "The working directory is dirty. Now commit pending changes."
-    git add . && git commit -m "Publishing to master" && git push origin master
+    git add . && git commit -m "Publishing to master" && git push origin master -f
 fi
 
 echo "Deleting old publication"
@@ -24,4 +24,4 @@ echo "Updating gh-pages branch"
 cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)"
 
 echo "Push to origin"
-git push origin gh-pages
+git push origin gh-pages -f
