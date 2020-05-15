@@ -52,14 +52,39 @@ tags:
   * topic：订阅的topic名字
   * md5sum：消息类型的md5sum
   * type：消息类型
+  * latching：发布消息的模式（发送最新消息给订阅者）
 * TCPROS publisher连接成功时返回如下fields：
   * md5sum： 消息类型的md5sum
   * type：消息类型
 ## Records
 ### Bag header
-　　rosbag的第一个record，具有固定的4096字节的长度，不足4096字节的部分用ASCII空白符(0x20)填充，包含如下fields：
+　　rosbag的第一个record，具有固定的4096字节的长度，不足4096字节的部分用ASCII空白符(0x20)填充，header包含如下fields：
 * index_pos：8字节little-endian整数，代表chunk后第一个record的偏置
 * conn_count：4字节little-endian整数，代表connections的数量
 * chunk_count： 4字节little-endian整数，代表chunk records的数量
 ### Chunk
-　　
+　　data存储压缩后的Message data Records和Connection Records，header包含如下fields：
+* compression：字符串类型，代表数据压缩方法
+* size：4字节little-endian整数，代表未压缩的消息块的大小
+### Connection
+　　data存储[connection header](#ros-connection-header)字符串，connection header一定包含**topic, type, md5sum, message_defination**这几个fields，可以包含**callerid, latching** fields，header包含如下fields：
+* conn：4字节little-endian整数，代表连接的ID号
+* topic：字符串类型，代表存储消息的topic名字
+### Message data
+　　data存储序列化的ros messages，header包含如下fields：
+* conn：4字节little-endian整数，代表发送消息的连接的ID号
+* time：8字节little-endian整数，代表消息接收时间
+### Index data
+　　data格式取决于header中存储的版本号，当前版本为1，data包含时间戳（8字节little-endian整数）、Message data Record的偏置信息（4字节little-endian整数），header包含如下fields：
+* ver：4字节little-endian整数，代表index data record的版本
+* conn：4字节little-endian整数，代表连接的ID号
+* count：4字节little-endian整数，代表conn这个链接中的消息数量
+### Chunk info
+　　data格式取决于header中存储的版本号，当前版本为1，data包含连接ID（4字节little-endian整数）、连接中的消息数量（4字节little-endian整数），header包含如下fields：
+* ver： 4字节little-endian整数，代表chunk info record的版本
+* chunk_pos：8字节little-endian整数，代表chunk record的偏置
+* start_time：8字节little-endian整数，代表chunk中最早接收的消息的时间戳
+* end_time：8字节little-endian整数，代表chunk中最后接收的消息的时间戳
+* count：4字节little-endian整数，代表chunk中建立的连接的数量
+
+# Rosbag数据结构解析
