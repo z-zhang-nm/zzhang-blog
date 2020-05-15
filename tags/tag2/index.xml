@@ -6,10 +6,19 @@
     <description>Recent content in tag2 on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 07 May 2020 11:49:15 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 14 May 2020 21:41:56 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>第三周</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/content/post/python/%E7%AC%AC%E4%B8%89%E5%91%A8/</link>
+      <pubDate>Thu, 14 May 2020 21:41:56 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/python/%E7%AC%AC%E4%B8%89%E5%91%A8/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>四元数转欧拉角</title>
