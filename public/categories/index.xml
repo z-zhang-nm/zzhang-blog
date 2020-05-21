@@ -6,12 +6,17 @@
     <description>Recent content in Categories on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+<<<<<<< HEAD
     <lastBuildDate>Thu, 14 May 2020 21:41:56 +0800</lastBuildDate>
+=======
+    <lastBuildDate>Fri, 15 May 2020 10:26:14 +0800</lastBuildDate>
+>>>>>>> d462ba1e8b9800c2037bf8f7f94e7348aa5b9356
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+<<<<<<< HEAD
       <title>category</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/categories/category/</link>
       <pubDate>Thu, 14 May 2020 21:41:56 +0800</pubDate>
@@ -33,15 +38,20 @@
       <title>C&#43;&#43;</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</link>
       <pubDate>Wed, 06 May 2020 16:44:12 +0800</pubDate>
+=======
+      <title>Leetcode</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/categories/leetcode/</link>
+      <pubDate>Fri, 15 May 2020 10:26:14 +0800</pubDate>
+>>>>>>> d462ba1e8b9800c2037bf8f7f94e7348aa5b9356
       
-      <guid>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</guid>
+      <guid>https://z-zhang.gitee.io/zzhang-blog/categories/leetcode/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python教程</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/categories/python%E6%95%99%E7%A8%8B/</link>
-      <pubDate>Wed, 06 May 2020 10:03:30 +0800</pubDate>
+      <pubDate>Thu, 14 May 2020 21:41:56 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/categories/python%E6%95%99%E7%A8%8B/</guid>
       <description></description>
@@ -50,9 +60,18 @@
     <item>
       <title>ros</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/categories/ros/</link>
-      <pubDate>Thu, 30 Apr 2020 10:01:03 +0800</pubDate>
+      <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/categories/ros/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</link>
+      <pubDate>Wed, 06 May 2020 16:44:12 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     

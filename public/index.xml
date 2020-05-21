@@ -6,26 +6,55 @@
     <description>Recent content on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
+<<<<<<< HEAD
     <lastBuildDate>Thu, 14 May 2020 21:41:56 +0800</lastBuildDate>
+=======
+    <lastBuildDate>Fri, 15 May 2020 10:26:14 +0800</lastBuildDate>
+>>>>>>> d462ba1e8b9800c2037bf8f7f94e7348aa5b9356
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+<<<<<<< HEAD
       <title>第三周</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/content/post/python/%E7%AC%AC%E4%B8%89%E5%91%A8/</link>
       <pubDate>Thu, 14 May 2020 21:41:56 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/python/%E7%AC%AC%E4%B8%89%E5%91%A8/</guid>
+=======
+      <title>AddTwoNumbers</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/addtwonumbers/</link>
+      <pubDate>Fri, 15 May 2020 10:26:14 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/addtwonumbers/</guid>
+>>>>>>> d462ba1e8b9800c2037bf8f7f94e7348aa5b9356
       <description></description>
     </item>
     
     <item>
+<<<<<<< HEAD
       <title>四元数转欧拉角</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</link>
       <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/content/post/ros/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</guid>
+=======
+      <title>TwoSum</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/twosum/</link>
+      <pubDate>Fri, 15 May 2020 10:22:31 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/twosum/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>第三周</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/</link>
+      <pubDate>Thu, 14 May 2020 21:41:56 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/</guid>
+>>>>>>> d462ba1e8b9800c2037bf8f7f94e7348aa5b9356
       <description></description>
     </item>
     
@@ -89,7 +118,7 @@
       <pubDate>Wed, 06 May 2020 10:03:30 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%BA%8C%E5%91%A8/</guid>
-      <description></description>
+      <description>&lt;p&gt;　　&lt;strong&gt;字符串、正则表达式&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -107,7 +136,7 @@
       <pubDate>Thu, 30 Apr 2020 18:38:02 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/</guid>
-      <description></description>
+      <description>&lt;p&gt;　　&lt;strong&gt;变量、运算符和函数&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
