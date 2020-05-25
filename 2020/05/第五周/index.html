@@ -267,7 +267,34 @@
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fd <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
 <span style="color:#66d9ef">print</span>(fd<span style="color:#f92672">.</span>read())
 fd<span style="color:#f92672">.</span>close()
-</code></pre></div>
+</code></pre></div><p>　　若<code>open</code>函数指定的文件并不存在或无法打开，将引发异常导致程序崩溃，为了让程序具有一定的鲁棒性，可以使用Python的异常机制对可能在运行时发成异常的代码进行适当的处理。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">fd <span style="color:#f92672">=</span> None
+<span style="color:#66d9ef">try</span>:
+    fd <span style="color:#f92672">=</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>)
+    <span style="color:#66d9ef">print</span>(fd<span style="color:#f92672">.</span>read())
+<span style="color:#66d9ef">except</span>:
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;open file error!&#39;</span>)
+<span style="color:#66d9ef">finally</span>:
+    <span style="color:#66d9ef">if</span> fd:
+        fd<span style="color:#f92672">.</span>close()
+</code></pre></div><p>　　Python中<code>try...except...</code>通常用来捕获程序异常，上面代码中<code>finally</code>块的代码无论程序是否异常都会执行，因此称其为“总是执行代码块”，通常被用来释放外部资源。</p>
+<p>　　若想省去文件关闭操作，可以使用<code>with</code>关键字打开文件对象，其会在代码块结束时自动释放文件资源。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    <span style="color:#66d9ef">print</span>(fd<span style="color:#f92672">.</span>read())
+</code></pre></div><p>　　<code>open</code>函数除了<code>read</code>方法外，还可以使用<code>for-in</code>循环逐行读取或用<code>readlines</code>将文件按行读取到列表中。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#for-in</span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> fd:
+        <span style="color:#66d9ef">print</span>(line)
+
+<span style="color:#75715e">#readlines</span>
+<span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    lines <span style="color:#f92672">=</span> fd<span style="color:#f92672">.</span>readlines()
+<span style="color:#66d9ef">print</span>(lines)
+</code></pre></div><p>　　向文件中写入内容也很简单，只需指定文件模式为<code>w</code>即可，若用追加模式，设置为<code>a</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;a&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
+    fd<span style="color:#f92672">.</span>write(<span style="color:#e6db74">&#34;hahaha</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</code></pre></div><h3 id="读写二进制文件">读写二进制文件</h3>
               
             </div>
           </div>
