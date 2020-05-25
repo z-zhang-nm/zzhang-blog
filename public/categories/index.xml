@@ -6,10 +6,28 @@
     <description>Recent content in Categories on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 21 May 2020 21:09:12 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 22 May 2020 07:38:49 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>C&#43;&#43;</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</link>
+      <pubDate>Fri, 22 May 2020 07:38:49 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43;Primer</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;primer/</link>
+      <pubDate>Fri, 22 May 2020 07:38:49 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;primer/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Python教程</title>
@@ -53,15 +71,6 @@
       <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/categories/ros/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>C&#43;&#43;</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</link>
-      <pubDate>Wed, 06 May 2020 16:44:12 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;/</guid>
       <description></description>
     </item>
     
