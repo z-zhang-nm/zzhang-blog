@@ -252,7 +252,7 @@ set1<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">1</span>
 set1<span style="color:#f92672">.</span>add(<span style="color:#ae81ff">4</span>)
 <span style="color:#66d9ef">print</span>(set1)
 set1<span style="color:#f92672">.</span>discard(<span style="color:#ae81ff">10</span>)
-<span style="color:#75715e"># set1.remove(5)</span>
+<span style="color:#75715e"># set1.remove(5)</span>
 <span style="color:#66d9ef">print</span>(set1 <span style="color:#f92672">&amp;</span> set2)
 <span style="color:#66d9ef">print</span>(set1 <span style="color:#f92672">|</span> set2)
 <span style="color:#66d9ef">print</span>(set1 <span style="color:#f92672">-</span> set2)
@@ -280,7 +280,7 @@ dict1<span style="color:#f92672">.</span>update({<span style="color:#e6db74">&#3
 <span style="color:#66d9ef">print</span>(dict1<span style="color:#f92672">.</span>pop(<span style="color:#e6db74">&#39;d&#39;</span>, <span style="color:#e6db74">&#39;not exit&#39;</span>))
 <span style="color:#66d9ef">del</span> dict1[<span style="color:#e6db74">&#39;c&#39;</span>]
 <span style="color:#66d9ef">print</span>(dict1)
-<span style="color:#75715e"># del dict1[&#39;d&#39;]</span>
+<span style="color:#75715e"># del dict1[&#39;d&#39;]</span>
 <span style="color:#66d9ef">print</span>(dict1<span style="color:#f92672">.</span>popitem())
 dict1<span style="color:#f92672">.</span>clear()
 <span style="color:#66d9ef">print</span>(dict1)
@@ -300,7 +300,7 @@ dict1<span style="color:#f92672">.</span>clear()
 <li>定义类：<code>Python</code>中使用关键字<code>class</code>定义一个类，类中可以通过数据类型定义属性，通过函数定义方法</li>
 </ul>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Student</span>():
-    <span style="color:#75715e"># __init__用于创建对象时进行初始化操作</span>
+    <span style="color:#75715e"># __init__用于创建对象时进行初始化操作</span>
     <span style="color:#66d9ef">def</span> __init__(self, name, age):
         self<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> name
         self<span style="color:#f92672">.</span>age <span style="color:#f92672">=</span> age
@@ -319,17 +319,17 @@ stu<span style="color:#f92672">.</span>study(<span style="color:#e6db74">&#39;Py
     <span style="color:#66d9ef">def</span> __init__(self, val):
         self<span style="color:#f92672">.</span>__value <span style="color:#f92672">=</span> val
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>(self): <span style="color:#75715e">#该方法为公有的，即类外、类内均可使用</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fun</span>(self): <span style="color:#75715e">#该方法为公有的，即类外、类内均可使用</span>
         <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__value)   
-        <span style="color:#75715e">#该属性 VALUE为私有的，仅在类内中使用，可通过fun 方法来调用value属性</span>
+        <span style="color:#75715e">#该属性 VALUE为私有的，仅在类内中使用，可通过fun 方法来调用value属性</span>
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__fun</span>(self): <span style="color:#75715e">#该方法为私有的，即 仅可在类内中使用</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">__fun</span>(self): <span style="color:#75715e">#该方法为私有的，即 仅可在类内中使用</span>
         <span style="color:#66d9ef">print</span>(self<span style="color:#f92672">.</span>__value)
 
 test <span style="color:#f92672">=</span> TestPrivate(<span style="color:#e6db74">&#39;hi&#39;</span>)
-<span style="color:#75715e"># print(test.__value)</span>
+<span style="color:#75715e"># print(test.__value)</span>
 test<span style="color:#f92672">.</span>fun()
-<span style="color:#75715e"># test.__fun()</span>
+<span style="color:#75715e"># test.__fun()</span>
 </code></pre></div><ul>
 <li>但是<code>Python</code>并没有从语法上严格保证私有属性或方法的私密性，通过更换名字的方法仍然可以访问到它们</li>
 </ul>
@@ -354,17 +354,17 @@ test<span style="color:#f92672">.</span>_TestPrivate__fun()
         self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name
         self<span style="color:#f92672">.</span>_age <span style="color:#f92672">=</span> age
 
-    <span style="color:#75715e"># 访问器 - getter方法</span>
+    <span style="color:#75715e"># 访问器 - getter方法</span>
     <span style="color:#a6e22e">@property</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">name</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_name
 
-    <span style="color:#75715e"># 访问器 - getter方法</span>
+    <span style="color:#75715e"># 访问器 - getter方法</span>
     <span style="color:#a6e22e">@property</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">age</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_age
 
-    <span style="color:#75715e"># 修改器 - setter方法</span>
+    <span style="color:#75715e"># 修改器 - setter方法</span>
     <span style="color:#a6e22e">@age.setter</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">age</span>(self, age):
         self<span style="color:#f92672">.</span>_age <span style="color:#f92672">=</span> age
@@ -387,24 +387,24 @@ test<span style="color:#f92672">.</span>_TestPrivate__fun()
 </code></pre></div><h3 id="__slots__魔法"><strong>__slots__魔法</strong></h3>
 <p><code>Python</code>是一门动态语言，允许我们在程序运行时给对象绑定新的属性或方法，但是如果需要限定自定义类型的对象只能绑定某些属性，可以通过在类中定义<code>__slots__</code>变量来进行限定，<code>__slots__</code>的限定只对当前类的对象生效，对子类并不起任何作用。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span>(object):
-    <span style="color:#75715e"># 限定Person对象只能绑定_name, _age和_gender属性</span>
+    <span style="color:#75715e"># 限定Person对象只能绑定_name, _age和_gender属性</span>
     __slots__ <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#39;_name&#39;</span>, <span style="color:#e6db74">&#39;_age&#39;</span>, <span style="color:#e6db74">&#39;_gender&#39;</span>)
 
     <span style="color:#66d9ef">def</span> __init__(self, name, age):
         self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name
         self<span style="color:#f92672">.</span>_age <span style="color:#f92672">=</span> age
 
-    <span style="color:#75715e"># 访问器 - getter方法</span>
+    <span style="color:#75715e"># 访问器 - getter方法</span>
     <span style="color:#a6e22e">@property</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">name</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_name
 
-    <span style="color:#75715e"># 访问器 - getter方法</span>
+    <span style="color:#75715e"># 访问器 - getter方法</span>
     <span style="color:#a6e22e">@property</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">age</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>_age
 
-    <span style="color:#75715e"># 修改器 - setter方法</span>
+    <span style="color:#75715e"># 修改器 - setter方法</span>
     <span style="color:#a6e22e">@age.setter</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">age</span>(self, age):
         self<span style="color:#f92672">.</span>_age <span style="color:#f92672">=</span> age
@@ -461,7 +461,7 @@ test<span style="color:#f92672">.</span>_TestPrivate__fun()
                (self<span style="color:#f92672">.</span>_hour, self<span style="color:#f92672">.</span>_minute, self<span style="color:#f92672">.</span>_second)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
-    <span style="color:#75715e"># 通过类方法创建对象并获取系统时间</span>
+    <span style="color:#75715e"># 通过类方法创建对象并获取系统时间</span>
     clock <span style="color:#f92672">=</span> Clock<span style="color:#f92672">.</span>now()
     <span style="color:#66d9ef">while</span> True:
         <span style="color:#66d9ef">print</span>(clock<span style="color:#f92672">.</span>show())
@@ -498,11 +498,11 @@ test<span style="color:#f92672">.</span>_TestPrivate__fun()
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">main</span>():
     a, b, c <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>
-    <span style="color:#75715e"># 静态方法是通过给类发消息来调用的</span>
+    <span style="color:#75715e"># 静态方法是通过给类发消息来调用的</span>
     <span style="color:#66d9ef">if</span> Triangle<span style="color:#f92672">.</span>is_valid(a, b, c):
         t <span style="color:#f92672">=</span> Triangle(a, b, c)
         <span style="color:#66d9ef">print</span>(t<span style="color:#f92672">.</span>perimeter())
-        <span style="color:#75715e"># 也可以通过给类发消息来调用对象方法但是要传入接收消息的对象作为参数</span>
+        <span style="color:#75715e"># 也可以通过给类发消息来调用对象方法但是要传入接收消息的对象作为参数</span>
         <span style="color:#66d9ef">print</span>(Triangle<span style="color:#f92672">.</span>perimeter(t))
         <span style="color:#66d9ef">print</span>(t<span style="color:#f92672">.</span>area())
         <span style="color:#66d9ef">print</span>(Triangle<span style="color:#f92672">.</span>area(t))
@@ -595,7 +595,7 @@ test<span style="color:#f92672">.</span>_TestPrivate__fun()
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Animal</span>(metaclass<span style="color:#f92672">=</span>ABCMeta):
     <span style="color:#66d9ef">def</span> __init__(self, name):
         self<span style="color:#f92672">.</span>_name <span style="color:#f92672">=</span> name
-    <span style="color:#75715e">#确保方法被子类实现，而本身不被实例化</span>
+    <span style="color:#75715e">#确保方法被子类实现，而本身不被实例化</span>
     <span style="color:#a6e22e">@abstractmethod</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">make_voice</span>(self):
         <span style="color:#66d9ef">pass</span>
