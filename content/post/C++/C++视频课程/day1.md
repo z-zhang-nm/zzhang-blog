@@ -1,0 +1,131 @@
+---
+title: "类成员变量初始化"
+date: 2020-05-29T09:48:09+08:00
+categories:
+- C++
+- Commute
+tags:
+- 成员变量初始化
+keywords:
+- tech
+#thumbnailImage: //example.com/image.jpg
+---
+
+<!--more-->
+
+# 类成员变量初始化
+
+## 初始化方式
+
+　　成员变量分为下面几类：
+1. 一般变量(`int`)
+2. 静态成员变量(`static int`)
+3. 常量(`const int`)
+4. 静态常量(`static const int`)
+
+　　对应的初始化方式：
+1. 一般变量可以在**初始化列表或构造函数里初始化，不能直接初始化或类外初始化**
+2. 静态成员变量**必须在类外初始化**
+3. 常量**必须在初始化列表里初始化**
+4. 静态常量**可以在类中声明处初始化，也可以像static在类外初始化**
+
+```cpp
+#include <iostream>
+
+using namespace std;
+
+class Test{
+private:
+    int a;
+    static int b;
+    const int c;
+    static const int d;
+public:
+    Test():c(3){
+        a = 1; //a也可以在初始化列表里初始化
+    }
+};
+
+int Test:b = 2; //不加static
+const int Test::d = 4;
+
+int mian(){
+    Test t;
+    return 0;
+}
+```
+
+## 初始化顺序
+
+　　成员变量的初始化顺序：
+1. 构造函数初始化列表的变量优先于构造函数，注意初始化列表中初始化顺序要与变量声明顺序一致
+2. 静态成员变量优先于实例变量
+3. 父类成员变量优先于子类成员变量
+4. 父类构造函数优先于子类构造函数
+
+```cpp
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Test{
+public:
+    Test(string s){
+        cout << s << endl;
+    }
+};
+
+class Base{
+public:
+    static Test *a;
+    Test *b;
+    Test *c;
+    Base():b(new Test("b")){
+        c = new Test("c");
+    }
+    virtual ~Base(){
+        if(a) delete a;
+        if(b) delete b;
+        if(c) delete c;
+    }
+};
+
+class Derived:Base{
+public:
+    static Test *da;
+    Test *db;
+    Test *dc;
+    Derived():db(new Test("b")){
+        dc = new Test("dc");
+    }
+    ~Derived(){
+        if(da) delete da;
+        if(db) delete db;
+        if(dc) delete dc;
+    }
+};
+
+Test *Base::a = new Test("a");
+Test *Derived::da = new Test("da");
+
+int mian(){
+    Derived d;
+}
+```
+
+　　上面程序的输出结果为:
+```
+a
+da //a和da是静态成员变量，优先于实例变量，且父类优先于子类
+b
+c
+db
+dc  //父类构造函数优先于子类，且初始化列表优先于构造函数
+```
+
+## static、const和static const的初始化
+
+　　`static`静态成员变量不能在类内部初始化，只能在类内部声明，定义需要在类外部，因为其不属于某个对象；`const`成员变量只能通过构造函数初始化列表初始化，其只在某个对象生存期内是常量，类可以创建多个对象，不同对象的const成员值可以不同，所以不能在类的声明中初始化const数据成员。若需要建立在整个类中都恒定的常量，需要用类的枚举常量或`static const`。
+
+　　　`const`成员函数的目的是防止成员函数修改成员变量的值，但是可以访问成员变量；`static`成员函数目的是作为类作用域的全局函数，不能访问类的非静态成员变量，类的静态成员函数没有`this`指针，因此：1、不能直接存取类的非静态成员变量和调用非静态成员函数 2、不能被成名为virtual
