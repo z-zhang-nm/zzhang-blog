@@ -40,6 +40,8 @@
     
       <meta property="article:tag" content="滑窗">
     
+      <meta property="article:tag" content="哈希表">
+    
   
 
 
@@ -224,6 +226,79 @@
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <h2 id="题目">题目</h2>
+<p>　　给定一个字符串，请你找出其中不含有重复字符的 <strong>最长子串</strong> 的 <strong>长度</strong>。</p>
+<p>　　示例1：</p>
+<blockquote>
+<p>输入: <code>&quot;abcabcbb&quot;</code><br>
+输出: <code>3</code><br>
+解释: 因为无重复字符的最长子串是 <code>&quot;abc&quot;</code>，所以其长度为 <code>3</code></p>
+</blockquote>
+<p>　　示例２：</p>
+<blockquote>
+<p>输入: <code>&quot;bbbbb&quot;</code><br>
+输出: <code>1</code><br>
+解释: 因为无重复字符的最长子串是 <code>&quot;b&quot;</code>，所以其长度为 <code>1</code></p>
+</blockquote>
+<p>　　示例３：</p>
+<blockquote>
+<p>输入: <code>&quot;pwwkew&quot;</code><br>
+输出: <code>3</code><br>
+解释: 因为无重复字符的最长子串是 <code>&quot;wke&quot;</code>，所以其长度为 3<br>
+请注意，你的答案必须是 子串 的长度，<code>&quot;pwke&quot;</code> 是一个子序列，不是子串</p>
+</blockquote>
+<h2 id="题解一">题解一</h2>
+<p>　　子串是字符串截取出来的，因此是连续的，可以想到应该用滑动窗口从头到尾遍历一遍寻找最长子串，用两个索引来记录滑动窗口的首尾位置，因为子串中不能有重复的字符，因此需要一个哈希表来存储目前子串中已有的字符和其位置间的映射，当尾部向后滑动一个位置，若没有重复字符，更新最大长度和当前哈希表，若出现重复字符，需要从哈希表中找到子串中重复字符的位置，并更新滑窗头部位置和删除哈希表中丢弃的字符，遍历结束后就会得到最长子串的长度。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lengthOfLongestSubstring</span>(string s) {
+    <span style="color:#66d9ef">if</span>(s.size() <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>)
+        <span style="color:#66d9ef">return</span> s.size();
+    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> idx_map;
+    size_t s_idx<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, e_idx <span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>;
+    idx_map[s[s_idx]] <span style="color:#f92672">=</span> s_idx;
+    <span style="color:#66d9ef">int</span> max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span>(s_idx <span style="color:#f92672">&lt;=</span> e_idx <span style="color:#f92672">&amp;&amp;</span> e_idx <span style="color:#f92672">&lt;</span> s.size()){
+        <span style="color:#66d9ef">if</span>(idx_map.count(s[e_idx]) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>){
+            <span style="color:#66d9ef">if</span>(e_idx <span style="color:#f92672">-</span> s_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&gt;</span> max_len)
+                max_len <span style="color:#f92672">=</span> e_idx <span style="color:#f92672">-</span> s_idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+            idx_map[s[e_idx]] <span style="color:#f92672">=</span> e_idx;
+            e_idx<span style="color:#f92672">++</span>;
+        }<span style="color:#66d9ef">else</span>{
+            size_t prev_s_idx <span style="color:#f92672">=</span> s_idx;
+            s_idx <span style="color:#f92672">=</span> idx_map[s[e_idx]] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+            <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> prev_s_idx; i <span style="color:#f92672">&lt;</span> s_idx; <span style="color:#f92672">++</span>i)
+                idx_map.erase(s[i]);
+        }
+    }
+    <span style="color:#66d9ef">return</span> max_len;
+}
+</code></pre></div><h2 id="题解二">题解二</h2>
+<p>　　题解一滑窗头部指向当前子串第一个字符的位置，可以让头部指向当前子串的第一个字符的前一个位置，这样可以从索引为0的地方遍历字符串且字符串长度为1的情况不用单独处理，将<code>while</code>循环改为<code>for</code>循环，滑窗尾部即当前循环的索引位置；题解一每次遍历到重复字符时，需要将哈希表中不存在于当前子串的元素去除掉，还有一种更优的方法，即通过滑窗头部位置和哈希表中字符位置对比，只有位置在滑窗右侧的字符才是当前子串中存在的重复字符。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lengthOfLongestSubstring</span>(string s) {
+    <span style="color:#66d9ef">int</span> max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, left <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> idx_map;
+    <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>i){
+        <span style="color:#66d9ef">if</span>(idx_map.count(s[i]) <span style="color:#f92672">&amp;&amp;</span> idx_map[s[i]] <span style="color:#f92672">&gt;</span> left){
+            left <span style="color:#f92672">=</span> idx_map[s[i]];
+        }
+        idx_map[s[i]] <span style="color:#f92672">=</span> i;
+        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">-</span>left <span style="color:#f92672">&gt;</span> max_len){
+            max_len <span style="color:#f92672">=</span> i<span style="color:#f92672">-</span>left;
+        }
+    }
+    <span style="color:#66d9ef">return</span> max_len;
+}
+</code></pre></div><h2 id="题解三">题解三</h2>
+<p>　　由于ASCII表共有256个字符，因此可以用一个大小为256的整型数组来代替哈希表，且全部初始化为-1，分别维护每个字符最后出现的位置，这样就省去了每次对字符是否存在于哈希表的判断。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">lengthOfLongestSubstring</span>(string s) {
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> idx_map(<span style="color:#ae81ff">256</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+    <span style="color:#66d9ef">int</span> max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, left <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); <span style="color:#f92672">++</span>i) {
+        left <span style="color:#f92672">=</span> max(left, idx_map[s[i]]);
+        idx_map[s[i]] <span style="color:#f92672">=</span> i;
+        max_len <span style="color:#f92672">=</span> max(max_len, i<span style="color:#f92672">-</span>left); <span style="color:#75715e">//题解二中由于循环用的size_t，因此max函数会报错
+</span><span style="color:#75715e"></span>    }
+    <span style="color:#66d9ef">return</span> max_len;
+}
+</code></pre></div>
               
             </div>
           </div>
@@ -238,6 +313,8 @@
   <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
 
   <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%BB%91%E7%AA%97/">滑窗</a>
+
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%93%88%E5%B8%8C%E8%A1%A8/">哈希表</a>
 
                   </div>
                 

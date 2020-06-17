@@ -282,12 +282,12 @@ fd<span style="color:#f92672">.</span>close()
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
     <span style="color:#66d9ef">print</span>(fd<span style="color:#f92672">.</span>read())
 </code></pre></div><p>　　<code>open</code>函数除了<code>read</code>方法外，还可以使用<code>for-in</code>循环逐行读取或用<code>readlines</code>将文件按行读取到列表中。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#for-in</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#for-in</span>
 <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
     <span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> fd:
         <span style="color:#66d9ef">print</span>(line)
 
-<span style="color:#75715e">#readlines</span>
+<span style="color:#75715e">#readlines</span>
 <span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#39;test.txt&#39;</span>, <span style="color:#e6db74">&#39;r&#39;</span>, encoding<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;utf-8&#39;</span>) <span style="color:#66d9ef">as</span> fd:
     lines <span style="color:#f92672">=</span> fd<span style="color:#f92672">.</span>readlines()
 <span style="color:#66d9ef">print</span>(lines)

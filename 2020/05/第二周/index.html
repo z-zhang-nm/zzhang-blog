@@ -285,7 +285,7 @@ my_list <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;z
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(\d+)\d(\w)&#39;</span>)
 pat<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;sghdvfjah1235hsdaf,kajh17982374aaa&#39;</span>)
 pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;sghdvfjah1235hsdaf,kajh17982374aaa&#39;</span>)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#删除字符串后面的注释</span>
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e">#删除字符串后面的注释</span>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">double</span>(matched):
     value <span style="color:#f92672">=</span> int(matched<span style="color:#f92672">.</span>group(<span style="color:#e6db74">&#39;val&#39;</span>))
     <span style="color:#66d9ef">return</span> str(value <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>)
