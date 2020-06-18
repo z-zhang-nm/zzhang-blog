@@ -6,10 +6,19 @@
     <description>Recent content in Leetcode on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 17 Jun 2020 17:57:07 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 18 Jun 2020 18:49:02 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>整数翻转</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%95%B4%E6%95%B0%E7%BF%BB%E8%BD%AC/</link>
+      <pubDate>Thu, 18 Jun 2020 18:49:02 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%95%B4%E6%95%B0%E7%BF%BB%E8%BD%AC/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Z字形变换</title>
