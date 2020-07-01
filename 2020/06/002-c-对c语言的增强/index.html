@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="002-C&#43;&#43;对C语言的增强">
+<meta name="twitter:title" content="002-C&#43;&#43;对C语言的增强">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/06/002-c-%E5%AF%B9c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A2%9E%E5%BC%BA/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/06/002-c-%E5%AF%B9c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A2%9E%E5%BC%BA/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-17T23:27:46">
+  
+  
+    <meta property="article:modified_time" content="2020-06-17T23:27:46">
+  
+  
+  
+    
+      <meta property="article:section" content="C&#43;&#43;视频课程">
+    
+  
+  
+    
+      <meta property="article:tag" content="C&#43;&#43;对C的扩展">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>002-C&#43;&#43;对C语言的增强</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/002-c-%E5%AF%B9c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A2%9E%E5%BC%BA/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      002-C&#43;&#43;对C语言的增强
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-17T23:27:46&#43;08:00">
+        
+  六月 17, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;%e8%a7%86%e9%a2%91%e8%af%be%e7%a8%8b">C&#43;&#43;视频课程</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h3 id="命名空间">命名空间</h3>
+<p>　　C语言只有一个全局作用域，C++提出了命名空间将全局作用域分为不同的部分，不同命名空间的标识符可以同名而不发生冲突。</p>
+<p>　　用法：
+1. using 命名空间::变量名　　
+2. using namespace 命名空间</p>
+<h3 id="实用性增强">实用性增强</h3>
+<p>　　C语言的变量需要在作用域开始的位置定义，即需要在所有语句的前面定义，C++为了提高语言的实用性，变量可以在需要使用的位置定义。</p>
+<h3 id="register变量增强">register变量增强</h3>
+<p>　　C语言为了提高变量存取速度，用register关键字请求将变量放在寄存器中，但是不能取寄存器变量的地址，C++对register关键字做了优化，不使用register关键字也可能将变量放在寄存器中，比如在频繁使用变量的情况下，C++编译器会将变量放在寄存器中，比如for循环中的循环变量，且C++中可以对register变量取地址（编译器发现需要对register变量取地址时，register对变量的声明变得无效）。</p>
+<h3 id="变量检测增强">变量检测增强</h3>
+<p>　　C语言中直接定义多个同名的全局变量是合法的，而C++中则不可以，C语言多个同名的全局变量会被链接到全局数据区中的同一个地址空间上。</p>
+<h3 id="struct关键字增强">struct关键字增强</h3>
+<p>　　C语言中struct关键字仅仅是定义了一组变量的集合，并不是一种新的类型，定义变量时需要明确写上struct，C++中struct可以定义新的类型。</p>
+<h3 id="类型检查增强">类型检查增强</h3>
+<p>　　C语言允许变量和函数有默认类型，而C++中所有变量和函数必须有类型。</p>
+<h3 id="表达式增强">表达式增强</h3>
+<p>　　C语言表达式的运算结果是变量的值，放在寄存器里，不能做左值，而C++中表达式作为左值时返回变量本身（即内存空间中变量的地址），比如三目运算符在C语言中不能作为左值，而C++中则可以，C语言实现C++三目运算符：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#f92672">*</span>(a <span style="color:#f92672">&lt;</span> b <span style="color:#f92672">?</span> <span style="color:#f92672">&amp;</span>a : <span style="color:#f92672">&amp;</span>b) <span style="color:#f92672">=</span> <span style="color:#ae81ff">30</span>;
+</code></pre></div><h3 id="const变量增强">const变量增强</h3>
+<p>　　C语言中const变量的值可以通过取地址间接修改，C++中则不可以，因为C++将const变量放在一个符号表中，其中是一个个的键值对，当对常量取地址的时候，会为其新开一个内存空间，因此通过地址间接修改的不是原来的常量的值。</p>
+<p>　　C语言中const变量是只读变量，有自己的内存空间，C++中const变量可能分配内存空间（1. const变量为全局变量且需要被其它文件使用 2. 对const变量取地址），也可能不分配内存空间，分配内存会在编译器编译期间进行。</p>
+<h3 id="引用">引用</h3>
+<p>　　引用是变量的别名，普通引用在声明时必须用其它变量进行初始化，引用作为其它变量的别名，因此在某些场合可以替代指针。</p>
+<p>　　引用的本质：1.单独定义引用时必须初始化，说明引用很像一个常量；2.引用跟原变量是同一块内存空间的别名，普通引用有自己的内存空间，大小与指针所占大小一样；因此可以知道引用在C++内部是一个常指针：<code>T &amp;name == T *const name</code>，为什么不是const T*呢？因为可以通过引用变量修改原变量的值且引用赋值后不能再引用别的变量。</p>
+<h3 id="函数返回值是引用基础类型">函数返回值是引用（基础类型）</h3>
+<p>　　当函数返回值是引用时，若返回局部变量（栈上），不能作为其它引用的初始值，不能作为左值使用，但是返回静态变量或全局变量时可以作为其它引用的初始值，既可作为右值使用，又可作为左值使用。函数返回值是引用的时候，函数也可以当左值。</p>
+<h3 id="c内存分布">C++内存分布</h3>
+<p>　　C++中内存分为栈区、堆区，全局变量区和代码区，函数体中定义的变量的内存，new或malloc申请的内存空间在堆区中。
+<img src="https://z-zhang.gitee.io/zzhang-blog/C++%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/002/%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.jpg" alt="内存分布"></p>
+<h3 id="常引用">常引用</h3>
+<p>　　 若不想通过引用修改变量的值，需要定义常引用，让引用拥有只读属性。</p>
+<p>　　常引用的初始化分为两种：</p>
+<ol>
+<li>用变量初始化</li>
+<li>用字面量初始化</li>
+</ol>
+<p>　　普通引用不能引用字面量，因为字面量没有内存空间，无法取别名。</p>
+<h3 id="内联函数">内联函数</h3>
+<p>　　C++可以用const常量替代宏常量，那么是否可以替代宏代码片段呢？</p>
+<p>　　有！内联函数！</p>
+<p>　　内联函数的声明和定义必须写在一起，c++编译器在编译时直接用内联函数的函数体替换掉函数的调用，因此内联函数没有普通函数调用时额外的开销（压栈、跳转、返回等）；内联函数是一种特殊的函数，具有普通函数的特征（参数检查、返回类型等），它是对编译器的一种请求，因此编译器可能会拒绝这种请求。</p>
+<p>　　内联函数和宏代码片段有什么不同？</p>
+<p>　　内联函数是由编译器处理的，直接将函数体插入函数调用的地方，而宏代码片段是由预处理器处理的，只进行简单的文本替换，不进行任何编译处理。C++编译器会进行编译优化，有些函数即使没有内联声明，也可能被编译器内联编译。</p>
+<p>　　内联函数需要注意：</p>
+<ol>
+<li>不能存在任何循环语句</li>
+<li>不能存在过多的条件判断或switch语句</li>
+<li>函数体不能过大</li>
+<li>不能取函数的地址</li>
+<li>声明必须在调用之前</li>
+</ol>
+<p>　　当函数体的执行开销远大于压栈、跳转和返回等开销时，不应使用内联函数，因为每一处内联函数的调用都会复制代码，使程序的总代码量增大，消耗更多内存空间。
+<img src="https://z-zhang.gitee.io/zzhang-blog/C++%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/002/%E5%AE%8F%E5%AE%9A%E4%B9%89%E7%9A%84%E5%9D%91.jpg" alt="宏定义的坑"></p>
+<h3 id="占位参数">占位参数</h3>
+<p>　　函数占位参数在函数调用时必须传入实参，占位参数可以和默认参数结合使用<code>void fun(int a, int = 0)</code>，此时传入一个参数和两个参数都可以。</p>
+<h3 id="函数重载">函数重载</h3>
+<p>　　函数重载至少需要满足以下几个条件之一：</p>
+<ol>
+<li>参数个数不同</li>
+<li>参数类型不同</li>
+<li>参数顺序不同</li>
+</ol>
+<p>　　函数返回值类型不是函数重载的判断标准。</p>
+<p>　　默认参数会影响函数重载。</p>
+<h3 id="函数指针">函数指针</h3>
+<p>　　定义函数指针变量的几种方法：</p>
+<ol>
+<li>声明一个函数类型：<code>typedef void (Func)(int a);</code>，通过声明的函数类型可以定义函数指针变量，指向函数的入口地址：<code>Func *funcp = NULL;</code></li>
+<li>直接声明一个函数指针类型：<code>typedef void(*FuncP)(int a);</code>，通过声明的函数指针类型可以定义一个函数指针变量：<code>FuncP funcp = NULL;</code></li>
+<li>直接定义一个函数指针变量：<code>void (*funcp)(int a)</code></li>
+</ol>
+<p>　　把重载函数名赋值给函数指针变量，之后通过函数指针调用函数时会执行严格的参数个数和参数类型的匹配。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/c&#43;&#43;%E5%AF%B9c%E7%9A%84%E6%89%A9%E5%B1%95/">C&#43;&#43;对C的扩展</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%95%B4%E6%95%B0%E7%BF%BB%E8%BD%AC/" data-tooltip="整数翻转">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" data-tooltip="Z字形变换">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%95%B4%E6%95%B0%E7%BF%BB%E8%BD%AC/" data-tooltip="整数翻转">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" data-tooltip="Z字形变换">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
