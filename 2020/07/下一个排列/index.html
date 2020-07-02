@@ -13,20 +13,20 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="移除元素">
-<meta name="twitter:title" content="移除元素">
-<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
-<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
+<meta property="og:title" content="下一个排列">
+<meta name="twitter:title" content="下一个排列">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/">
 <meta property="og:site_name" content="zzhang-blog">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2020-07-01T16:33:41">
+    <meta property="article:published_time" content="2020-07-02T09:38:34">
   
   
-    <meta property="article:modified_time" content="2020-07-01T16:33:41">
+    <meta property="article:modified_time" content="2020-07-02T09:38:34">
   
   
   
@@ -59,14 +59,14 @@
   <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
 
 
-    <title>移除元素</title>
+    <title>下一个排列</title>
 
     <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/">
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -196,15 +196,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      移除元素
+      下一个排列
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-07-01T16:33:41&#43;08:00">
+      <time itemprop="datePublished" datetime="2020-07-02T09:38:34&#43;08:00">
         
-  七月 1, 2020
+  七月 2, 2020
 
       </time>
     
@@ -224,73 +224,76 @@
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
               <h2 id="题目">题目</h2>
-<p>　　给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度。</p>
-<p>　　不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 原地 修改输入数组。</p>
-<p>　　元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。</p>
-<p>　　示例1：</p>
+<p>　　实现获取下一个排列的函数，算法需要将给定数字序列重新排列成字典序中下一个更大的排列。</p>
+<p>　　如果不存在下一个更大的排列，则将数字重新排列成最小的排列（即升序排列）。</p>
+<p>　　必须原地修改，只允许使用额外常数空间。</p>
+<p>　　以下是一些例子，输入位于左侧列，其相应输出位于右侧列。</p>
 <blockquote>
-<p>给定 <code>nums = [3,2,2,3]</code>, val = 3,<br>
-函数应该返回新的长度 2, 并且 nums 中的前两个元素均为 2<br>
-你不需要考虑数组中超出新长度后面的元素</p>
-</blockquote>
-<p>　　示例2：</p>
-<blockquote>
-<p>给定 <code>nums = [0,1,2,2,3,0,4,2], val = 2</code>,<br>
-函数应该返回新的长度 5, 并且 nums 中的前五个元素为 0, 1, 3, 0, 4<br>
-注意这五个元素可为任意顺序<br>
-你不需要考虑数组中超出新长度后面的元素</p>
+<p><code>1,2,3 → 1,3,2</code><br>
+<code>3,2,1 → 1,2,3</code><br>
+<code>1,1,5 → 1,5,1</code></p>
 </blockquote>
 <h2 id="题解一">题解一</h2>
-<p>　　本题是未排序的数组，要求原地移除值等于val的元素，首先想到双指针，左指针从前往后遍历数组，当遇到等于val的元素，让右指针从其下一个位置开始查找，跳过所有val值，最后交换left和right位置的元素的值，并将left指针右移一位。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">removeElement</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> val) {
-    <span style="color:#66d9ef">if</span> (nums.size() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">//注意输入为空的边界条件
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, len <span style="color:#f92672">=</span> nums.size();
-    <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;</span> len) { <span style="color:#75715e">//注意边界条件[2] 3
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(nums[left] <span style="color:#f92672">==</span> val) {
-            <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> left<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-            <span style="color:#66d9ef">while</span>(right <span style="color:#f92672">&lt;</span> len <span style="color:#f92672">&amp;&amp;</span> nums[right] <span style="color:#f92672">==</span> val){
-                right<span style="color:#f92672">++</span>;
-            }
-            <span style="color:#66d9ef">if</span>(right <span style="color:#f92672">==</span> len) <span style="color:#66d9ef">break</span>;
-            <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> nums[left];
-            nums[left] <span style="color:#f92672">=</span> nums[right];
-            nums[right] <span style="color:#f92672">=</span> tmp;
-            left<span style="color:#f92672">++</span>;
-        }<span style="color:#66d9ef">else</span>{
-            left<span style="color:#f92672">++</span>;
+<p>　　字典序排列即大于当前数的所有数中最小的一个，举个例子，<code>1231</code>的下一个数字为<code>1312</code>，可以看出应该尽量改变位数比较靠后的数字，且交换的那一位数字后面一定存在一个数字大于要交换的那个数字，只需要找到要交换数字后面大于它且最小的那一个即可。</p>
+<p>　　若从后往前一直是递增的，那么当前位数后面一定不存在大于当前数字的，若数字减小的话，从后面找到大于它且最小的那一个跟它交换，然后对后面的数字从小到达排序即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nextPermutation</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+    <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, swap_pos <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">while</span>(pos <span style="color:#f92672">&gt;</span><span style="color:#ae81ff">0</span>) {
+        <span style="color:#66d9ef">if</span>(nums[pos<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> nums[pos]) {
+            swap_pos <span style="color:#f92672">=</span> pos;
+            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i) {
+                <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;</span> nums[pos] <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&gt;</span> nums[pos<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) swap_pos <span style="color:#f92672">=</span> i; <span style="color:#75715e">//还要判断是否大于nums[pos-1]
+</span><span style="color:#75715e"></span>            }
+            <span style="color:#66d9ef">break</span>;
         }
+        pos<span style="color:#f92672">--</span>;
     }
-    <span style="color:#66d9ef">return</span> left;
+    <span style="color:#66d9ef">if</span>(pos <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+        reverse(nums.begin(), nums.end());
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> nums[pos<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+        nums[pos<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> nums[swap_pos];
+        nums[swap_pos] <span style="color:#f92672">=</span> tmp;
+        sort(nums.begin()<span style="color:#f92672">+</span>pos, nums.end());
+    }
 }
 </code></pre></div><h2 id="题解二">题解二</h2>
-<p>　　官方解法一用的是也是快慢指针，不过跟我的解法不同的是，在右指针元素等于val时复制右移跳过，不等于val的时候不是跟左指针交换元素而是复制右指针元素值到左指针元素，直到右指针到达数组末尾。</p>
-<p>　　会不会出现右指针元素覆盖不是val值的情况？
-　　不会，因为当右指针向后寻找时已经空出了足够的位置放当前左指针后面不是val的元素，且每次循环都会将左指针位置或其后第一个不是val的值赋值给左指针元素。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">removeElement</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> val) {
-    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-    <span style="color:#66d9ef">while</span>(right <span style="color:#f92672">&lt;</span> nums.size()) {
-        <span style="color:#66d9ef">if</span>(nums[right] <span style="color:#f92672">!=</span> val){
-            nums[left] <span style="color:#f92672">=</span> nums[right];
-            left<span style="color:#f92672">++</span>;
-        }
-        right<span style="color:#f92672">++</span>;
+<p>　　我的解法和官方解法基本类似，不过官方解法更精妙的地方在于寻找交换位数字的时候不是从当前位置向后全部遍历一遍，而是从最后向前遍历直到遇到大于被交换数字的那一个，这是因为后面的数字一定是降序的，否则在之前就进行了交换。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nextPermutation</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+    <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">while</span>(pos <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> nums[pos] <span style="color:#f92672">&gt;=</span> nums[pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]) {
+        pos<span style="color:#f92672">--</span>;
     }
-    <span style="color:#66d9ef">return</span> left;
+    <span style="color:#66d9ef">if</span>(pos <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>){
+        reverse(nums.begin(), nums.end());
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#66d9ef">int</span> swap_pos <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+        <span style="color:#66d9ef">while</span>(swap_pos <span style="color:#f92672">&gt;</span> pos <span style="color:#f92672">&amp;&amp;</span> nums[swap_pos] <span style="color:#f92672">&lt;=</span> nums[pos]) {
+            swap_pos<span style="color:#f92672">--</span>;
+        }
+        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> nums[pos];
+        nums[pos] <span style="color:#f92672">=</span> nums[swap_pos];
+        nums[swap_pos] <span style="color:#f92672">=</span> tmp;
+        sort(nums.begin()<span style="color:#f92672">+</span>pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, nums.end());
+        <span style="color:#75715e">//这里直接用reverse即可
+</span><span style="color:#75715e"></span>    }
 }
-</code></pre></div><h2 id="题解三">题解三</h2>
-<p>　　若数组中需要删除的元素很少时，比如<code>nums=[1,2,3,4,5]</code>，要删除5，那么5之前的赋值操作都是不必要的，又比如<code>nums=[5,1,2,3,4]</code>，要删除5，也似乎没必要将<code>[1,2,3,4]</code>这几个元素都左移一步。</p>
-<p>　　注意到题目中说元素的顺序可以更改，因此当遇到val时，将其与最后一个元素交换，并释放掉最后一个元素，为什么要释放一个元素呢？因为最后一个元素也可能是val，若不释放掉会陷入死循环。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">removeElement</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> val) {
-    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
-    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n) {
-        <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">==</span> val) {
-            nums[i] <span style="color:#f92672">=</span> nums[n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
-            n<span style="color:#f92672">--</span>;
-        }<span style="color:#66d9ef">else</span>{
-            i<span style="color:#f92672">++</span>;
-        }
+</code></pre></div><p>　　上面解法最后的sort可以用reverse，因为交换完后pos后面还是递减的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">nextPermutation</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+    <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>;
+    <span style="color:#66d9ef">while</span>(pos <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> nums[pos] <span style="color:#f92672">&gt;=</span> nums[pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>]) {
+        pos<span style="color:#f92672">--</span>;
     }
-    <span style="color:#66d9ef">return</span> n;
+    <span style="color:#66d9ef">if</span>(pos <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>){
+        <span style="color:#66d9ef">int</span> swap_pos <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+        <span style="color:#66d9ef">while</span>(swap_pos <span style="color:#f92672">&gt;</span> pos <span style="color:#f92672">&amp;&amp;</span> nums[swap_pos] <span style="color:#f92672">&lt;=</span> nums[pos]) {
+            swap_pos<span style="color:#f92672">--</span>;
+        }
+        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> nums[pos];
+        nums[pos] <span style="color:#f92672">=</span> nums[swap_pos];
+        nums[swap_pos] <span style="color:#f92672">=</span> tmp;
+    }
+    reverse(nums.begin()<span style="color:#f92672">+</span>pos<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, nums.end());
 }
 </code></pre></div>
               
@@ -319,7 +322,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" data-tooltip="下一个排列">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -327,7 +330,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/003-%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/" data-tooltip="003 类的封装">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" data-tooltip="移除元素">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -377,7 +380,7 @@
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E4%B8%8B%E4%B8%80%E4%B8%AA%E6%8E%92%E5%88%97/" data-tooltip="下一个排列">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -385,7 +388,7 @@
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/003-%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/" data-tooltip="003 类的封装">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/" data-tooltip="移除元素">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
