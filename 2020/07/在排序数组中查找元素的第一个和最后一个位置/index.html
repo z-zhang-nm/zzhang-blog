@@ -267,29 +267,27 @@
 <li>当遇到<code>nums[mid]==target</code>后，若<code>nums[mid] &gt;= target</code>更新right指针为mid，否则更新左指针为mid+1，这样向左搜索到<code>left==right</code>时即找到了最左侧的位置</li>
 <li>当遇到<code>nums[mid]==target</code>后，若<code>nums[mid] &gt; target</code>更新right指针为mid，否则更新左指针为mid+1，这样向右搜索到<code>left==right</code>时即找到了最右侧的位置</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> searchRange(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
-        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ret{<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
-        <span style="color:#66d9ef">if</span>(nums.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> ret; <span style="color:#75715e">//因为findEage在nums为空时会返回0，所以要加一个判断
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> leftmost <span style="color:#f92672">=</span> findEage(nums, target, true);
-        <span style="color:#66d9ef">if</span> (nums[leftmost] <span style="color:#f92672">!=</span> target) <span style="color:#66d9ef">return</span> ret;
-        <span style="color:#66d9ef">int</span> rightmost <span style="color:#f92672">=</span> findEage(nums, target, false);
-        <span style="color:#75715e">//这里与官方题解不同，因为这里right初始化为n-1（对[2,2] 2 和 [5,7,7,8,8,10] 8 找到的right不同）
-</span><span style="color:#75715e"></span>        rightmost <span style="color:#f92672">=</span> (nums[rightmost] <span style="color:#f92672">==</span> target) <span style="color:#f92672">?</span> rightmost : rightmost<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-        <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{leftmost, rightmost};
-    }
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> searchRange(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ret{<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>,<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
+  <span style="color:#66d9ef">if</span>(nums.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> ret; <span style="color:#75715e">//因为findEage在nums为空时会返回0，所以要加一个判断
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> leftmost <span style="color:#f92672">=</span> findEage(nums, target, true);
+  <span style="color:#66d9ef">if</span> (leftmost <span style="color:#f92672">==</span> nums.size() <span style="color:#f92672">||</span> nums[leftmost] <span style="color:#f92672">!=</span> target) <span style="color:#66d9ef">return</span> ret; <span style="color:#75715e">//由于right初始化为nums.size，所以left可能等于right等于nums.size
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">int</span> rightmost <span style="color:#f92672">=</span> findEage(nums, target, false)<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{leftmost, rightmost};
+}
 
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findEage</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target, <span style="color:#66d9ef">bool</span> left_direction) {
-        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-        <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;</span> right) {
-            <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-            <span style="color:#66d9ef">if</span> (nums[mid] <span style="color:#f92672">&gt;</span> target <span style="color:#f92672">||</span> (left_direction <span style="color:#f92672">&amp;&amp;</span> nums[mid] <span style="color:#f92672">==</span> target)) {
-                right <span style="color:#f92672">=</span> mid;
-            }<span style="color:#66d9ef">else</span>{
-                left <span style="color:#f92672">=</span> mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-            }
-        }
-        <span style="color:#66d9ef">return</span> left; <span style="color:#75715e">//直接返回，在主函数判断
-</span><span style="color:#75715e"></span>    }
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findEage</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target, <span style="color:#66d9ef">bool</span> left_direction) {
+  <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> nums.size();
+  <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&lt;</span> right) {
+      <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> left <span style="color:#f92672">+</span> (right <span style="color:#f92672">-</span> left) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+      <span style="color:#66d9ef">if</span> (nums[mid] <span style="color:#f92672">&gt;</span> target <span style="color:#f92672">||</span> (left_direction <span style="color:#f92672">&amp;&amp;</span> nums[mid] <span style="color:#f92672">==</span> target)) {
+          right <span style="color:#f92672">=</span> mid;
+      }<span style="color:#66d9ef">else</span>{
+          left <span style="color:#f92672">=</span> mid<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+      }
+  }
+  <span style="color:#66d9ef">return</span> left; <span style="color:#75715e">//直接返回，在主函数判断
+</span><span style="color:#75715e"></span>}
 </code></pre></div>
               
             </div>
