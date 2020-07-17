@@ -6,10 +6,19 @@
     <description>Recent content on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Wed, 15 Jul 2020 09:45:16 +0800</lastBuildDate>
+    <lastBuildDate>Thu, 16 Jul 2020 09:44:53 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>048 旋转图像</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/048-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</link>
+      <pubDate>Thu, 16 Jul 2020 09:44:53 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/048-%E6%97%8B%E8%BD%AC%E5%9B%BE%E5%83%8F/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>跳跃游戏2</title>
