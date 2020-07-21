@@ -13,30 +13,32 @@
 
 <meta property="og:description" content="">
 <meta property="og:type" content="article">
-<meta property="og:title" content="004 对象的构造和析构">
-<meta name="twitter:title" content="004 对象的构造和析构">
-<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/004-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/">
-<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/004-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/">
+<meta property="og:title" content="055 跳跃游戏">
+<meta name="twitter:title" content="055 跳跃游戏">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/055-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/055-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/">
 <meta property="og:site_name" content="zzhang-blog">
 <meta property="og:description" content="">
 <meta name="twitter:description" content="">
 <meta property="og:locale" content="zh-cn">
 
   
-    <meta property="article:published_time" content="2020-07-07T12:42:15">
+    <meta property="article:published_time" content="2020-07-21T08:58:01">
   
   
-    <meta property="article:modified_time" content="2020-07-07T12:42:15">
+    <meta property="article:modified_time" content="2020-07-21T08:58:01">
   
-  
-  
-    
-      <meta property="article:section" content="C&#43;&#43;视频课程">
-    
   
   
     
-      <meta property="article:tag" content="对象的构造和析构">
+      <meta property="article:section" content="Leetcode">
+    
+  
+  
+    
+      <meta property="article:tag" content="数组">
+    
+      <meta property="article:tag" content="贪心算法">
     
   
 
@@ -57,14 +59,14 @@
   <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
 
 
-    <title>004 对象的构造和析构</title>
+    <title>055 跳跃游戏</title>
 
     <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
     
 
     
 
-    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/004-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/">
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/055-%E8%B7%B3%E8%B7%83%E6%B8%B8%E6%88%8F/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -194,15 +196,15 @@
             <div class="post-header main-content-wrap text-left">
   
     <h1 class="post-title" itemprop="headline">
-      004 对象的构造和析构
+      055 跳跃游戏
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2020-07-07T12:42:15&#43;08:00">
+      <time itemprop="datePublished" datetime="2020-07-21T08:58:01&#43;08:00">
         
-  七月 7, 2020
+  七月 21, 2020
 
       </time>
     
@@ -211,7 +213,7 @@
   
     <span>发布在</span>
     
-      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;%e8%a7%86%e9%a2%91%e8%af%be%e7%a8%8b">C&#43;&#43;视频课程</a>
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>
     
   
 
@@ -221,109 +223,72 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <h2 id="1-构造函数">1 构造函数</h2>
-<p>　　创建类的对象时，常常需要做一些初始化工作，C++提供了构造函数来进行这一工作，它是一种特殊的成员函数，不需要用户来调用它，其在创建对象时自动执行。</p>
-<h3 id="11-定义与调用">1.1 定义与调用</h3>
-<ol>
-<li>函数名与类名相同且可以有参数</li>
-<li>没有任何返回类型的声明</li>
-<li>一般情况下C++编译器会自动调用构造函数，某些情况下也需要手动调用</li>
-</ol>
-<h3 id="12-构造函数的分类">1.2 构造函数的分类</h3>
-<ol>
-<li>无参数构造函数，创建对象时只写变量名会调用<code>类A a</code>，注意变量名后不用写括号</li>
-<li>有参数构造函数</li>
-<li>拷贝(赋值)构造函数<code>类A(const 类A&amp; obj) {}</code></li>
-</ol>
-<h3 id="13-调用有参数构造函数的三种方法">1.3 调用有参数构造函数的三种方法</h3>
+              <h2 id="题目">题目</h2>
+<p>　　给定一个非负整数数组，你最初位于数组的第一个位置，数组中的每个元素代表你在该位置可以跳跃的最大长度，判断你是否能够到达最后一个位置。</p>
+<p>　　示例1：</p>
 <blockquote>
-<p><code>Test(int a, int b) {}</code></p>
+<p>输入: [2,3,1,1,4]<br>
+输出: true<br>
+解释: 我们可以先跳 1 步，从位置 0 到达 位置 1, 然后再从位置 1 跳 3 步到达最后一个位置。</p>
 </blockquote>
-<ol>
-<li>括号法<code>Test t1(1,2)</code>，自动调用</li>
-<li>等号法<code>Test t2 = (3,4,5,6)</code>，c++对等号符功能增强，会调用只有一个参数的构造函数，参数传递逗号表达式最后一个元素（逗号表达式最后一个值为整个表达式的值）</li>
-<li>直接调用构造函数<code>Test t3 = Test(1,2)</code>，手动调用，会产生一个匿名对象</li>
-</ol>
-<h3 id="13-拷贝构造函数的调用时机">1.3 拷贝构造函数的调用时机</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">Test <span style="color:#a6e22e">t0</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
-Test <span style="color:#a6e22e">t1</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
-t1 <span style="color:#f92672">=</span> t0;<span style="color:#75715e">//用t0给t1赋值， 不会调用拷贝构造函数，需要重载等号操作
-</span></code></pre></div><ol>
-<li><code>Test t2 = t0;</code></li>
-<li><code>Test t2(t0);</code></li>
-<li>实参初始化形参的时候会调用类的拷贝构造函数</li>
-<li>函数返回值是一个元素（复杂类型），返回的是一个新的匿名对象，所以调用匿名对象类的拷贝构造函数</li>
-</ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">func1</span>(){
-    func2();<span style="color:#75715e">//3.1 匿名对象并未被使用，接着调用其析构函数
-</span><span style="color:#75715e"></span>    Test t <span style="color:#f92672">=</span> func2();<span style="color:#75715e">//3.2 匿名对象用于初始化t，直接将匿名对象转成t，匿名对象不会被析构，也不会再调用拷贝构造函数
-</span><span style="color:#75715e"></span>    Test t1(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>);
-    t1 <span style="color:#f92672">=</span> func2();<span style="color:#75715e">//3.3 调用类的等号操作，匿名对象被析构
-</span><span style="color:#75715e"></span>}
-Test <span style="color:#a6e22e">func2</span>() {
-    Test T;
-    <span style="color:#66d9ef">return</span> T;<span style="color:#75715e">//1.用T创建一个匿名对象，执行拷贝构造函数 2.析构T
-</span><span style="color:#75715e"></span>}
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mian</span>(){
-    func1();
-}
-</code></pre></div><h3 id="14-默认构造函数">1.4 默认构造函数</h3>
-<ol>
-<li>默认无参构造函数：当类中没有定义构造函数时，编译器提供一个无参构造函数，函数体为空</li>
-<li>默认拷贝构造函数：当类中没有定义拷贝构造函数时，编译器提供一个默认拷贝构造函数，进行成员变量的值复制（浅拷贝）</li>
-</ol>
-<h3 id="15-构造函数调用规则">1.5 构造函数调用规则</h3>
-<ol>
-<li>当类中没有定义任何一个构造函数时，编译器会提供一个默认无参构造函数和默认拷贝构造函数</li>
-<li>当类中定义了拷贝构造函数时，编译器不会提供默认无参构造函数</li>
-<li>当类中定义了无参构造函数或有参构造函数，编译器不会提供默认无参构造函数</li>
-</ol>
-<p>　　<strong>只要自己写了构造函数，就必须要用！</strong></p>
-<h3 id="16-浅拷贝">1.6 浅拷贝</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> {
-<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-    Test(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p){
-        <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> strlen(p);
-        len_ <span style="color:#f92672">=</span> len;
-        p_ <span style="color:#f92672">=</span> (<span style="color:#66d9ef">char</span><span style="color:#f92672">*</span>)malloc(len<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>); <span style="color:#75715e">//1
-</span><span style="color:#75715e"></span>        strcpy(p_, p); <span style="color:#75715e">//2
-</span><span style="color:#75715e"></span>    }
-    <span style="color:#f92672">~</span>Test(){
-        <span style="color:#66d9ef">if</span>(p_ <span style="color:#f92672">!=</span> NULL){
-            free(p_);
-            p_ <span style="color:#f92672">=</span> NULL;
-            len_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<p>　　示例2：</p>
+<blockquote>
+<p>输入: [3,2,1,0,4]<br>
+输出: false<br>
+解释: 无论怎样，你总会到达索引为 3 的位置。但该位置的最大跳跃长度是 0 ， 所以你永远不可能到达最后一个位置。</p>
+</blockquote>
+<h2 id="题解一">题解一</h2>
+<p>　　<strong>反向贪心</strong></p>
+<p>　　从最后一个位置开始，反向寻找能到达当前位置的最远的位置，若没有找到，则返回失败。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">canJump</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+    <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> nums.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">while</span>(pos <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+        <span style="color:#66d9ef">int</span> pre_pos <span style="color:#f92672">=</span> pos;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> pos; <span style="color:#f92672">++</span>i) {
+            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">+</span> nums[i] <span style="color:#f92672">&gt;=</span> pos) {
+                pos <span style="color:#f92672">=</span> i;
+                <span style="color:#66d9ef">break</span>;
+            }
         }
+        <span style="color:#66d9ef">if</span>(pre_pos <span style="color:#f92672">==</span> pos) <span style="color:#66d9ef">return</span> false;
     }
-<span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-    <span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>p_;
-    <span style="color:#66d9ef">int</span> len_;
+    <span style="color:#66d9ef">return</span> true;
 }
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fun</span>(){
-    Test t1(<span style="color:#e6db74">&#34;abcdefg&#34;</span>);
-    Test t2 <span style="color:#f92672">=</span> t1;<span style="color:#75715e">//3. 默认的拷贝构造函数，拷贝的是指针变量的值
-</span><span style="color:#75715e"></span>}
-
-<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>() {
-    fun();
+</code></pre></div><h2 id="题解二">题解二</h2>
+<p>　　<strong>正向贪心</strong></p>
+<p>　　找到当前位置跳两步能到的最远位置。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">canJump</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+    <span style="color:#66d9ef">int</span> pos <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+    <span style="color:#66d9ef">while</span>(pos <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+        <span style="color:#66d9ef">if</span>(nums[pos] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+        <span style="color:#66d9ef">if</span>(pos<span style="color:#f92672">+</span>nums[pos] <span style="color:#f92672">&gt;=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+        <span style="color:#66d9ef">int</span> max <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, next_i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; pos<span style="color:#f92672">+</span>i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;=</span> nums[pos]; <span style="color:#f92672">++</span>i) {
+            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">+</span> nums[pos<span style="color:#f92672">+</span>i] <span style="color:#f92672">&gt;</span> max <span style="color:#f92672">&amp;&amp;</span> nums[pos<span style="color:#f92672">+</span>i] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>){
+                max <span style="color:#f92672">=</span> i<span style="color:#f92672">+</span>nums[pos<span style="color:#f92672">+</span>i];
+                next_i <span style="color:#f92672">=</span> pos <span style="color:#f92672">+</span> i;
+            }
+        }
+        <span style="color:#66d9ef">if</span>(max <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+        pos <span style="color:#f92672">=</span> next_i;
+    }
+    <span style="color:#66d9ef">return</span> true;
 }
-</code></pre></div><p>　　上面的代码运行会崩溃，下面进行分析：</p>
-<ol>
-<li><img src="https://z-zhang.gitee.io/zzhang-blog/C++%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/004/%E6%B5%85%E6%8B%B7%E8%B4%9D1.png" alt="浅拷贝1"></li>
-<li><img src="https://z-zhang.gitee.io/zzhang-blog/C++%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/004/%E6%B5%85%E6%8B%B7%E8%B4%9D2.png" alt="浅拷贝2"></li>
-<li><img src="https://z-zhang.gitee.io/zzhang-blog/C++%E8%A7%86%E9%A2%91%E8%AF%BE%E7%A8%8B/004/%E6%B5%85%E6%8B%B7%E8%B4%9D3.png" alt="浅拷贝3"></li>
-</ol>
-<h2 id="2-析构函数">2 析构函数</h2>
-<p>　　进行一些垃圾回收工作。</p>
-<h3 id="21-定义与调用">2.1 定义与调用</h3>
-<ol>
-<li>函数名与类名相同，且函数名前面加一个波浪号</li>
-<li>用来清理对象的特殊成员函数</li>
-<li>没有参数也没有任何返回类型的声明</li>
-<li>对象销毁时自动调用</li>
-<li>析构时先构造的对象后释放</li>
-</ol>
+</code></pre></div><h2 id="题解三">题解三</h2>
+<p>　　历数组中的每一个位置，并实时维护 最远可以到达的位置。对于当前遍历到的位置 x，如果它在 最远可以到达的位置 的范围内，那么就可以从起点通过若干次跳跃到达该位置，因此可以用 x + nums[x] 更新 最远可以到达的位置。</p>
+<p>　　在遍历的过程中，如果 最远可以到达的位置 大于等于数组中的最后一个位置，那就说明最后一个位置可达，可以直接返回 True 作为答案。反之，如果在遍历结束后，最后一个位置仍然不可达，返回 False 作为答案。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">canJump</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size(), max_pos <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, pos <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, end <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span>(pos <span style="color:#f92672">&lt;</span> n) {
+        <span style="color:#66d9ef">if</span>(pos <span style="color:#f92672">&lt;=</span> max_pos){
+            max_pos <span style="color:#f92672">=</span> max(max_pos, pos<span style="color:#f92672">+</span>nums[pos]);
+            <span style="color:#66d9ef">if</span>(max_pos <span style="color:#f92672">&gt;=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> true;
+        }
+        pos<span style="color:#f92672">++</span>;
+    }
+    <span style="color:#66d9ef">return</span> false;
+}
+</code></pre></div>
               
             </div>
           </div>
@@ -335,7 +300,9 @@ Test <span style="color:#a6e22e">func2</span>() {
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">标签</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/">对象的构造和析构</a>
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%95%B0%E7%BB%84/">数组</a>
+
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E8%B4%AA%E5%BF%83%E7%AE%97%E6%B3%95/">贪心算法</a>
 
                   </div>
                 
@@ -348,7 +315,7 @@ Test <span style="color:#a6e22e">func2</span>() {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/" data-tooltip="搜索插入位置">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -356,7 +323,7 @@ Test <span style="color:#a6e22e">func2</span>() {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/" data-tooltip="在排序数组中查找元素的第一个和最后一个位置">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/054-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5/" data-tooltip="054 螺旋矩阵">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
@@ -406,7 +373,7 @@ Test <span style="color:#a6e22e">func2</span>() {
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E6%90%9C%E7%B4%A2%E6%8F%92%E5%85%A5%E4%BD%8D%E7%BD%AE/" data-tooltip="搜索插入位置">
+                <a class="post-action-btn btn btn--disabled">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
@@ -414,7 +381,7 @@ Test <span style="color:#a6e22e">func2</span>() {
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/" data-tooltip="在排序数组中查找元素的第一个和最后一个位置">
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/054-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5/" data-tooltip="054 螺旋矩阵">
               
                   <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
                   <i class="fa fa-angle-right"></i>
