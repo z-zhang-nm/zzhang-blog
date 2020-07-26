@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tag2 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/tag2/</link>
+    <description>Recent content in tag2 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 30 May 2020 12:53:44 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/tag2/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>动态参数配置</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/</link>
+      <pubDate>Sat, 30 May 2020 12:53:44 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>第三周</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/</link>
+      <pubDate>Thu, 14 May 2020 21:41:56 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
