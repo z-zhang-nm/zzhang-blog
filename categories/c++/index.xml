@@ -6,10 +6,28 @@
     <description>Recent content in C&#43;&#43; on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 28 Jul 2020 21:38:11 +0800</lastBuildDate>
+    <lastBuildDate>Wed, 29 Jul 2020 17:36:17 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>单例模式</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</link>
+      <pubDate>Wed, 29 Jul 2020 17:36:17 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://segmentfault.com/a/1190000015950693&#34;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Override和final关键字</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/override%E5%92%8Cfinal%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Wed, 29 Jul 2020 15:18:03 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/override%E5%92%8Cfinal%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kancloud.cn/wangshubo1989/new-characteristics/99708&#34;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>005 New和delete</title>

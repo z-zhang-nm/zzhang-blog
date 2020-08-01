@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>final关键字 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/final%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+    <description>Recent content in final关键字 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 29 Jul 2020 15:18:03 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/final%E5%85%B3%E9%94%AE%E5%AD%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Override和final关键字</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/override%E5%92%8Cfinal%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Wed, 29 Jul 2020 15:18:03 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/override%E5%92%8Cfinal%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://www.kancloud.cn/wangshubo1989/new-characteristics/99708&#34;&gt;参考链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
