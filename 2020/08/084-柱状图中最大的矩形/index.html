@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="题目链接">
+
+
+<meta property="og:description" content="题目链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="084 柱状图中最大的矩形">
+<meta name="twitter:title" content="084 柱状图中最大的矩形">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/08/084-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/08/084-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="题目链接">
+<meta name="twitter:description" content="题目链接">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-08-11T10:00:37">
+  
+  
+    <meta property="article:modified_time" content="2020-08-11T10:00:37">
+  
+  
+  
+    
+      <meta property="article:section" content="Leetcode">
+    
+      <meta property="article:section" content="数组">
+    
+  
+  
+    
+      <meta property="article:tag" content="数组">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>084 柱状图中最大的矩形</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/084-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      084 柱状图中最大的矩形
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-08-11T10:00:37&#43;08:00">
+        
+  八月 11, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e6%95%b0%e7%bb%84">数组</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><a href="https://leetcode-cn.com/problems/largest-rectangle-in-histogram/">题目链接</a></p>
+<h2 id="题目">题目</h2>
+<p>　　给定 n 个非负整数，用来表示柱状图中各个柱子的高度。每个柱子彼此相邻，且宽度为 1 。求在该柱状图中，能够勾勒出来的矩形的最大面积。</p>
+<p>　　示例：</p>
+<blockquote>
+<p>输入: [2,1,5,6,2,3]<br>
+输出: 10</p>
+</blockquote>
+<h2 id="题解一">题解一</h2>
+<p>　　看到本题第一反应是与<strong>042-接雨水</strong>一题类似，因此沿用那一题的思路，对每一个柱子，向左右寻找能到达的最远边界，边界的判断准则是柱子高度小于当前柱子高度，则停止，计算当前柱子能勾勒出的最大面积。</p>
+<p>　　这种方法可以通过样例，但是提交后对于长度过长的数组会超出时间限制，因为其时间复杂度为<code>O(N^2)</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">largestRectangleArea</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> heights) {
+    <span style="color:#66d9ef">int</span> max_area <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> heights.size(); <span style="color:#f92672">++</span>i) {
+        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> i, right <span style="color:#f92672">=</span> i;
+        <span style="color:#66d9ef">while</span>(left <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> heights[left] <span style="color:#f92672">&gt;=</span> heights[i]) left<span style="color:#f92672">--</span>;
+        <span style="color:#66d9ef">while</span>(right <span style="color:#f92672">&lt;</span> heights.size() <span style="color:#f92672">&amp;&amp;</span> heights[right] <span style="color:#f92672">&gt;=</span> heights[i]) right<span style="color:#f92672">++</span>;
+        <span style="color:#66d9ef">int</span> curr_area <span style="color:#f92672">=</span> (right<span style="color:#f92672">-</span>left<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">*</span> heights[i];
+        <span style="color:#66d9ef">if</span>(curr_area <span style="color:#f92672">&gt;</span> max_area) max_area<span style="color:#f92672">=</span>curr_area;
+    }
+    <span style="color:#66d9ef">return</span> max_area;
+}
+</code></pre></div><h2 id="题解二">题解二</h2>
+<p>　　<strong>单调栈</strong></p>
+<p>　　首先归纳下题解一的主要思路：</p>
+<ol>
+<li>遍历每一根柱子<code>h=heights[i]</code></li>
+<li>对每一根柱子向左右两边扩展，使得扩展到的柱子高度均不小于h</li>
+<li>更新最大面积</li>
+</ol>
+<p>　　上面的思路可以总结出：如果有两根柱子j0和j1，其中j0在j1的左侧，且j0的高度大于等于j1，那么j1后面的柱子i在向左寻找高度小于heights[i]的柱子时，一定不会找到j0，因为如果j0小于heights[i]，那么在找到j1时已经停止，即j1<strong>挡住了</strong>j0。</p>
+<p>　　这样，我们可以对数组从左到右进行遍历，同时维护一个<strong>可能作为答案</strong>的数据结构，其中按照位置从左到右，高度从小到大的顺序存放一些j值，假设我们存放了<code>j0,j1...j8</code>，那么一定有<code>heights[j0]&lt;height[j1]&lt;...&lt;heights[j8]</code>，因为若相邻的两个j若为<code>&gt;=</code>的关系，那么后一个会<strong>挡住</strong>前一个，前一个就不能作为<strong>可能的答案</strong>了。</p>
+<p>　　当我们遍历到第i根柱子时，数据机构中已经存放了<code>j0,j1...j8</code>，若<code>heights[j0]&lt;heights[j1]&lt;...&lt;heights[j4]&lt;heights[i]&lt;=heights[j5]&lt;...&lt;heights[8]</code>，那么就可以将高度大于等于<code>heights[i]</code>的j全部移除，剩下的j中最大的即为位置i的柱子的左边界。</p>
+<p>　　从上面的分析可以看出，使用的数据结构为栈。</p>
+<p>　　总结下要点：</p>
+<ol>
+<li>栈中存放了j值，从栈底到栈顶，j值严格单调递增，同时对应的柱子高度也严格单调递增</li>
+<li>当遍历到第i根柱子的时候，从栈顶不断移除大于等于当前高度的j值，移除完毕后，栈顶的j值即为i左侧且最近的小于其高度的柱子
+<ul>
+<li>这里有一种特殊情况，即将栈内的所有j都移除了，这说明所有柱子的高度都大于等于heights[i]，那么就可以认为i左侧最近的小于其高度的柱子位置在<code>j=-1</code>，这个虚拟的位置一般叫做<strong>哨兵</strong>。</li>
+</ul>
+</li>
+<li>将ｉ放入栈顶</li>
+</ol>
+<p>　　栈内存放的元素具有单调性，这种数据结构被称为<strong>单调栈</strong>。</p>
+<p>　　单调栈方法的复杂度是多少？直接计算可能不是那么直观，可以发现<strong>每个位置只会入栈一次，且最多出栈一次</strong>，因此从左到右和从右到左遍历数组时，对栈的操作次数为<code>O(n)</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">largestRectangleArea</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> heights) {
+  <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> heights.size();
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> left(n), right(n);
+  stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> monotonic_stack;
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i){
+      <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>monotonic_stack.empty() <span style="color:#f92672">&amp;&amp;</span> heights[monotonic_stack.top()] <span style="color:#f92672">&gt;=</span> heights[i]){
+          monotonic_stack.pop();
+      }
+      left[i] <span style="color:#f92672">=</span> (monotonic_stack.empty() <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> monotonic_stack.top());
+      monotonic_stack.push(i);
+  }
+  monotonic_stack <span style="color:#f92672">=</span> stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>();
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; <span style="color:#f92672">--</span>i){
+      <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>monotonic_stack.empty() <span style="color:#f92672">&amp;&amp;</span> heights[monotonic_stack.top()] <span style="color:#f92672">&gt;=</span> heights[i]) {
+          monotonic_stack.pop();
+      }
+      right[i] <span style="color:#f92672">=</span> (monotonic_stack.empty() <span style="color:#f92672">?</span> n : monotonic_stack.top());
+      monotonic_stack.push(i);
+  }
+  <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i){
+      ret <span style="color:#f92672">=</span> max(ret, (right[i]<span style="color:#f92672">-</span>left[i]<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)<span style="color:#f92672">*</span>heights[i]);
+  }
+  <span style="color:#66d9ef">return</span> ret;
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%95%B0%E7%BB%84/">数组</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/085-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" data-tooltip="085 最大矩形">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-tooltip="工厂模式">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/085-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/" data-tooltip="085 最大矩形">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F/" data-tooltip="工厂模式">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

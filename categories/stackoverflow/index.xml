@@ -6,10 +6,19 @@
     <description>Recent content in StackOverflow on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 13 Aug 2020 13:43:22 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2020 15:26:27 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/stackoverflow/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>遍历string中的单词</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E9%81%8D%E5%8E%86string%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/</link>
+      <pubDate>Tue, 18 Aug 2020 15:26:27 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E9%81%8D%E5%8E%86string%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/236129/how-do-i-iterate-over-the-words-of-a-string&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>指针和引用的区别</title>

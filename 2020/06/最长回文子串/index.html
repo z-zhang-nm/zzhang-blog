@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="">
+
+
+<meta property="og:description" content="">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最长回文子串">
+<meta name="twitter:title" content="最长回文子串">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="">
+<meta name="twitter:description" content="">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-06-08T17:06:35">
+  
+  
+    <meta property="article:modified_time" content="2020-06-08T17:06:35">
+  
+  
+  
+    
+      <meta property="article:section" content="Leetcode">
+    
+  
+  
+    
+      <meta property="article:tag" content="字符串">
+    
+      <meta property="article:tag" content="动态规划">
+    
+      <meta property="article:tag" content="Manacher算法">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>最长回文子串</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%9C%80%E9%95%BF%E5%9B%9E%E6%96%87%E5%AD%90%E4%B8%B2/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      最长回文子串
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-06-08T17:06:35&#43;08:00">
+        
+  六月 8, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <h2 id="题目">题目</h2>
+<p>　　给定一个字符串 <code>s</code>，找到 <code>s</code> 中最长的回文子串。你可以假设 <code>s</code> 的最大长度为 1000。</p>
+<p>　　示例1：</p>
+<blockquote>
+<p>输入: <code>&quot;babad&quot;</code><br>
+输出: <code>&quot;bab&quot;</code><br>
+注意: <code>&quot;aba&quot;</code> 也是一个有效答案</p>
+</blockquote>
+<p>　　示例2：</p>
+<blockquote>
+<p>输入: <code>&quot;cbbd&quot;</code><br>
+输出: <code>&quot;bb&quot;</code></p>
+</blockquote>
+<h2 id="题解一">题解一</h2>
+<p>　　最暴力的解法当然是暴力搜索，先找到所有的子串，然后一个一个判断是否是回文串，并从中找出最长的那个，不过这当然不能满足Leetcode的要求。找出所有字串需要 $C_n^2 = \frac{n(n-1)}{2}$，之后需要再遍历一遍所有的子串，因此最终的时间复杂度为$O(n^3)$。</p>
+<p>　　本题需要找的是回文子串，而回文子串的中心一旦确定，整个回文串就可以确定，因此可以仅仅遍历一遍字符串即可找到最长回文串，时间复杂度变为$O(n^2)$。</p>
+<p>　　本题一个需要注意的点为回文串分为奇回文(<code>aba</code>)和偶回文(<code>abba</code>)两种，这两种情况要分别考虑。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">string <span style="color:#a6e22e">longestPalindrome</span>(string s) {
+    <span style="color:#66d9ef">if</span>(s.size() <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>){
+        <span style="color:#66d9ef">return</span> s;
+    }
+    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size()<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#f92672">++</span>i) {
+        findLongestPalindrome(s, i, i, left, right);
+        findLongestPalindrome(s, i, i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, left, right);
+    }
+    <span style="color:#66d9ef">return</span> s.substr(left, right<span style="color:#f92672">-</span>left<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">findLongestPalindrome</span>(string s, <span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>left, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>right) {
+    <span style="color:#66d9ef">while</span>(start <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> end <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> s[start] <span style="color:#f92672">==</span> s[end]) {
+        start<span style="color:#f92672">-=</span><span style="color:#ae81ff">1</span>;
+        end<span style="color:#f92672">+=</span><span style="color:#ae81ff">1</span>;
+    }
+    <span style="color:#66d9ef">if</span>(end <span style="color:#f92672">-</span> start <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&gt;</span> right <span style="color:#f92672">-</span> left) {
+        left <span style="color:#f92672">=</span> start<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+        right <span style="color:#f92672">=</span> end<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>; <span style="color:#75715e">//注意跳出循环时当前start和end不属于回文串
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><h2 id="题解二">题解二</h2>
+<p>　　此题还可以用动态规划来解，维护一个二维数组<code>dp</code>，其中<code>dp[i][j]</code>表示字符区间<code>[i,j]</code>之间是否为回文串。</p>
+<p>　　当<code>i==j</code>时，<code>dp[i][j]</code>自然为1，当<code>s[i]</code>和<code>s[j]</code>是两个相邻的字符时，需要判断<code>s[i]</code>和<code>s[j]</code>是否相等，若<code>s[i]</code>和<code>s[j]</code>不相邻时，除了要判断<code>s[i]</code>和<code>s[j]</code>是否相等外，还需要判断<code>dp[j+1][i-1</code>是否是回文串。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">string <span style="color:#a6e22e">longestPalindrome</span>(string s) {
+    <span style="color:#66d9ef">if</span> (s.size() <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>) {
+        <span style="color:#66d9ef">return</span> s;
+    }
+    <span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> s.size(), left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;<span style="color:#75715e">//注意max_len初始化为1，否则&#39;ac&#39;不通过
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> dp[len][len];
+    memset(dp, <span style="color:#ae81ff">0</span>, len<span style="color:#f92672">*</span>len<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len; <span style="color:#f92672">++</span>i) {
+        dp[i][i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; <span style="color:#f92672">++</span>j) {
+            dp[j][i] <span style="color:#f92672">=</span> (s[i] <span style="color:#f92672">==</span> s[j] <span style="color:#f92672">&amp;&amp;</span> (i <span style="color:#f92672">-</span> j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">||</span> dp[j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>][i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]));
+            <span style="color:#66d9ef">if</span> (dp[j][i] <span style="color:#f92672">&amp;&amp;</span> max_len <span style="color:#f92672">&lt;</span> i<span style="color:#f92672">-</span>j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>){
+                left <span style="color:#f92672">=</span> j;
+                max_len <span style="color:#f92672">=</span> i<span style="color:#f92672">-</span>j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
+            }
+        }
+    }
+    <span style="color:#66d9ef">return</span> s.substr(left, max_len);
+}
+</code></pre></div><h2 id="题解三10">题解三1.0</h2>
+<p>　　<strong>Manacher算法导论</strong></p>
+<p>　　为了免去对回文串是奇回文还是偶回文的讨论，首先对原始字符串进行预处理，即在字符串头尾及每两个字符之间增加分隔符<code>#</code>，例如<code>abac</code>变为<code>#a#b#a#c#</code>，加入分隔符后，偶回文的对称中心也有了具体的位置，且添加了分隔符的新字符串长度一定是奇数(<code>2*n+1</code>)，新字符串与原始字符串长度之间的关系如下。
+<img src="https://z-zhang.gitee.io/zzhang-blog/Leetcode/005/%E6%96%B0%E6%97%A7%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%95%BF%E5%BA%A6%E5%85%B3%E7%B3%BB.jpg" alt="新旧字符串长度关系"></p>
+<p>　　用一个辅助数组p记录新字符串中以每个字符为中心向左右能扩散的最大步数，以<code>abbabb</code>为例，可以得到下表：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Char</th>
+<th align="center">#</th>
+<th align="center">a</th>
+<th align="center">#</th>
+<th align="center">b</th>
+<th align="center">#</th>
+<th align="center">b</th>
+<th align="center">#</th>
+<th align="center">a</th>
+<th align="center">#</th>
+<th align="center">b</th>
+<th align="center">#</th>
+<th align="center">b</th>
+<th align="center">#</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">Index</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">4</td>
+<td align="center">5</td>
+<td align="center">6</td>
+<td align="center">7</td>
+<td align="center">8</td>
+<td align="center">9</td>
+<td align="center">10</td>
+<td align="center">11</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">p</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">5</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p>　　辅助数组p的最大值为5，说明原始字符串中最长回文子串长度为5，这个结论具有一般性：</p>
+<ol>
+<li>如果回文子串中心是一个字符，那么原始字符串中心也是一个字符，新回文串中向两边扩散时先是一个分隔符，后是一个字符，且在新字符串中每扩散两步，虽然只扫到一个有效字符，但是相当于在原始字符串计算了两个字符。
+<img src="https://z-zhang.gitee.io/zzhang-blog/Leetcode/005/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E6%95%A31.jpg" alt="字符串扩散"></li>
+<li>如果回文子串中心是一个分隔符，那么原始字符串中心是一个“空隙”，新回文串中向两边扩散时先是一个字符，后是一个分隔符，且在新字符串中每扩散两步，虽然只扫到一个有效字符，但是相当于在原始字符串计算了两个字符。
+<img src="https://z-zhang.gitee.io/zzhang-blog/Leetcode/005/%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%89%A9%E6%95%A32.jpg" alt="字符串扩散"></li>
+</ol>
+<p>　　原始回文串左边界left的计算公式为<code>left = (i - max_len) / 2</code>，即<code>i/2 - max_len/2</code>，<code>i/2</code>为当前索引在原始字符串中的索引位置，<code>max_len/2</code>为实际扫到的有效字符的个数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">string <span style="color:#a6e22e">longestPalindrome</span>(string s) {
+    <span style="color:#66d9ef">if</span> (s.size() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) {
+        <span style="color:#66d9ef">return</span> s;
+    }
+    string s_ <span style="color:#f92672">=</span> AddBoundaries(s);
+    <span style="color:#66d9ef">int</span> len_ <span style="color:#f92672">=</span> s_.size(), left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len_; <span style="color:#f92672">++</span>i) {
+        <span style="color:#66d9ef">int</span> curr_len <span style="color:#f92672">=</span> CenterSpread(s_, i);
+        <span style="color:#66d9ef">if</span> (curr_len <span style="color:#f92672">&gt;</span> max_len) {
+            max_len <span style="color:#f92672">=</span> curr_len;
+            left <span style="color:#f92672">=</span> (i <span style="color:#f92672">-</span> max_len) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+        }
+    }
+    <span style="color:#66d9ef">return</span> s.substr(left, max_len);
+}
+
+string <span style="color:#a6e22e">AddBoundaries</span>(string s) {
+    string ret_s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> c : s) {
+        ret_s <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;#&#34;</span>;
+        ret_s <span style="color:#f92672">+=</span> c;
+    }
+    ret_s <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;#&#34;</span>;
+    <span style="color:#66d9ef">return</span> ret_s;
+}
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">CenterSpread</span>(string s, <span style="color:#66d9ef">int</span> idx) {
+    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> idx<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> idx<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, step <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> s[i] <span style="color:#f92672">==</span> s[j]) {
+        step <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+        i<span style="color:#f92672">--</span>;
+        j<span style="color:#f92672">++</span>;
+    }
+    <span style="color:#66d9ef">return</span> step;
+}
+</code></pre></div><h2 id="题解三20">题解三2.0</h2>
+<p>　　<strong>Manacher算法</strong></p>
+<p>　　上面的<strong>Manacher算法导论</strong>的时间复杂度仍然为<code>O(n^2)</code>，因为其会导致原始字符串的每一个字符可能被多次访问，比如<code>#a#a#a#a#a#a#a#a#</code>，它只是为了引入真正的<strong>Manacher算法</strong>。</p>
+<p>　　若在填写辅助数组ｐ的时候可以参考已经填过的数组ｐ，使得新字符串每个字符只被访问一次，那么时间复杂度就可以降为<code>O(n)</code>，具体方法是新增两个辅助变量<code>maxRight</code>和<code>center</code>，<code>maxRight</code>表示遍历到目前为止所有回文子串所能达到的最右边界，<code>center</code>为对应<code>maxRight</code>的回文子串的中心。</p>
+<p>　　循环变量<code>i</code>与<code>maxRight</code>的关系：</p>
+<ol>
+<li><code>i &gt;= maxRight</code>时，有两种情况，一种是刚开始，一种是刚遍历完一个回文子串，这两种情况只需要对当前<code>i</code>进行”中心扩散“更新<code>maxRight</code>即可。</li>
+<li><code>i &lt; maxRight</code>时，根据新字符的回文子串的特性，<code>i</code>关于当前<code>center</code>对称的那个<code>mirror</code>位置的<code>p</code>值就很重要，由于<code>mirror</code>和<code>i</code>关于<code>center</code>中心对称，所以<code>(mirror+i)/2=center</code>，根据<code>p[mirror]</code>与<code>maxRight-i</code>的大小关系，可以分为如下三种情况：
+<ol>
+<li><code>p[mirror]</code>小于<code>maxRight-i</code>：，以<code>mirror</code>为中心的回文串已不能继续扩散，且以<code>center</code>为中心的回文子串包含以<code>i</code>为中心的回文子串，因此以<code>i</code>为中心的回文子串也不能继续扩散了<code>p[i]=p[mirror]</code>
+<img src="https://z-zhang.gitee.io/zzhang-blog/Leetcode/005/%E9%A9%AC%E6%8B%89%E8%BD%A61.jpg" alt="情况一"></li>
+<li><code>p[mirror]</code>恰好等于<code>maxRight-i</code>：以<code>mirror</code>为中心的回文子串已不能继续扩散，但是其到达了以<code>center</code>为中心的回文子串的左边界，<code>p[i]</code>至少可以到达以<code>center</code>为中心的回文子串的右边界，且有可能可以继续扩散，因此可以先令<code>p[i]=p[mirror]</code>，然后继续“中心扩散”
+<img src="https://z-zhang.gitee.io/zzhang-blog/Leetcode/005/%E9%A9%AC%E6%8B%89%E8%BD%A62.jpg" alt="情况二"></li>
+<li><code>p[mirror]</code>大于<code>maxRight-i</code>：这种情况比较复杂，如下图所示，由于以<code>center</code>为中心的回文子串的对称性，其左右两侧的<code>c</code>和<code>e</code>一定不相等，由于以<code>mirror</code>为中心的回文字串的对称性，上述<code>c</code>和相对于<code>mirror</code>右侧对称的<code>c</code>相等，且<code>c</code>与相对于<code>center</code>对称的<code>c</code>，即以<code>i</code>为中心且边界到达<code>maxRight</code>的回文子串的左侧字符相等，因此相对于<code>center</code>对称的<code>c</code>不等于<code>e</code>，即以<code>i</code>为中心的回文子串不能继续扩散
+<img src="https://z-zhang.gitee.io/zzhang-blog/Leetcode/005/%E9%A9%AC%E6%8B%89%E8%BD%A63.jpg" alt="情况三"></li>
+</ol>
+</li>
+</ol>
+<p>　　综上，当<code>i &lt; maxRight</code>时，<code>p[i]</code>的值更新为<code>p[mirror]</code>和<code>maxRight-i</code>中较小的那个。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">string <span style="color:#a6e22e">longestPalindrome</span>(string s) {
+    <span style="color:#66d9ef">if</span> (s.size() <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">2</span>) {
+        <span style="color:#66d9ef">return</span> s;
+    }
+    string s_ <span style="color:#f92672">=</span> AddBoundaries(s);
+    <span style="color:#66d9ef">int</span> len_ <span style="color:#f92672">=</span> s_.size(), left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, max_len <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, p[len_];
+    memset(p, <span style="color:#ae81ff">0</span>, len_<span style="color:#f92672">*</span><span style="color:#66d9ef">sizeof</span>(<span style="color:#66d9ef">int</span>));
+    <span style="color:#66d9ef">int</span> maxRight <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, center <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> len_; <span style="color:#f92672">++</span>i) {
+        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> maxRight) {
+            <span style="color:#66d9ef">int</span> mirror <span style="color:#f92672">=</span> (<span style="color:#ae81ff">2</span><span style="color:#f92672">*</span>center <span style="color:#f92672">-</span> i);
+            p[i] <span style="color:#f92672">=</span> min(p[mirror], maxRight <span style="color:#f92672">-</span> i);
+        }
+        <span style="color:#66d9ef">int</span> pre_pos <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> (p[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+        <span style="color:#66d9ef">int</span> next_pos <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> (p[i] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+        <span style="color:#66d9ef">while</span>(pre_pos <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> next_pos <span style="color:#f92672">&lt;</span> s_.size() <span style="color:#f92672">&amp;&amp;</span> s_[pre_pos] <span style="color:#f92672">==</span> s_[next_pos]) {
+            p[i]<span style="color:#f92672">++</span>;
+            pre_pos<span style="color:#f92672">--</span>;
+            next_pos<span style="color:#f92672">++</span>;
+        }
+        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">+</span> p[i] <span style="color:#f92672">&gt;</span> maxRight) {
+            maxRight <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> p[i];
+            center <span style="color:#f92672">=</span> i;
+        }
+        <span style="color:#66d9ef">if</span> (p[i] <span style="color:#f92672">&gt;</span> max_len) {
+            max_len <span style="color:#f92672">=</span> p[i];
+            left <span style="color:#f92672">=</span> (i <span style="color:#f92672">-</span> max_len) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+        }
+    }
+    <span style="color:#66d9ef">return</span> s.substr(left, max_len);
+}
+
+string <span style="color:#a6e22e">AddBoundaries</span>(string s) {
+    string ret_s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> c : s) {
+        ret_s <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;#&#34;</span>;
+        ret_s <span style="color:#f92672">+=</span> c;
+    }
+    ret_s <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#34;#&#34;</span>;
+    <span style="color:#66d9ef">return</span> ret_s;
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/manacher%E7%AE%97%E6%B3%95/">Manacher算法</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" data-tooltip="Z字形变换">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/004-%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%AD%A3%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/" data-tooltip="004 寻找两个正序数组的中位数">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/" data-tooltip="Z字形变换">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/06/004-%E5%AF%BB%E6%89%BE%E4%B8%A4%E4%B8%AA%E6%AD%A3%E5%BA%8F%E6%95%B0%E7%BB%84%E7%9A%84%E4%B8%AD%E4%BD%8D%E6%95%B0/" data-tooltip="004 寻找两个正序数组的中位数">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
