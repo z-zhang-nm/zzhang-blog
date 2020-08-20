@@ -75,7 +75,7 @@ int main() {
          ostream_iterator<string>(cout, "\n"));
 }
 ```
-　　
+　　`istream_iterator<string>(iss)`表示创建了一个流迭代器，从iss中读取string对象，`istream_iterator<string>()`调用默认构造函数，表示流迭代器的结束。
 
 　　也可以直接放入容器中。
 
@@ -86,8 +86,8 @@ copy(istream_iterator<string>(iss),
      istream_iterator<string>(),
      back_inserter(tokens));
 //方法二
-vector<string> tokens{istream_iterator<string>{iss},
-                      istream_iterator<string>{}};
+vector<string> tokens{istream_iterator<string>(iss),
+                      istream_iterator<string>())};
 ```
 
 　　这种方式只能处理空白符，若单词以其它分隔符分割，就不能正确提取。
