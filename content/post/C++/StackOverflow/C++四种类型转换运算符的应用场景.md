@@ -88,7 +88,27 @@ printf("0x%08x\n", pa);//0x88b8b5cc
 
 　　该运算符可以在程序执行过程中决定真正的类型，执行转换时首先检查能否成功转换，若可以则转换之，否则转换失败，若是指针则返回空指针，若是引用则抛出bad_cast异常。
 
-　　**dynamic_cast转换符只能用于含有虚函数的类**(具有多态特性)。
+　　**dynamic_cast转换符只能用于含有虚函数的类(具有多态特性)**。
 ```cpp
+class Base
+{
+public:
+	virtual void foo(){};
+};
+class Derived : public Base
+{
+};
 
+void main()
+{
+	//基类 -> 子类
+	Base *pb1 = new Base;
+	Derived *pd1 = dynamic_cast<Derived *>(pb1); //失败，pd1 = NULL
+	//子类 -> 子类
+	Base *pb2 = new Derived;
+	Derived *pd2 = dynamic_cast<Derived *>(pb2); //成功
+	//子类 -> 基类
+	Base *pb3 = new Derived;
+	Base *pd3 = dynamic_cast<Base *>(pb3);		 //成功
+}；
 ```
