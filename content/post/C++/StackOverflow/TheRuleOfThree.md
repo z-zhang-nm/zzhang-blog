@@ -5,7 +5,8 @@ categories:
 - C++
 - StackOverflow
 tags:
-- class
+- 拷贝构造函数
+- 拷贝赋值操作符
 keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg
