@@ -120,3 +120,47 @@ tags:
 `<header_len=100> <field1_len=18><field1_name=chunk_pos>=<field1_value=4117> <10><count>=<1> <17><end_time>=<(secs)+(nsecs)> <4><op>=<6> <19><start_time>=<> <8><ver>=<1> <data_len=8><data>`
 
 # Rosbag数据结构解析
+
+## 数据结构
+　　首先需要定义一个存储rosbag数据的**数据结构**Bag，初步判断其中需要包括：记录record基本信息（offset,header_len, data_len）的结构Record，存储各个Record的record_list_数组，存储消息结构的数据结构。
+
+## 提取Record基本信息
+> 一个字节八个比特,就是八个二进制位，四个二进制数最大表示为15,就是一个16进制数,所以八位可以表示成两个16进制的数，即一个字节为两个用两个16进制数表示
+
+　　读取文件时需要借助字符数组作为Buffer，其大小一般为4*1024=[4096](https://stackoverflow.com/questions/236861/how-do-you-determine-the-ideal-buffer-size-when-using-fileinputstream)个字节。
+
+　　为了方便后续进行record的解析，首先遍历rosbag文件，提取各个record的基本信息，包括各个record的起始位置，header length和data length。解析时使用C++标准库的文件流`ifstream`。
+1. 定位到文件末尾，记录文件末尾位置，作为遍历结束条件
+2. 跳过rosbag第一行的13个字符，定位到第一个record(Bag header)的位置，开始遍历record
+   1. 记录record的offset位置
+   2. 读取4个字节，得到header_len
+   3. 从当前位置向前定位header_len个字节
+   4. 读取4个字节，得到data_len
+   5. 从当前位置向前定位data_len个字节
+   6. 将当前record放入record_list_
+3. 定位到文件开始位置
+
+## 解析Record Header数据
+　　[提取Record基本信息](#提取record基本信息)中已经得到rosbag中每一个record的基本信息，下面首先对每一个record的header进行解析，header的格式见[Header Format](#header-format)一节。
+
+　　这里需要解析header的数据，因此需要一个新的**数据结构**存储header data，由于header的格式为`<len><name>=<value>`，需要记录每一对name和value的数据对，由此哈希map比较合适。
+1. 定位到record.offset+4的位置，即header data开始的位置
+2. 由于Buffer大小为4096个字节，header_len可能大于4096，因此需要先确定读取的次数
+3. 读取header data并转换为string格式，接下来循环解析这个字符串
+   1. 首先读取4个字节，得到field_len
+   2. 截取field_len长度的子串，并找到字符`=`的位置
+   3. `=`前面为field_name，后面为field_value
+   4. 将键值对加入Header map
+
+　　利用Record Header解析函数解析第一个record，即Bag header record，得到rosbag中Chunck record和Connection Record的个数。
+
+## 消息结构解析
+
+### Record选取
+　　消息定义在rosbag中有两种record可以获取，即Chunck record和Connection record，由[rosbag结构实例](#结构)一节可以知道rosbag中records的排列是有顺序的，由于Chunck中的数据可能是被压缩过的且其与Index data record交叉排列，所以选择Connection record作为消息结构解析record。
+
+### 存储数据结构选取
+　　rosbag中含有不同topic的消息，每一个topic中包含不同的消息，消息类型包括ros基本消息类型和用户自定义类型，消息可以包含多个层级，比如`header.stamp.secs`代表时间戳中的秒，不同消息的结构深度不同，因此考虑使用**树结构**作为**存储消息结构的数据结构**。
+
+### 消息结构树的建立
+　　
