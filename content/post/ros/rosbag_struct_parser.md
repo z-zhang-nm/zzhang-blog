@@ -194,3 +194,5 @@ tags:
    2. 若结点为数组，打印`type[array_size] name`，否则打印`type name`
    3. 结点层数加一
    4. 遍历结点子结点，递归查看
+
+# Load消息代码生成
