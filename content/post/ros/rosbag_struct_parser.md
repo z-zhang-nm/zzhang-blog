@@ -76,11 +76,37 @@ tags:
 　　data存储序列化的ros messages，header包含如下fields：
 * conn：4字节little-endian整数，代表发送消息的连接的ID号
 * time：8字节little-endian整数，代表消息接收时间
+
+　　序列化的数据存储时是按照定义中的顺序存放的，存储string和数组时会多占用4个字节记录string的长度和数组的大小。
+
+　　下面是std_msgs的大小：
+- bool : 1
+- int8 : 1
+- uint8 : 1
+- int16 : 2
+- uint16 : 2
+- int32 : 4
+- uint32 : 4
+- int64 : 8
+- uint64 : 8
+- float32 : 4
+- float64 : 8
+- time : 8(int, int)
+- duration : 8(int, int)
+- string : 0
+
+　　怎么定位到Message data Record的位置？
+> 遍历每一个Index data Record，根据header中记录的Connection ID确定topic，根据Index data Record位置定位到属于哪一个chunk，记录chunk的起始位置，然后遍历data，得到每条消息的时间戳和在chunk中偏置位置，根据`chunk起始位置+偏置位置`定位到记录这条消息的Message data Record在rosbag中的偏置位置。
+
 ### Index data
 　　data格式取决于header中存储的版本号，当前版本为1，data包含时间戳（8字节little-endian整数）、Message data Record的偏置信息（4字节little-endian整数），header包含如下fields：
 * ver：4字节little-endian整数，代表index data record的版本
 * conn：4字节little-endian整数，代表连接的ID号
 * count：4字节little-endian整数，代表前一个chunk中消息的数量
+
+　　data包括count个重复的`<time><offset>`的消息：
+* time: 接收消息的时间
+* offset: 消息在前面chunk中的偏置
 ### Chunk info
 　　data格式取决于header中存储的版本号，当前版本为1，data包含连接ID（4字节little-endian整数）、连接中的消息数量（4字节little-endian整数），header包含如下fields：
 * ver： 4字节little-endian整数，代表chunk info record的版本
@@ -206,7 +232,7 @@ tags:
 　　首先在`structure.h`中加入一行包含当前topic的头文件代码，例如`#include "fusion_obstacle_list.h"`。
 
 ### 生成头文件
-　　头文件中包括topic的完整消息结构定义(struct)、Load函数和Output函数的声明。每个头文件的前四行内容都是固定的，以`fusion_obstacle_list`为例,如下：
+　　头文件中包括topic的完整消息结构定义(struct)、LoadData函数和OutputData函数的声明。每个头文件的前四行内容都是固定的，以`fusion_obstacle_list`为例,如下：
 ```cpp
 #param once
 #include "public_header.h"
@@ -237,8 +263,21 @@ namespace fusion_obstacle_list{
 
 　　头文件内容加上`}\n`与`namespace fusion_obstacle_list{`组成完整命名空间。
 
-　　
+　　接下来加入LoadData函数和OutputData函数的声明，参数类型为`<topic名字>::object`，如下例子，其中`ToolStream`为public_header中的类，用于数据的输入和输出：
+```cpp
+void LoadData(ToolStream &ss,fusion_obstacle_list::object &value);
+void OutputData(fusion_obstacle_list::object &value);
+```
 
 ### 生成cpp文件
+　　首先增加头文件包含，例如：
+```cpp
+#include "fusion_obstacle_list.h"
+```
+
+#### LoadData函数实现
+　　here
+
+#### OutputData函数实现
 
 ### 生成CMakeList文件
