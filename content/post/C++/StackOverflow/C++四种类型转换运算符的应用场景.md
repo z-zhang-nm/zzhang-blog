@@ -55,6 +55,8 @@ void main(){
 ```
 
 　　`static_cast`本质上是传统c语言强制转换的替代品，要注意的是`static_cast`不能转换掉`expression`的`const`、`volitale`、或者`__unaligned`属性。
+
+> static_cast can also cast through inheritance hierarchies. It is unnecessary when casting upwards (towards a base class), but when casting downwards it can be used as long as it doesn't cast through virtual inheritance. It does not do checking, however, and it is undefined behavior to static_cast down a hierarchy to a type that isn't actually the type of the object.
 ---
 ## **const_cast**
 　　顾名思义，`const_cast`修改表达式的`const`属性，C++中只有这一运算符可以移除`const`属性。
@@ -90,8 +92,6 @@ printf("0x%08x\n", pa);//0x88b8b5cc
 　　dynamic_cast支持交叉转换，假设基类A有两个直接派生类B、C，那么，将`B* pB`转换为`C* pC`，这种由派生类B转换到派生类C的转换称之为交叉转换，这种情况下只能使用`dynamic_cast`。
 
 　　dynamic_cast支持多继承，假设有两个基类A1、A2，派生类B从A1、A2中派生，那么，将pB转换为pA1或是pA2，此时只能使用`dynamic_cast`。
-
-　　由于运行时的检查，所以会额外消耗一些性能，因此，上行转换时一般使用`static_cast`，下行转换时使用`dynamic_cast`。
 ```cpp
 class Base
 {
@@ -113,6 +113,9 @@ void main()
 	//子类 -> 基类
 	Base *pb3 = new Derived;
 	Base *pd3 = dynamic_cast<Base *>(pb3);		 //成功
+	//子类 -> 基类
+	Derived *pb4 = new Derived;
+	Base *pd4 = dynamic_cast<Base *>(pb4);		 //成功
 }；
 ```
 　　下面看一个菱形继承的例子。
@@ -133,7 +136,7 @@ void main()
     A *pA = dynamic_cast<A *>(pB);
 }
 ```
-
+---
 ## reinterpret_cast
 > `reinterpret_cast<type>(expression)`
 
