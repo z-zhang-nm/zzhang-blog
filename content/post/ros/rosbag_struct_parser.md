@@ -276,8 +276,63 @@ void OutputData(fusion_obstacle_list::object &value);
 ```
 
 #### LoadData函数实现
-　　here
+　　加入LoadData函数声明行：
+```cpp
+void LoadData(ToolStream &ss,fusion_obstacle_list::object &value){
+```
+
+　　用数组`load_prefix`存放当前遍历到的树的结点名字，并向数组中放入`value`，遍历根结点的子结点：
+1. 遍历`load_prefix`数组，生成从根结点到当前结点的结构字符串，由`.`连接
+2. 若当前结点为基本类型且不是数组：
+   1. 若类型为string，序列化字符串会多四个字节来存放字符串的长度，首先需要读取字符串大小，然后resize结点消息字符串大小
+   2. 生成读取消息行`ss >> <prefix+name>;\n`
+3. 若当前结点为基本类型且是数组，考虑到多维数组，读取数组大小的变量名需要加上序号标志来进行区分
+   1. 序列化字符串存储**动态**数组也会多四个字节存放数组的大小，因此需要首先读取数组大小，resize结点消息字符串大小
+   2. 若是固定长度数组，直接获取数组大小
+   3. 生成读取消息循环
+4. 若当前结点为自定义类型且是数组
+   1. 与3的处理方式基本一样，不过由于并非基本类型，所以树结构还没到叶子结点，所以需要继续递归遍历，遍历前需要将当前变量名加数组索引名字加入`load_prefix`数组
+   2. 遍历结束后将其弹出
+   3. 加上`}\n`闭合循环
+5. 若当前结点为自定义类型且不是数组
+   1. 将当前结点变量名加入`load_prefix`数组
+   2. 递归遍历结点子结点
+   3. 弹出当前变量名
+
+　　加入`}\n`闭合函数名义。
+
+```cpp
+//string
+int string_size_0(0);
+ss >> string_size_0;
+value.header.frame_id.resize(string_size_0);
+ss >> value.header.frame_id;
+//基本类型
+ss >> value.header.seq;
+//自定义类型
+ss >> value.center_lane.position_parameter_c0;
+//数组
+int array_size_0(0);
+ss >> array_size_0;
+value.center_lane.quality_score.resize(array_size_0);
+for(int index_0 = 0;index_0 < array_size_0;++index_0){
+ ss >> value.center_lane.quality_score[index_0].distance;
+ ss >> value.center_lane.quality_score[index_0].score;
+}
+```
 
 #### OutputData函数实现
+　　与LoadData函数类似，不过将数据流读取变为cout输出而已。
 
 ### 生成CMakeList文件
+　　加入如下固定内容即可：
+```
+SET(CMAKE_BUILD_TYPE "Debug")
+SET(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS}    -O0 -Wall -g2 -ggdb") 
+SET(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
+cmake_minimum_required(VERSION 3.2)
+add_compile_options(-std=c++11)
+project(bag_structer_parse)
+file(GLOB sources *.cpp)
+add_library(bag_structer SHARED ${sources})
+```
