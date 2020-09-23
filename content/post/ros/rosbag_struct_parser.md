@@ -17,65 +17,79 @@ tags:
 ```
 
 ## Record format
-　　每一个record有如下格式：
+　　每一个record由以下四个部分组成：
 ```
 <header_len><header><data_len><data>
 ```
-* header_len为４字节little-endian整数（低地址到高地址的顺序存放数据的低位字节到高位字节），代表其后header的长度
-* header存放长度为header_len的数据，数据内容见[Header format](#header-format)
-* data_len为４字节little-endian整数，代表其后data的长度
-* data存放长度为data_len的数据
-* 注意Chunk Record比较特殊，它的data中包含另外的Connection Record和Message Data Record
+- header_len为4字节小端序整数（低地址到高地址的顺序存放数据的低位字节到高位字节），代表后面header的长度
+- header存放长度为header_len的数据，数据格式见[header结构](#header-format)
+- data_len为4字节小端序整数，代表后面data的长度
+- data存放长度为data_len的数据
+
 ## Header format
-　　每一个header由`<len><name>=<value>`的fields序列组成，如下：
+　　record中的header由一系列`<field_len><field_name>=<field_value>`格式的fields构成，如下：
 ```
 <field1_len><field1_name>=<field1_value><field2_len><field2_name>=<field2_value>...<fieldN_len><fieldN_name>=<fieldN_value>
 ```
-* fieldX_len为４字节little-endian整数，代表其后fieldX_name和fieldX_value的长度（包括符号'='）
-* fieldX_name为字符串，代表field的名字
-* 不同field的fieldX_value具有不同类型，有可能是字符串或整数等
+- fieldX_len为４字节小端序整数，代表其后fieldX_name和fieldX_value的长度（包括符号'=’）
+- fieldX_name为字符串，代表field的名字
+- 不同field的fieldX_value具有不同类型，有可能是字符串、整数等
 
-　　每一个header都包含一个名字为op的field，用来指定record的类别，包括以下几种类别（按在bag包中首次出现的顺序列出）：
-1. Bag header(op=0x03)：存储整个bag包的结构信息：第一个Index Data Record的偏置、Chunk Records和Connection Records的数量
-2. Chunk(op=0x05)：存储可能被压缩过的Connection Records和Message Data Records
-3. Connection(op=0x07)：存储[ROS connection header](#ros-connection-header)，包括topic名字和消息定义文本
-4. Message data(op=0x02)：存储某个Connection Record的序列化消息数据（长度可能为0）
-5. Index data(op=0x04)：存储前面chunk record单个connection中消息的索引
-6. Chunk info(op=0x06)：存储chunk中消息的信息
-### ROS connection header
-　　存储建立的连接的元数据，field_name和field_value都是字符串，格式：
+　　每个header都必定包含一个field_name为op的field，用来表明当前record属于哪个类别，当前版本rosbag结构包括以下几种类别，具体格式见[record类别](#record类别)：
+1. Bag header(op=0x03)：存储rosbag中第一个Index data record的偏置、Chunk record的数量和Connection record的数量
+2. Chunk(op=0x05)：存储（可能被压缩过的）Connection record和Message data record
+3. Connection(op=0x07)：存储ros结点连接的信息，比如topic名字、消息定义文本等
+4. Message data(op=0x02)：存储某个连接的序列化消息
+5. Index data(op=0x04)：存储某一个连接不同时刻的序列化消息在之前一个Chunk record中的偏置
+6. Chunk info(op=0x06)：存储Chunk record的信息，比如偏置、开始结束时间、连接数量等
+
+## **record类别**
+　　rosbag中不同类别的record的存储顺序如下所示：
 ```
-4-byte length + [4-byte field length + field_name=field_value]*
+<Bag header> (<Chunk>(<Index data>*N))*M <Connection>*K <Chunk info>*M
 ```
-　　TCPROS是供ROS消息和服务端使用的一个传输层，使用标准TCP/IP套接字来传输消息，TCPROS connections包括如下fields：
-* TCPROS subscriber 需要发送如下fields:
-  * message_definition：全部消息定义的文本
-  * callerid：发送消息的节点名字
-  * topic：订阅的topic名字
-  * md5sum：消息类型的md5sum
-  * type：消息类型
-  * latching：发布者是否是latching模式（发送最新消息给新的订阅者）
-* TCPROS publisher连接成功时返回如下fields：
-  * md5sum： 消息类型的md5sum
-  * type：消息类型
-## Records
+　　N代表前一个Chunk record中连接的数量，M代表rosbag中Chunk record的数量，K代表rosbag中Connection record的数量。
+
+　　Chunk record比较特殊，它的data中包含Connection record和Message data record。
+
 ### Bag header
-　　rosbag的第一个record，具有固定的4096字节的长度，不足4096字节的部分用ASCII空白符(0x20)填充，header包含如下fields：
-* index_pos：8字节little-endian整数，代表chunk后第一个record的偏置
-* conn_count：4字节little-endian整数，代表Connection Record的数量（不包括Chunk中的）
-* chunk_count： 4字节little-endian整数，代表Chunk Record的数量
+　　rosbag中第一个record，具有4096字节的固定长度，不足4096的部分由空白符（0x20）补充，它的header中包含如下field：
+- index_pos：8字节小端序整数，代表rosbag中第一个Index data record的偏置
+- conn_count：4字节小端序整数，代表rosbag中Connection record的数量（不含Chunk record中的）
+- chunk_count：4字节小端序整数，代表rosbag中Chunk record的数量
+
 ### Chunk
-　　data存储压缩后的Message data Records和Connection Records，header包含如下fields：
-* compression：字符串类型，代表数据压缩方法（none或bz2）
-* size：4字节little-endian整数，代表未压缩的消息块的大小
+　　header中包含如下field：
+- compression：字符串类型，代表Chunk record中的数据压缩方法，目前支持`bz2`的压缩方式
+- size：4字节小端序整数，代表data未压缩时的大小，压缩后的大小为data_len
+
 ### Connection
-　　data存储[Connection Header](#ros-connection-header)字符串，connection header一定包含**topic, type, md5sum, message_defination**这几个fields，可以包含**callerid, latching** fields，header包含如下fields：
-* conn：4字节little-endian整数，代表连接的ID号
-* topic：字符串类型，代表存储消息的topic名字
+　　header中包含如下field：
+- conn：4字节小端序整数，代表连接的标识号
+- topic：字符串类型，代表连接的topic
+
+　　data中包含[Connection header](#connection-header-结构)，它的格式与record中的header一样，由不同的field组成，`topic, type, md5sum, message_definition`必须存在于Connection header中。
+
+#### **Connection header 结构**
+　　在ROS中，结点之间直接进行连接，ROS Master只提供一些映射信息，订阅某一topic的结点从发布该topic的结点请求连接，并通过某一协议建立连接，ROS中常用的协议是TCPROS，它使用标准的TCP/IP sockets。
+
+　　TCPROS subscriber 会发送如下field:
+- message_definition：消息定义文本
+- callerid：发送消息的结点名字
+- topic：订阅的topic名字
+- md5sum：消息类型的md5sum
+- type：消息类型
+
+　　TCPROS publisher连接成功时返回如下field：
+- md5sum： 消息类型的md5sum
+- type：消息类型
+
 ### Message data
-　　data存储序列化的ros messages，header包含如下fields：
-* conn：4字节little-endian整数，代表发送消息的连接的ID号
-* time：8字节little-endian整数，代表消息接收时间
+　　header中包含如下field：
+- conn：4字节小端序整数，代表连接标识号
+- time：8字节小端序整数，代表接收消息的时间戳
+
+　　data中存储序列化的消息序列。
 
 　　序列化的数据存储时是按照定义中的顺序存放的，存储string和数组时会多占用4个字节记录string的长度和数组的大小。
 
@@ -99,21 +113,26 @@ tags:
 > 遍历每一个Index data Record，根据header中记录的Connection ID确定topic，根据Index data Record位置定位到属于哪一个chunk，记录chunk的起始位置，然后遍历data，得到每条消息的时间戳和在chunk中偏置位置，根据`chunk起始位置+偏置位置`定位到记录这条消息的Message data Record在rosbag中的偏置位置。
 
 ### Index data
-　　data格式取决于header中存储的版本号，当前版本为1，data包含时间戳（8字节little-endian整数）、Message data Record的偏置信息（4字节little-endian整数），header包含如下fields：
-* ver：4字节little-endian整数，代表index data record的版本
-* conn：4字节little-endian整数，代表连接的ID号
-* count：4字节little-endian整数，代表前一个chunk中消息的数量
+　　header中包含如下field：
+- ver：4字节小端序整数，代表记录index data的格式版本
+- conn：4字节小端序整数，连接标识号
+- count：4字节小端序整数，代表当前连接在之前一个Chunk record中的Message data record的数量
 
-　　data包括count个重复的`<time><offset>`的消息：
-* time: 接收消息的时间
-* offset: 消息在前面chunk中的偏置
+　　当前data记录版本ver为1，data包括不同时刻消息在前一个Chunk record中的偏置：
+- time：8字节小端序整数，接收消息的时间戳
+- offset：4字节小端序整数，消息在前一个Chunk record中的偏置
+
 ### Chunk info
-　　data格式取决于header中存储的版本号，当前版本为1，data包含连接ID（4字节little-endian整数）、连接中的消息数量（4字节little-endian整数），header包含如下fields：
-* ver： 4字节little-endian整数，代表chunk info record的版本
-* chunk_pos：8字节little-endian整数，代表chunk record的偏置
-* start_time：8字节little-endian整数，代表chunk中最早接收的消息的时间戳
-* end_time：8字节little-endian整数，代表chunk中最后接收的消息的时间戳
-* count：4字节little-endian整数，代表chunk中建立的连接的数量
+　　header中包含如下field：
+- ver：4字节小端序整数，代表记录chunk info data的格式版本
+- chunk_pos：8字节小端序整数，代表Chunk record在rosbag中的偏置
+- start_time：8字节小端序整数，代表Chunk record中最早接收消息的时间戳
+- end_time：8字节小端序整数，代表Chunk record中最晚接收消息的时间戳
+- count：4字节小端序整数，代表Chunk record中Connection record的数量
+
+　　当前data记录版本ver为1，data包括不同连接在当前Chunk record中Message data record的数量：
+- conn：4字节小端序整数，代表连接标识号
+- count：4字节小端序整数，当前连接在当前Chunk record中消息的数量
 
 # 实例
 
