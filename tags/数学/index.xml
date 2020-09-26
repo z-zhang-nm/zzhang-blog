@@ -6,10 +6,28 @@
     <description>Recent content in 数学 on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Thu, 27 Aug 2020 09:50:54 +0800</lastBuildDate>
+    <lastBuildDate>Mon, 21 Sep 2020 17:59:41 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%95%B0%E5%AD%A6/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>067 二进制求和</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/067-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/</link>
+      <pubDate>Mon, 21 Sep 2020 17:59:41 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/067-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%B1%82%E5%92%8C/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/add-binary/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>043 字符串相乘</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/043-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/</link>
+      <pubDate>Wed, 16 Sep 2020 14:36:08 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/043-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/multiply-strings/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>013 罗马数字转整数</title>

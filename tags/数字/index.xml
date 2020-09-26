@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>数字 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/%E6%95%B0%E5%AD%97/</link>
+    <description>Recent content in 数字 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 21 Sep 2020 11:40:28 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%95%B0%E5%AD%97/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>065 有效数字</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/065-%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Mon, 21 Sep 2020 11:40:28 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/065-%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/valid-number/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

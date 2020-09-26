@@ -6,10 +6,19 @@
     <description>Recent content in 问题解决 on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Mon, 06 Jul 2020 20:14:02 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 01 Sep 2020 16:55:55 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ubuntu更新显卡驱动后开机黑屏</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/ubuntu%E6%9B%B4%E6%96%B0%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%90%8E%E5%BC%80%E6%9C%BA%E9%BB%91%E5%B1%8F/</link>
+      <pubDate>Tue, 01 Sep 2020 16:55:55 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/ubuntu%E6%9B%B4%E6%96%B0%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%90%8E%E5%BC%80%E6%9C%BA%E9%BB%91%E5%B1%8F/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Pyqt循环按钮点击事件</title>
