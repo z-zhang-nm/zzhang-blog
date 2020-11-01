@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="链接">
+
+
+<meta property="og:description" content="链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C&#43;&#43;四种类型转换运算符的应用场景">
+<meta name="twitter:title" content="C&#43;&#43;四种类型转换运算符的应用场景">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/08/c-%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/08/c-%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="链接">
+<meta name="twitter:description" content="链接">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-08-26T16:08:32">
+  
+  
+    <meta property="article:modified_time" content="2020-08-26T16:08:32">
+  
+  
+  
+    
+      <meta property="article:section" content="C&#43;&#43;">
+    
+      <meta property="article:section" content="StackOverflow">
+    
+  
+  
+    
+      <meta property="article:tag" content="类型转换运算符">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>C&#43;&#43;四种类型转换运算符的应用场景</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/c-%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      C&#43;&#43;四种类型转换运算符的应用场景
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-08-26T16:08:32&#43;08:00">
+        
+  八月 26, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;">C&#43;&#43;</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/stackoverflow">StackOverflow</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><a href="https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used">链接</a></p>
+<h2 id="引言">引言</h2>
+<p>　　C语言类型转换：</p>
+<blockquote>
+<p><code>(T) expression</code></p>
+</blockquote>
+<p>　　C++类型转换：</p>
+<blockquote>
+<p><code>static_cast&lt;T&gt;(expression)</code><br>
+<code>dynamic_cast&lt;T&gt;(expression)</code><br>
+<code>reinterpret_cast&lt;T&gt;(expression)</code><br>
+<code>const_cast&lt;T&gt;(expression)</code></p>
+</blockquote>
+<h2 id="c语言类型转换为强制性的即可以在任意类型之间转换且不易debug">　　C语言类型转换为强制性的，即可以在任意类型之间转换，且不易debug。</h2>
+<h2 id="static_cast"><strong>static_cast</strong></h2>
+<p>　　<code>static_cast</code>与C语言中强制类型转换功能基本一样，不提供运行时的检查，所以叫static_cast，需要在编写程序时确认转换的安全性。</p>
+<blockquote>
+<p><code>static_cast&lt;type_id&gt; ( expression )</code></p>
+</blockquote>
+<p>　　该运算符把<code>expression</code>转换为<code>type_id</code>类型，但<strong>转换的时候不会检查类型来保证转换的安全性</strong>，主要有如下几种用法：</p>
+<ol>
+<li>用于类层次结构中基类和派生类之间的指针或引用转换，要注意的是进行上行转换（把派生类指针或引用转换为基类表示）时是安全的，进行下行转换时是不安全的</li>
+<li>用于基本数据类型之间的转换，这种转换的安全性也需要人为保证</li>
+<li>把空指针转换为目标类型的指针（极其不安全）</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>{
+    <span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base{
+    <span style="color:#75715e">//...
+</span><span style="color:#75715e"></span>};
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>(){
+    <span style="color:#75715e">//基本类型转换
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> i;
+    <span style="color:#66d9ef">float</span> f <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.1</span>;
+    i <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(f);
+    <span style="color:#75715e">//上行转换
+</span><span style="color:#75715e"></span>    Derived <span style="color:#f92672">*</span>pd <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Derived;
+    Base <span style="color:#f92672">*</span>pb <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>Base<span style="color:#f92672">*&gt;</span>(pd);
+    <span style="color:#75715e">//下行转换
+</span><span style="color:#75715e"></span>    Base <span style="color:#f92672">*</span>pB <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Base;
+    Derived <span style="color:#f92672">*</span>pD <span style="color:#f92672">=</span> <span style="color:#66d9ef">static_cast</span><span style="color:#f92672">&lt;</span>Derived<span style="color:#f92672">*&gt;</span>(pB);<span style="color:#75715e">//编译通过但不安全（例如访问子类成员）
+</span><span style="color:#75715e"></span>}
+</code></pre></div><p>　　<code>static_cast</code>本质上是传统c语言强制转换的替代品，要注意的是<code>static_cast</code>不能转换掉<code>expression</code>的<code>const</code>、<code>volitale</code>、或者<code>__unaligned</code>属性。</p>
+<blockquote>
+<p>static_cast can also cast through inheritance hierarchies. It is unnecessary when casting upwards (towards a base class), but when casting downwards it can be used as long as it doesn&rsquo;t cast through virtual inheritance. It does not do checking, however, and it is undefined behavior to static_cast down a hierarchy to a type that isn&rsquo;t actually the type of the object.</p>
+</blockquote>
+<hr>
+<h2 id="const_cast"><strong>const_cast</strong></h2>
+<p>　　顾名思义，<code>const_cast</code>修改表达式的<code>const</code>属性，C++中只有这一运算符可以移除<code>const</code>属性。</p>
+<blockquote>
+<p><code>const_cast&lt;type_id&gt; (expression)</code></p>
+</blockquote>
+<p>　　该运算符用来修改类型的<code>const</code>或<code>volatile</code>，除了<code>const</code>或<code>volatile</code>修饰外，<code>type_id</code>和<code>expression</code>类型是一样的，有如下几种用法：</p>
+<ol>
+<li>常量指针转换为非常量指针，且仍指向原来的对象</li>
+<li>常量引用转换为非常量引用</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<span style="color:#75715e">// int *p = &amp;a;//编译错误
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pa <span style="color:#f92672">=</span> <span style="color:#66d9ef">const_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*&gt;</span>(<span style="color:#f92672">&amp;</span>a);
+<span style="color:#f92672">*</span>pa <span style="color:#f92672">=</span> <span style="color:#ae81ff">110</span>;
+printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, a);<span style="color:#75715e">//1
+</span><span style="color:#75715e"></span>printf(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span>pa);<span style="color:#75715e">//110
+</span><span style="color:#75715e"></span>printf(<span style="color:#e6db74">&#34;0x%08x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">&amp;</span>a);<span style="color:#75715e">//0x88b8b5cc
+</span><span style="color:#75715e"></span>printf(<span style="color:#e6db74">&#34;0x%08x</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, pa);<span style="color:#75715e">//0x88b8b5cc
+</span></code></pre></div><p>　　a的地址与pa的值一样，但是为什么a的值与<code>*pa</code>不一样呢，这是因为a为常亮，存储在符号表中，一般情况下其不存在地址，只有取其地址的时候会另外开辟内存，且在预编译阶段，常量会被真实数值替换，就像define定义的宏一样，于是，<code>printf(&quot;%d,\n&quot;,a)</code>也就相当于编译成<code>printf(&quot;%d,\n&quot;,100)</code>。</p>
+<hr>
+<h2 id="dynamic_cast"><strong>dynamic_cast</strong></h2>
+<p>　　<code>dynamic_cast</code>支持运行时识别指针或引用所指向的对象，主要用于执行<code>安全的向下转型（safe down casting）</code>，也就是说，要确定一个对象是否是一个继承体系中的一个特定类型。</p>
+<blockquote>
+<p><code>dynamic_cast&lt;type_id&gt; (expression)</code></p>
+</blockquote>
+<p>　　该运算符把<code>expression</code>转换为<code>type_id</code>类型，且<code>type_id</code>必须是类的指针、类的引用或<code>void*</code>。如果<code>type_id</code>是类指针类型，那么<code>expression</code>也必须是一个指针，如果<code>type_id</code>是一个引用，那么<code>expression</code>也必须是一个引用。</p>
+<p>　　该运算符可以在程序执行过程中决定真正的类型，执行转换时首先检查能否成功转换，若可以则转换之，否则转换失败，若是指针则返回空指针，若是引用则抛出bad_cast异常。</p>
+<p>　　<strong>dynamic_cast转换符只能用于含有虚函数的类(具有多态特性)</strong>，因为类中存在虚函数，就说明它有想要让基类指针或引用指向派生类对象的情况，此时转换才有意义。</p>
+<p>　　dynamic_cast支持交叉转换，假设基类A有两个直接派生类B、C，那么，将<code>B* pB</code>转换为<code>C* pC</code>，这种由派生类B转换到派生类C的转换称之为交叉转换，这种情况下只能使用<code>dynamic_cast</code>。</p>
+<p>　　dynamic_cast支持多继承，假设有两个基类A1、A2，派生类B从A1、A2中派生，那么，将pB转换为pA1或是pA2，此时只能使用<code>dynamic_cast</code>。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Base</span>
+{
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> foo(){};
+};
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Derived</span> <span style="color:#f92672">:</span> <span style="color:#66d9ef">public</span> Base
+{
+};
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>()
+{
+	<span style="color:#75715e">//基类 -&gt; 子类（错误下行）
+</span><span style="color:#75715e"></span>	Base <span style="color:#f92672">*</span>pb1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Base;
+	Derived <span style="color:#f92672">*</span>pd1 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>Derived <span style="color:#f92672">*&gt;</span>(pb1); <span style="color:#75715e">//失败，pd1 = NULL
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//子类 -&gt; 子类（正确下行）
+</span><span style="color:#75715e"></span>	Base <span style="color:#f92672">*</span>pb2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Derived;
+	Derived <span style="color:#f92672">*</span>pd2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>Derived <span style="color:#f92672">*&gt;</span>(pb2); <span style="color:#75715e">//成功
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//子类 -&gt; 基类
+</span><span style="color:#75715e"></span>	Base <span style="color:#f92672">*</span>pb3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Derived;
+	Base <span style="color:#f92672">*</span>pd3 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>Base <span style="color:#f92672">*&gt;</span>(pb3);		 <span style="color:#75715e">//成功
+</span><span style="color:#75715e"></span>	<span style="color:#75715e">//子类 -&gt; 基类
+</span><span style="color:#75715e"></span>	Derived <span style="color:#f92672">*</span>pb4 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Derived;
+	Base <span style="color:#f92672">*</span>pd4 <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>Base <span style="color:#f92672">*&gt;</span>(pb4);		 <span style="color:#75715e">//成功
+</span><span style="color:#75715e"></span>}<span style="color:#960050;background-color:#1e0010">；</span>
+</code></pre></div><p>　　下面看一个菱形继承的例子。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> { <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {}; };
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> <span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> A { <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {}; };
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">C</span> <span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> A { <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {}; };
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">D</span> <span style="color:#f92672">:</span><span style="color:#66d9ef">public</span> B, <span style="color:#66d9ef">public</span> C { <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>() {}; };
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">main</span>()
+{
+    D <span style="color:#f92672">*</span>pD <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> D;
+    <span style="color:#75715e">//B和C都继承了A，并且都实现了虚函数f()，导致在进行转换时，无法选择一条转换路径
+</span><span style="color:#75715e"></span>    A <span style="color:#f92672">*</span>pA <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>A <span style="color:#f92672">*&gt;</span>(pD); <span style="color:#75715e">// compile error
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//自行指定一条转换路径
+</span><span style="color:#75715e"></span>    D <span style="color:#f92672">*</span>pD <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> D;
+    B <span style="color:#f92672">*</span>pB <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>B <span style="color:#f92672">*&gt;</span>(pD);
+    A <span style="color:#f92672">*</span>pA <span style="color:#f92672">=</span> <span style="color:#66d9ef">dynamic_cast</span><span style="color:#f92672">&lt;</span>A <span style="color:#f92672">*&gt;</span>(pB);
+}
+</code></pre></div><hr>
+<h2 id="reinterpret_cast">reinterpret_cast</h2>
+<blockquote>
+<p><code>reinterpret_cast&lt;type&gt;(expression)</code></p>
+</blockquote>
+<p>　　非常激进的指针类型转换，在编译期完成，可以转换任何类型的指针，所以极不安全。非极端情况不要使用。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>pi;
+<span style="color:#66d9ef">char</span> <span style="color:#f92672">*</span>pc <span style="color:#f92672">=</span> <span style="color:#66d9ef">reinterpret_cast</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">*&gt;</span>(pi);
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6/">类型转换运算符</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/09/theruleofthree/" data-tooltip="TheRuleOfThree">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6%E5%B0%96%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB/" data-tooltip="包含头文件尖括号和双引号的区别">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/09/theruleofthree/" data-tooltip="TheRuleOfThree">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6%E5%B0%96%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB/" data-tooltip="包含头文件尖括号和双引号的区别">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

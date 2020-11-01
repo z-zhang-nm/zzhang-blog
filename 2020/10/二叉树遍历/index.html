@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="参考链接">
+
+
+<meta property="og:description" content="参考链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="二叉树遍历">
+<meta name="twitter:title" content="二叉树遍历">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/10/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/10/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="参考链接">
+<meta name="twitter:description" content="参考链接">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-10-12T10:12:47">
+  
+  
+    <meta property="article:modified_time" content="2020-10-12T10:12:47">
+  
+  
+  
+    
+      <meta property="article:section" content="Leetcode">
+    
+      <meta property="article:section" content="树">
+    
+  
+  
+    
+      <meta property="article:tag" content="二叉树遍历">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>二叉树遍历</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      二叉树遍历
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-12T10:12:47&#43;08:00">
+        
+  十月 12, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e6%a0%91">树</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><a href="https://www.cnblogs.com/songwenjie/p/8955856.html">参考链接</a></p>
+<h2 id="什么是二叉树遍历">什么是二叉树遍历</h2>
+<p>　　二叉树遍历指的是从把树的所有结点按照某种顺序依次访问一遍，使得每个结点被访问依次且仅被访问一次。</p>
+<p>　　根结点定义：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span>{
+    <span style="color:#66d9ef">int</span> val;
+    TreeNode<span style="color:#f92672">*</span> left;
+    TreeNode<span style="color:#f92672">*</span> right;
+    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+}
+</code></pre></div><h2 id="中序遍历">中序遍历</h2>
+<p>　　<code>左 -&gt; 根 -&gt; 右</code>，在二分搜索树中，中序遍历的顺序符合从小到大或从大到小顺序，若要输出排序好的结果，使用中序遍历。</p>
+<h3 id="递归方式">递归方式</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">in_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    in_order(root<span style="color:#f92672">-&gt;</span>left); <span style="color:#75715e">//遍历左子树
+</span><span style="color:#75715e"></span>    cout <span style="color:#f92672">&lt;&lt;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">//打印val
+</span><span style="color:#75715e"></span>    in_order(root<span style="color:#f92672">-&gt;</span>right) <span style="color:#75715e">//遍历右子树
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="非递归方式">非递归方式</h3>
+<p>　　核心思想：<strong>让代码跟着思维走</strong>。</p>
+<p>　　思维是什么，思维就是中序遍历的路径，即如果要对一棵二叉树进行中序遍历，首先我们会找到左子树最下面的结点：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//代码段1
+</span><span style="color:#75715e"></span>stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root;
+<span style="color:#75715e">//遍历到左子树最下边，边遍历边保存结点到栈中
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span>(cur){
+    stk.push(cur);
+    cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+}
+</code></pre></div><p>　　为什么要保存结点到栈？因为中序遍历在遍历完左子树后，需要借助根结点进入右子树，若上面的while循环结束，只可能有如下两种情况：</p>
+<pre><code>          Node                   Node
+         /    \                 /    \
+      Node     ?             Node     ?
+     /                      /    \
+nullptr(cur)        nullptr(cur) Node
+</code></pre><p>　　此时需要打印cur的父节点的值，而其父节点为当前栈顶结点，因此直接弹出栈顶结点即可：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//代码段2
+</span><span style="color:#75715e"></span>cur <span style="color:#f92672">=</span> stk.top();
+stk.pop();
+cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+</code></pre></div><p>　　此时根据当前cur有无右孩子可以分为如上图示的两种情况：</p>
+<ol>
+<li>当前cur无右孩子：按照中序遍历的顺序，接下来需要访问其根结点，而且刚好是当前的栈顶元素，因此跟上面一样直接弹出栈顶元素，此时左孩子和根结点都访问完毕，接下来就是右孩子了，在右子树中，又会有新的一轮中序遍历（即把右子树当做新的树进行中序遍历：代码段1+代码段2）：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//代码段2
+</span><span style="color:#75715e"></span>cur <span style="color:#f92672">=</span> stk.top();
+stk.pop();
+cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+<span style="color:#75715e">//即向上寻找直到遇到情况2 
+</span></code></pre></div><ol start="2">
+<li>当前cur有右孩子：按照中序遍历的顺序，接下来需要访问其右孩子，直接令cur指向其右孩子，开始新的一轮中序遍历：</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//代码段2
+</span><span style="color:#75715e"></span>cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+</code></pre></div><p>　　上面两种情况得到的代码段2如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//情况1
+</span><span style="color:#75715e"></span>cur <span style="color:#f92672">=</span> stk.top();
+stk.pop();
+cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+cur <span style="color:#f92672">=</span> stk.top();
+stk.pop();
+cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+<span style="color:#75715e">//情况2
+</span><span style="color:#75715e"></span>cur <span style="color:#f92672">=</span> stk.top();
+stk.pop();
+cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+</code></pre></div><p>　　遍历过程是个循环，代码段1和代码段2构成一次循环体，循环直到栈为空且cur为空，而当cur无右孩子，即情况1时，代码段1就不会执行，因此，代码段2可以统一写为：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">cur <span style="color:#f92672">=</span> stk.top();
+stk.pop();
+cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+</code></pre></div><p>　　至此，完整的循环体如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root;
+<span style="color:#75715e">//还能向上回退或者还可以对以右孩子为根节点的子树进行新一轮遍历
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">||</span> cur){
+   <span style="color:#66d9ef">while</span>(cur){
+       stk.push(cur);
+       cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+   }
+   cur <span style="color:#f92672">=</span> stk.top();
+   stk.pop();
+   cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+   cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+}
+</code></pre></div><p>　　算法总结：</p>
+<ol>
+<li>申请一个栈stack，令cur指向树的根结点</li>
+<li>当cur不为空时，将其压入栈并令cur为其左孩子，重复步骤2</li>
+<li>弹出栈顶结点，打印结点值，令cur为其右孩子，继续步骤2</li>
+<li>当栈为空且cur为空时结束</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">in_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+    TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">||</span> cur){
+        <span style="color:#75715e">//一直遍历到左子树最下面，边遍历边保存当前结点到栈中
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(cur){
+            stk.push(cur);
+            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+        }
+        <span style="color:#75715e">//当cur为空时，说明已经到达左子树最下面，此时需要出栈了
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>stk.empty()){
+            cur <span style="color:#f92672">=</span> stk.top();
+            stk.pop();
+            cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+            <span style="color:#75715e">//进入右子树，开始新一轮的左子树遍历
+</span><span style="color:#75715e"></span>            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+        }
+        <span style="color:#75715e">//当左边都遍历完成后，按照入栈顺序，该弹出中间结点了，相当于左-&gt;中
+</span><span style="color:#75715e"></span>    }
+}
+</code></pre></div><h3 id="morris-traversal">Morris Traversal</h3>
+<p>　　<a href="https://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html">参考链接</a></p>
+<p>　　先介绍一种新的树，线索二叉树：把所有原本为空的右孩子指向中序遍历顺序之后的那个节点并把原本为空的左孩子指向中序遍历之前的那个节点。</p>
+<p>　　本题与线索二叉树的关系：将所有为空的右孩子指向中序遍历下一个节点，这样中序遍历完左子节点后，就能顺利地返回其根结点继续进行遍历，因为左子树遍历的最后一个结点是其左子树的最右结点。</p>
+<ol>
+<li>初始化指针cur指向root</li>
+<li>当cur不为空
+<ul>
+<li>若cur无左孩子
+<ol>
+<li>打印cur结点值</li>
+<li>将cur指向右孩子，即将其右孩子作为当前结点</li>
+</ol>
+</li>
+<li>将pre指针指向cur左子树中最右子结点，即中序遍历的前驱结点
+<ul>
+<li>若pre不存在右孩子
+<ol>
+<li>将其右子结点指回cur</li>
+<li>cur指向其左子节点</li>
+</ol>
+</li>
+<li>否则，前驱结点的右孩子为当前结点
+<ol>
+<li>将pre的右孩子置空，即恢复树的形状</li>
+<li>打印cur结点值</li>
+<li>将cur指针指向其右孩子</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">in_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span>;
+    TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root, <span style="color:#f92672">*</span>pre <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">while</span>(cur){
+        <span style="color:#66d9ef">if</span>(cur<span style="color:#f92672">-&gt;</span>left){
+            cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+        }<span style="color:#66d9ef">else</span>{
+            pre <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+            <span style="color:#66d9ef">while</span>(pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">&amp;&amp;</span> pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> cur) pre <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>right;
+            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>pre<span style="color:#f92672">-&gt;</span>right){
+                pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> cur;
+                cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+            }<span style="color:#66d9ef">else</span>{
+                pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+                cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+                cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+            }
+        }
+    }
+}
+</code></pre></div><p>　　空间复杂度为<code>O(1)</code>，因为只用了两个辅助指针，时间复杂度<code>O(n)</code>。</p>
+<blockquote>
+<p>n个结点的二叉树中共有n-1条边，整个过程每条边最多走三次，一次是定位到某个节点，一次是为了寻找上面某个结点的前驱结点，另一次是将树恢复，因此时间复杂度为<code>O(n)</code>。</p>
+</blockquote>
+<h2 id="前序遍历">前序遍历</h2>
+<p>　　<code>根 -&gt; 左 -&gt; 右</code>，一般若想在节点上直接执行操作，会使用前序遍历。</p>
+<h3 id="递归方式-1">递归方式</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pre_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    cout <span style="color:#f92672">&lt;&lt;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">//打印val
+</span><span style="color:#75715e"></span>    pre_order(root<span style="color:#f92672">-&gt;</span>left) <span style="color:#75715e">//遍历左子树
+</span><span style="color:#75715e"></span>    pre_order(root<span style="color:#f92672">-&gt;</span>right) <span style="color:#75715e">//遍历右子树
+</span><span style="color:#75715e"></span>}
+</code></pre></div><h3 id="非递归方式-1">非递归方式</h3>
+<ol>
+<li>申请一个栈stack</li>
+<li>将根结点压入栈</li>
+<li>每次弹出栈顶结点，打印结点值，若其右孩子不为空，将右孩子压入栈，若左孩子不为空，将左孩子压入栈</li>
+<li>重复步骤3，直到栈为空</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pre_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+    stk.push(root);
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()){
+        TreeNode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> stk.top();
+        stk.pop();
+        cout <span style="color:#f92672">&lt;&lt;</span> p<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">//先访问根结点
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) stk.push(p<span style="color:#f92672">-&gt;</span>right); <span style="color:#75715e">//先压入的后弹出
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) stk.push(p<span style="color:#f92672">-&gt;</span>left);
+    }
+}
+</code></pre></div><p>　　另一种写法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">in_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+    TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">||</span> cur){
+        <span style="color:#66d9ef">while</span>(cur){
+            <span style="color:#75715e">//注意比较中序遍历的代码，只是打印结点值的位置不一样
+</span><span style="color:#75715e"></span>            cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+            stk.push(cur);
+            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+        }
+        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>stk.empty()){
+            cur <span style="color:#f92672">=</span> stk.top();
+            stk.pop();
+            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+        }
+    }
+}
+</code></pre></div><h3 id="morris-traversal-1">Morris Traversal</h3>
+<p>　　前序遍历与中序遍历相似，代码上只有一行不同，不同就在于输出的顺序。</p>
+<ol>
+<li>初始化指针cur指向root</li>
+<li>当cur不为空
+<ul>
+<li>若cur无左孩子
+<ol>
+<li>打印cur结点值</li>
+<li>将cur指向右孩子，即将其右孩子作为当前结点</li>
+</ol>
+</li>
+<li>将pre指针指向cur左子树中最右子结点，即中序遍历的前驱结点
+<ul>
+<li>若pre不存在右孩子
+<ol>
+<li>将其右子结点指回cur</li>
+<li>打印cur结点值</li>
+<li>cur指向其左子节点</li>
+</ol>
+</li>
+<li>否则，前驱结点的右孩子为当前结点
+<ol>
+<li>将pre的右孩子置空，即恢复树的形状</li>
+<li>将cur指针指向其右孩子</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pre_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span>;
+    TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root, pre <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">while</span>(cur){
+        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>cur<span style="color:#f92672">-&gt;</span>left){
+            cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+        }<span style="color:#66d9ef">else</span>{
+           pre <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+           <span style="color:#66d9ef">while</span>(pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">&amp;&amp;</span> pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> cur) pre <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>right;
+           <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>pre<span style="color:#f92672">-&gt;</span>right){
+               pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> cur;
+               cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+               cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+           }<span style="color:#66d9ef">else</span>{
+               pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+               cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+           }
+        }
+    }
+}
+</code></pre></div><h2 id="后序遍历">后序遍历</h2>
+<p>　　<code>左 -&gt; 右 -&gt; 根</code>，后序遍历的特点是执行操作时，肯定已经遍历过该节点的左右孩子，适合进行破坏性操作，比如删除所有结点，比如判断树中是否存在相同子树。</p>
+<h3 id="递归方式-2">递归方式</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">post_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    post_order(root<span style="color:#f92672">-&gt;</span>left);
+    post_order(root<span style="color:#f92672">-&gt;</span>right);
+    cout <span style="color:#f92672">&lt;&lt;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div><h3 id="非递归方式一双栈">非递归方式一（双栈）</h3>
+<ol>
+<li>申请两个栈stk1和stk2，将根结点压入stk1</li>
+<li>弹出stk1栈顶元素记为cur，将cur压入stk2，依次将cur左孩子和右孩子压入stk1</li>
+<li>重复步骤2直到stk1为空</li>
+<li>依次弹出stk2中结点并打印</li>
+</ol>
+<pre><code>        1
+      /   \
+     2     3
+</code></pre><p>　　只用看上面这种通用情况，由于从stk1中弹出的结点需要压入stk2，所以只要秉承一个原则：最后输出的结点先从stk1弹出，而要先弹出就需要尽量靠近stk1的栈顶。因此，先将结点1（根结点）压入stk1，然后弹出结点1压入stk2，接下来将左孩子压入stk1（左子树的根结点），再右孩子压入stk1（右子树的根结点），这样就能先弹出结点3。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">post_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk1, stk2;
+    stk1.push(root);
+    TreeNode <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> root;
+    <span style="color:#75715e">//相当于中、右、左的顺序入stk2，弹出时刚好是左、右、中
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk1.empty()){
+        cur <span style="color:#f92672">=</span> stk1.top();
+        stk1.pop();
+        stk2.push(cur);
+        <span style="color:#66d9ef">if</span>(cur<span style="color:#f92672">-&gt;</span>left) stk1.push(cur<span style="color:#f92672">-&gt;</span>left);
+        <span style="color:#66d9ef">if</span>(cur<span style="color:#f92672">-&gt;</span>right) stk1.push(cur<span style="color:#f92672">-&gt;</span>right);
+    }
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk2.empty()){
+        cur <span style="color:#f92672">=</span> stk2.top();
+        stk2.pop();
+        cout <span style="color:#f92672">&lt;&lt;</span> cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+    }
+}
+</code></pre></div><h3 id="非递归方式二单栈">非递归方式二（单栈）</h3>
+<ol>
+<li>
+<p>申请一个栈stk1，将根结点压入stk1，用两个变量h和c分别代表最近一次弹出并打印的结点和当前stk的栈顶结点，初始时令h指向根结点，c为nullptr</p>
+</li>
+<li>
+<p>每次令c等于当前stk的栈顶结点，但是不弹出结点，分三种情况：</p>
+<ol>
+<li>c的左孩子不为空且h不等于c的左孩子也不等于右孩子，把c的左孩子压入栈</li>
+<li>不满足情况1，c的右孩子不为空且h不等于c的右孩子，把c的右孩子压入栈</li>
+<li>不满足情况1和情况2，从stk弹出c，令h等于c</li>
+</ol>
+</li>
+<li>
+<p>重复步骤2，直到stk为空</p>
+<p>下面的两种情况说明左孩子还没有打印，需要将左孩子入栈，继续循环判断以左孩子为根的子树(进入条件1的情况)：</p>
+</li>
+</ol>
+<pre><code>        Node(c)            Node(c)
+       /                  /    \
+     Node               Node  Node
+</code></pre><p>　　下面两种情况需要将右孩子入栈，继续循环判断以右孩子为根的子树（进入条件2的情况）：</p>
+<pre><code>        Node(c)            Node(c)
+       /    \                  \
+    Node(h) Node              Node
+</code></pre><p>　　下面这四种情况需要打印结点值(进入条件3的情况)：</p>
+<pre><code>Node(c)     Node(c)       Node(c)          Node(c)
+           /             /    \                \
+         Node(h)       Node  Node(h)          Node(h)
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">post_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+    stk.push(root);
+    TreeNode <span style="color:#f92672">*</span>h <span style="color:#f92672">=</span> root, <span style="color:#f92672">*</span>c <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()){
+        c <span style="color:#f92672">=</span> stk.top();
+        <span style="color:#66d9ef">if</span>(c<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">&amp;&amp;</span> h <span style="color:#f92672">!=</span> c<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">&amp;&amp;</span> h <span style="color:#f92672">!=</span> c<span style="color:#f92672">-&gt;</span>right) stk.push(c<span style="color:#f92672">-&gt;</span>left);<span style="color:#75715e">//条件1
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(c<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">&amp;&amp;</span> h <span style="color:#f92672">!=</span> c<span style="color:#f92672">-&gt;</span>right) stk.push(c<span style="color:#f92672">-&gt;</span>right);<span style="color:#75715e">//条件2
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span>{<span style="color:#75715e">//条件3
+</span><span style="color:#75715e"></span>            stk.pop();
+            cout <span style="color:#f92672">&lt;&lt;</span> c<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+            h <span style="color:#f92672">=</span> c;
+        }
+    }
+}
+</code></pre></div><h3 id="非递归方式三单栈">非递归方式三（单栈）</h3>
+<p>　　难点在于：需要判断上次访问的结点位于左子树还是右子树，若是左子树，需要跳过根结点，先进入右子树，回头再访问根结点；若是右子树，则可以直接访问根结点。</p>
+<p>　　下面两种情况说明需要打印当前结点（进入条件1）：无右孩子或右孩子刚被访问：</p>
+<pre><code>          Node                   Node
+         /    \                 /    \
+      Node(c)  ?             Node(c)  ?
+     /                      /    \
+nullptr                nullptr   Node(l)
+</code></pre><p>　　进入条件2有两类情况：while循环进入最左结点结束（下面左图）或条件1执行结束，上面的两种进入条件1的情况执行结束后都会变为下面右图的情况，接下来进入右孩子继续即可：</p>
+<pre><code>        Node(c)                 Node(c)
+       /    \                  /    \
+   nullptr  Node           Node(l)   ?
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">post_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+    TreeNode <span style="color:#f92672">*</span>pCur <span style="color:#f92672">=</span> root, pLastVisit <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">while</span>(pCur){
+        stk.push(pCur);
+        pCur <span style="color:#f92672">=</span> pCur<span style="color:#f92672">-&gt;</span>left;
+    }
+    <span style="color:#75715e">//与中序遍历不同的是并不是每次一都会进入右孩子，进入右孩子代表开始新的子树遍历，所以需要
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">//先走到最左叶子结点，而没有进入右孩子则需要弹出判断上一个结点。
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()){
+        pCur <span style="color:#f92672">=</span> stk.top();
+        <span style="color:#66d9ef">if</span>(pCur<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span> <span style="color:#f92672">||</span> pCur<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">==</span> pLastVisit){<span style="color:#75715e">//条件1
+</span><span style="color:#75715e"></span>            stk.pop();
+            cout <span style="color:#f92672">&lt;&lt;</span> pCur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+            pLastVisit <span style="color:#f92672">=</span> pCur;
+        }<span style="color:#66d9ef">else</span>{<span style="color:#75715e">//条件2
+</span><span style="color:#75715e"></span>            pCur <span style="color:#f92672">=</span> pCur<span style="color:#f92672">-&gt;</span>right;
+            <span style="color:#66d9ef">while</span>(pCur){
+                stk.push(pCur);
+                pCur <span style="color:#f92672">=</span> pCur<span style="color:#f92672">-&gt;</span>left;
+            }
+        }
+    }
+}
+</code></pre></div><h3 id="morris-traversal-2">Morris Traversal</h3>
+<p>　　后序遍历稍微有点儿复杂，需要建立一个临时结点dump，并令其左孩子为root，且还需要一个子过程，即倒序输出某两个结点之间路径上的各个结点。</p>
+<ol>
+<li>初始化指针cur指向dump</li>
+<li>当cur不为空
+<ul>
+<li>若cur无左孩子
+<ol>
+<li>将cur指向右孩子，即将其右孩子作为当前结点</li>
+</ol>
+</li>
+<li>将pre指针指向cur左子树中最右子结点，即中序遍历的前驱结点
+<ul>
+<li>若pre不存在右孩子
+<ol>
+<li>将其右孩子指回cur</li>
+<li>cur指向其左子节点</li>
+</ol>
+</li>
+<li>否则，前驱结点的右孩子为当前结点
+<ol>
+<li>将pre的右孩子置空，即恢复树的形状</li>
+<li>倒序输出当前结点左孩子到pre路径上的所有结点</li>
+<li>将cur指针指向其右孩子</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">post_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span>;
+    TreeNode <span style="color:#f92672">*</span>dump(<span style="color:#ae81ff">0</span>), cur<span style="color:#f92672">=</span>dump, pre <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    dump<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> root;
+    <span style="color:#66d9ef">while</span>(cur){
+        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>cur<span style="color:#f92672">-&gt;</span>left){
+            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+        }<span style="color:#66d9ef">else</span>{
+            pre <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>left;
+            <span style="color:#66d9ef">while</span>(pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">&amp;&amp;</span> pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> cur) pre <span style="color:#f92672">=</span> pre<span style="color:#f92672">-&gt;</span>right;
+            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>pre<span style="color:#f92672">-&gt;</span>right){
+                pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> cur;
+                cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>left;
+            }<span style="color:#66d9ef">else</span>{
+                pre<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+                printReverse(cur<span style="color:#f92672">-&gt;</span>left, pre);
+                cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>right;
+            }
+        }
+    }
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printReverse</span>(TreeNode <span style="color:#f92672">*</span>from, TreeNode <span style="color:#f92672">*</span>to){
+    reverse(from, to);
+    TreeNode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> to;
+    <span style="color:#66d9ef">while</span>(true){
+        cout <span style="color:#f92672">&lt;&lt;</span> p<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> from) <span style="color:#66d9ef">break</span>;
+        p <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>right;
+    }
+    reverse(to, from);
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">reverse</span>(TreeNode <span style="color:#f92672">*</span>from, TreeNode <span style="color:#f92672">*</span>to){
+    <span style="color:#66d9ef">if</span>(from <span style="color:#f92672">==</span> to) <span style="color:#66d9ef">return</span>;
+    TreeNode <span style="color:#f92672">*</span>x <span style="color:#f92672">=</span> from, <span style="color:#f92672">*</span>y <span style="color:#f92672">=</span> from<span style="color:#f92672">-&gt;</span>right, <span style="color:#f92672">*</span>z <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">while</span>(true){
+        z <span style="color:#f92672">=</span> y<span style="color:#f92672">-&gt;</span>right;
+        y<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> x;
+        x <span style="color:#f92672">=</span> y;
+        y <span style="color:#f92672">=</span> z;
+        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> to) <span style="color:#66d9ef">break</span>;
+    }
+}
+</code></pre></div><h2 id="创建二叉树">创建二叉树</h2>
+<p>　　使用层序数组创建二叉树，数组按照层序输入，节点为空时，用&rsquo;#&lsquo;代替。</p>
+<p>　　关键点是父节点<em>2+1代表左孩子，父节点</em>2+2代表右孩子。</p>
+<pre><code>            1(0)
+           /    \
+        2(1)    3(2)
+       /   \    /   \
+    4(3)  5(4) 6(5) 7(6)
+</code></pre><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">createTree</span>(<span style="color:#66d9ef">const</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> arr, <span style="color:#66d9ef">int</span> len, <span style="color:#66d9ef">int</span> idx){
+    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> len <span style="color:#f92672">||</span> arr[idx] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;#&#39;</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    TreeNode <span style="color:#f92672">*</span>root <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(arr[idx]);
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> createTree(arr, len, idx<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
+    root<span style="color:#f92672">-&gt;</span>ight <span style="color:#f92672">=</span> createTree(arr, len, idx<span style="color:#f92672">*</span><span style="color:#ae81ff">2</span><span style="color:#f92672">+</span><span style="color:#ae81ff">2</span>);
+}
+</code></pre></div><p>　　　从控制台获取结点值。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">createTree</span>(){
+    <span style="color:#66d9ef">char</span> val;
+    scanf(<span style="color:#e6db74">&#34;%c&#34;</span>, <span style="color:#f92672">&amp;</span>val);
+    <span style="color:#66d9ef">if</span>(val <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;#&#39;</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">else</span>{
+        TreeNode <span style="color:#f92672">*</span>rppt <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(val);
+        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nullptr</span>;
+        root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> createTree();
+        root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> createTree();
+    }
+}
+</code></pre></div><h2 id="层序遍历">层序遍历</h2>
+<h3 id="广度优先搜索bfs横向">广度优先搜索BFS（横向）</h3>
+<p>　　当树的高度非常高（比较瘦），使用广度优先搜索比较节省空间。其核心是先进先出队列，用层来作为入队和出队的判断条件，且按照层的顺序，从左到右的顺序遍历。</p>
+<p>　　父节点入队，父节点出队，左孩子入队，右孩子入队。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bread_first</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    queue<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> que;
+    que.push(root);
+    TreeNode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>que.empty()){
+        p <span style="color:#f92672">=</span> que.front();
+        que.pop();
+        cout <span style="color:#f92672">&lt;&lt;</span> p<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl;
+        <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>left) que.push(p<span style="color:#f92672">-&gt;</span>left);
+        <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>right) que.push(p<span style="color:#f92672">-&gt;</span>right);
+    }
+}
+</code></pre></div><h3 id="深度优先搜索dfs纵向">深度优先搜索DFS（纵向）</h3>
+<p>　　当树很胖，使用深度优先搜索比较节省空间，其实就是先序遍历。</p>
+<p>　　父节点入栈，父节点出栈，右孩子入栈，左孩子入栈。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pre_order</span>(TreeNode <span style="color:#f92672">*</span>root){
+    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+    stack<span style="color:#f92672">&lt;</span>TreeNode <span style="color:#f92672">*&gt;</span> stk;
+    stk.push(root);
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk.empty()){
+        TreeNode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> stk.top();
+        stk.pop();
+        cout <span style="color:#f92672">&lt;&lt;</span> p<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">//先访问根结点
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) stk.push(p<span style="color:#f92672">-&gt;</span>right); <span style="color:#75715e">//先压入的后弹出
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>) stk.push(p<span style="color:#f92672">-&gt;</span>left);
+    }
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">二叉树遍历</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/095-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%912/" data-tooltip="095 不同的二叉搜索树2">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/097-%E4%BA%A4%E9%94%99%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-tooltip="097 交错字符串">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/095-%E4%B8%8D%E5%90%8C%E7%9A%84%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%912/" data-tooltip="095 不同的二叉搜索树2">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/097-%E4%BA%A4%E9%94%99%E5%AD%97%E7%AC%A6%E4%B8%B2/" data-tooltip="097 交错字符串">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

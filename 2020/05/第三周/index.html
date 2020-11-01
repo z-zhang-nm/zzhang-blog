@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="　　正则表达式、列表">
+
+
+<meta property="og:description" content="　　正则表达式、列表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三周">
+<meta name="twitter:title" content="第三周">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="　　正则表达式、列表">
+<meta name="twitter:description" content="　　正则表达式、列表">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-05-14T21:41:56">
+  
+  
+    <meta property="article:modified_time" content="2020-05-14T21:41:56">
+  
+  
+  
+    
+      <meta property="article:section" content="Python教程">
+    
+  
+  
+    
+      <meta property="article:tag" content="妹妹">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>第三周</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E4%B8%89%E5%91%A8/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      第三周
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-05-14T21:41:56&#43;08:00">
+        
+  五月 14, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/python%e6%95%99%e7%a8%8b">Python教程</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>　　<strong>正则表达式、列表</strong></p>
+<h3 id="正则表达式语法"><strong>正则表达式语法</strong></h3>
+<ul>
+<li>特殊字符，若需使用这些字符的字面值，需要进行转义：
+<ul>
+<li><code>\</code> 转义</li>
+<li><code>.</code> 匹配除换行符之外的字符)</li>
+<li><code>^</code> 非或匹配开头位置</li>
+<li><code>$</code> 匹配结束位置</li>
+<li><code>? + * {}</code> 量词</li>
+<li><code>()</code> 分组</li>
+<li><code>[]</code> 字符类</li>
+<li><code>|</code> 或，从左到右尝试匹配，匹配成功就结束</li>
+</ul>
+</li>
+<li>练习：
+<ul>
+<li>判断字符串是否全部为小写字母(abcdefg, abcDefg, abcdefg\t, \tabcdefg)</li>
+</ul>
+</li>
+<li>正则中的转义与字符串的转义
+<ul>
+<li><code>python</code>中<code>\</code>字符比较特殊，可以用来构成一些特殊字符，比如<code>'Hello\World\nPython'</code>，若不需要对<code>n</code>进行转义，可以写为<code>'Hello\World\\nPython'</code>，也可以在字符串前面加上r，表示字符串为原生字符串，即<code>r'Hello\World\nPython'</code>，原生字符串中所有字符都直接按照字面值来使用，不进行转义</li>
+<li>正则表达式中也存在转义，其与字符串转义完全不同，正则表达式中要匹配<code>\</code>这个字符，需要写为<code>'\\\\'</code>或<code>r'\\'</code></li>
+<li>由上可以看出“字符串转义”优先于“正则转义”，即先进行字符串转义，再进行正则转义，<code>r</code>只影响字符串转义</li>
+<li>常用字符串转义：
+<ul>
+<li><code>\\</code> 反斜杠</li>
+<li><code>\'</code> 单引号</li>
+<li><code>\''</code> 双引号</li>
+<li><code>\b</code> 退格符</li>
+<li><code>\n</code> 换行符</li>
+<li><code>\t</code> 制表符</li>
+<li><code>\r</code> 回车</li>
+</ul>
+</li>
+<li>常用正则转义：
+<ul>
+<li>对特殊字符的转义</li>
+<li><code>\d</code> 数字<code>[0-9]</code> <code>\D</code> 非数字<code>[^\d]</code></li>
+<li><code>\w</code> 字母<code>[a-zA-Z0-9_]</code> <code>\W</code> 非字母<code>[^\w]</code></li>
+<li><code>\s</code> 空白符<code>[空格\t\n\r]</code> <code>\S</code> 非空白符<code>[^\s]</code></li>
+<li><code>\b</code> 单词边界，即待匹配字符串左右不能有英文字母 <code>\B</code></li>
+<li><code>\A</code> 字符串开头 <code>\Z</code> 字符串结尾</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>字符类：
+<ul>
+<li>包含在<code>[]</code>中的一个或多个字符在匹配时若未指定量词，只会匹配其中一个</li>
+<li>可以指定范围<code>[a-z0-9]</code></li>
+<li><code>[^0-9]</code></li>
+<li>字符类内部除了\其它字符不需要转义(<code>^</code>,<code>-</code>和<code>]</code>呢)</li>
+<li>字符类内部可以使用正则转义</li>
+<li>量词(贪婪模式：会尽量多地进行匹配)
+<ul>
+<li><code>?</code> 匹配前面的字符0次或1次(<code>??</code>非贪婪)</li>
+<li><code>*</code> 匹配前面的字符0次或多次(<code>*?</code>)</li>
+<li><code>+</code> 匹配前面的字符1次或多次(<code>+?</code>)</li>
+<li><code>{m}</code> 匹配前面的表达式m次</li>
+<li><code>{m,}</code> 匹配前面的表达式至少m次</li>
+<li><code>{,n}</code> 匹配前面的表达式最多n次</li>
+<li><code>{m,n}</code> 匹配前面的表达式至少m次，最多n次(<code>{m,n}?</code>)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;ab(\d)+&#39;</span>)
+pat<span style="color:#f92672">.</span>match(<span style="color:#e6db74">&#39;abccccc&#39;</span>)
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;ab(\d)+?&#39;</span>)
+pat<span style="color:#f92672">.</span>match(<span style="color:#e6db74">&#39;abccccc&#39;</span>)
+</code></pre></div><ul>
+<li>练习
+<ul>
+<li>匹配非零开头的最多带两位小数的正数</li>
+<li>匹配有效的<code>python</code>标识符</li>
+</ul>
+</li>
+<li><code>()</code>的作用
+<ul>
+<li>捕获<code>()</code>中的内容，若想关闭捕获功能，需要在左括号后跟上<code>?:</code></li>
+<li>组合正则表达式的一部分内容，以便使用量词或<code>|</code></li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;(?:\d+)\s+(\w+)&#39;</span>)
+pat<span style="color:#f92672">.</span>findall(<span style="color:#e6db74">&#39;123 sdfasd&#39;</span>)
+</code></pre></div><ul>
+<li>反向引用
+<ul>
+<li>每一个未使用<code>?:</code>的小括号都会分配一个组号，从1开始，依次递增，可以通过<code>\i</code>引用前面<code>()</code>捕获的内容</li>
+<li>可以用<code>(?P&lt;name&gt;)</code>为分组起一个别名，尖括号中的<code>name</code>为自定义的组名，后面通过<code>(?P=name)</code>来引用前面捕获的内容</li>
+<li>反向引用不能放在字符类<code>[]</code>中使用</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\b(\w+)\b\s+\b\1\b&#39;</span>)
+pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;haha hehe haha haha&#39;</span>)
+pat <span style="color:#f92672">=</span> re<span style="color:#f92672">.</span>compile(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;\b(?P&lt;word&gt;\w+)\b\s+\b(?P=word)\b&#39;</span>)
+pat<span style="color:#f92672">.</span>search(<span style="color:#e6db74">&#39;haha hehe haha haha&#39;</span>)
+</code></pre></div><ul>
+<li>练习
+<ul>
+<li>匹配ABAB型字符串</li>
+</ul>
+</li>
+<li>断言与标记
+<ul>
+<li>断言不会匹配任何文本，只是对断言所在的文本施加某些约束</li>
+<li>常用断言
+<ul>
+<li><code>\b</code>匹配单词的边界，放在字符类<code>[]</code>中则表示backspace，<code>\B</code>匹配非单词边界</li>
+<li><code>\A</code> 在字符串起始处匹配(忽略<code>re.MULTILINE</code>)，<code>^</code>在字符串开头或行开头(<code>re.MULTILINE</code>)处匹配</li>
+<li><code>\Z</code>在字符串结尾处匹配(忽略<code>re.MULTILINE</code>)，<code>$</code>在字符串结尾、字符串结尾的<code>\n</code>之前或行结尾处匹配(<code>re.MULTILINE</code>)</li>
+<li><code>e(?=...)</code>正前瞻：<code>e</code>后面需要匹配表达式
+<ul>
+<li><code>a(?=\d)</code>匹配后面是数字的<code>a</code></li>
+</ul>
+</li>
+<li><code>e(?!...)</code>负前瞻：<code>e</code>后面需要不匹配表达式
+<ul>
+<li><code>a(?!\d)</code>匹配后面不是数字的<code>a</code></li>
+</ul>
+</li>
+<li><code>(?&lt;=...)e</code>正回顾：<code>e</code>前面需要匹配表达式
+<ul>
+<li><code>(?&lt;=\d)a</code>匹配前面是数字的<code>a</code></li>
+</ul>
+</li>
+<li><code>(?&lt;!...)e</code>负回顾：<code>e</code>前面需要不匹配表达式
+<ul>
+<li><code>(?&lt;!\d)a</code>匹配前面不是数字的<code>a</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>条件匹配：<code>(?(id)yes_exp|no_exp)</code>若对应<code>id</code>的子表达式匹配到内容，则这里匹配<code>yes_exp</code>，否则匹配<code>no_exp</code></li>
+<li>常用标志
+<ul>
+<li><code>re.M</code>或<code>re.MULTILINE</code>  多行匹配，使<code>^</code>在每个<code>\n</code>后匹配，<code>$</code>在每个<code>\n</code>前匹配</li>
+<li><code>re.S</code>或<code>re.DOTALL</code> 使<code>.</code>可以匹配任意字符(包括回车)</li>
+<li><code>re.I</code>或<code>re.IGNORECASE</code>  使正则表达式忽略大小写</li>
+</ul>
+</li>
+<li>练习
+<ul>
+<li>用<code>re.M</code>写一个多行匹配的例子</li>
+</ul>
+</li>
+</ul>
+<h3 id="列表"><strong>列表</strong></h3>
+<ul>
+<li><code>[]</code>或<code>list()</code>初始化空列表</li>
+<li><code>for</code>循环遍历，可与<code>enumerate</code>函数联用</li>
+<li><code>append(value)</code>和<code>insert(pos, value)</code>，<code>list1+list2</code>，<code>list1.extend(list2)</code></li>
+<li><code>remove(first value)</code>和<code>pop(pos)</code></li>
+<li><code>clear</code></li>
+<li><code>sort</code>和<code>sorted</code>，可用<code>key</code>关键字定义排序规则</li>
+<li><code>zip(list1, list2)</code>将两个列表合并为一个元组构成的列表</li>
+<li><code>zip(*list)</code>拆分</li>
+<li>练习
+将一个长度为5的列表<code>[1,2,3,4,5]</code>每个元素向前移动一位</li>
+</ul>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%A6%B9%E5%A6%B9/">妹妹</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E5%9B%9B%E5%91%A8/" data-tooltip="第四周">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/" data-tooltip="四元数转欧拉角">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E7%AC%AC%E5%9B%9B%E5%91%A8/" data-tooltip="第四周">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/" data-tooltip="四元数转欧拉角">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

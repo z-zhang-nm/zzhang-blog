@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="参考链接">
+
+
+<meta property="og:description" content="参考链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单例模式">
+<meta name="twitter:title" content="单例模式">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="参考链接">
+<meta name="twitter:description" content="参考链接">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-07-29T17:36:17">
+  
+  
+    <meta property="article:modified_time" content="2020-07-29T17:36:17">
+  
+  
+  
+    
+      <meta property="article:section" content="C&#43;&#43;">
+    
+  
+  
+    
+      <meta property="article:tag" content="单例模式">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>单例模式</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      单例模式
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-07-29T17:36:17&#43;08:00">
+        
+  七月 29, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;">C&#43;&#43;</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><a href="https://segmentfault.com/a/1190000015950693">参考链接</a></p>
+<h1 id="单例模式">单例模式</h1>
+<h2 id="1-什么是单例模式">1 什么是单例模式</h2>
+<p>　　单例模式指在整个系统的生命周期里，一个类只能有一个实例，确保该类的唯一性。</p>
+<h2 id="2-单例模式分类">2 单例模式分类</h2>
+<p>　　单例模式分为<strong>懒汉式</strong>和<strong>饿汉式</strong>，这两者的区别在于<strong>创建实例的时间不同</strong>。</p>
+<ul>
+<li>懒汉式：系统运行中，实例并不存在，只有当需要使用该实例时，才会去创建并使用实例。（需要考虑线程安全）</li>
+<li>饿汉式：系统一运行，就初始化创建实例，需要时直接调用即可。（本身就线程安全，没有多线程的问题）</li>
+</ul>
+<h2 id="3-单例类的特点">3 单例类的特点</h2>
+<ul>
+<li>构造函数和析构函数为<code>private</code>类型，目的是禁止外部构造和析构</li>
+<li>拷贝构造函数和赋值构造函数为<code>private</code>类型，目的是禁止外部拷贝和赋值，确保实例唯一性</li>
+<li>类里有个获取实例的<code>静态函数</code>，可以全局访问</li>
+</ul>
+<h2 id="4-应用场景举例">4 应用场景举例</h2>
+<ul>
+<li>Windows的任务管理器是很典型的单例模式，不能同时打开两个任务管理器，回收站也是如此</li>
+<li>应用程序的日志应用，一般可以用单例模式实现，只能有一个实例取操作文件</li>
+<li>读取配置文件，配置信息只需要读取一次，所有地方都可以用</li>
+<li>多线程线程池</li>
+</ul>
+<h2 id="51-线程不安全的懒汉模式">5.1 线程不安全的懒汉模式</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>Instance() {
+    <span style="color:#75715e">//检查对象是否存在
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (m_instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+      m_instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton();
+    }
+    <span style="color:#66d9ef">return</span> m_instance;
+  }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  Singleton();  <span style="color:#75715e">//私有构造函数，不允许使用者外部调用
+</span><span style="color:#75715e"></span>  Singleton(<span style="color:#66d9ef">const</span> Singleton <span style="color:#f92672">&amp;</span>other);
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>m_instance;  <span style="color:#75715e">//静态成员变量
+</span><span style="color:#75715e"></span>};
+
+Singleton <span style="color:#f92672">*</span>Singleton<span style="color:#f92672">::</span>m_instance <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">nullptr</span>;  <span style="color:#75715e">//静态成员在类内声明，在类外定义与初始化
+</span></code></pre></div><p>　　这是单例模式最经典的实现方式，将构造函数和拷贝构造函数都设为私有的，且采用了懒汉模式，为什么不是线程安全的呢？</p>
+<p>　　正常情况下，若线程A调用Instance()时，将m_instance初始化了，线程B再调用Instance()时，就不会再new了，直接返回已经构造好的对象；但是存在这样一种情况：线程A执行new过程还没结束，此时m_instance仍然为nullptr，因此线程B也会执行new过程，这样就会产生两个对象。</p>
+<h2 id="52-线程安全的懒汉模式锁的代价过高">5.2 线程安全的懒汉模式（锁的代价过高）</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span><span style="color:#a6e22e">Instance</span>() {
+  Lock lock;  <span style="color:#75715e">//伪代码
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (m_instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    m_instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton();
+  }
+  <span style="color:#66d9ef">return</span> m_instance;
+}
+</code></pre></div><p>　　这种写法不会出现5.1两个线程都new的情况，因为当线程A在new的时候，若线程B在调用Instance()时会被阻塞在加锁处，等待线程A执行结束并释放锁后再继续执行。</p>
+<p>　　但这种写法性能不高，因为每次调用Instance()时都会加锁和释放锁，实际上这个步骤只需要在第一次new的时候才是必要的，只要m_instance被创建后，不管多少线程同时访问，if判断已经足够了，锁会影响性能。</p>
+<h2 id="53-双检查锁懒汉模式内存读写reorder导致的不安全">5.3 双检查锁懒汉模式[内存读写reorder导致的不安全]</h2>
+<p>　　5.2的写法在某个线程访问时不管三七二十一先加一把锁，这样会导致不必要的锁消耗，那么，是否可以先进行if判断呢，如果m_instance为nullptr，根本不需要加锁，这就是双检查锁(DCL-double check locking)的思想。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span><span style="color:#a6e22e">Instance</span>() {
+  <span style="color:#75715e">//先判断是否已经初始化
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (m_instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    Lock lock;  <span style="color:#75715e">//伪代码
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (m_instance <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+      m_instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton();
+    }
+  }
+  <span style="color:#66d9ef">return</span> m_instance;
+}
+</code></pre></div><p>　　这种写法看起来很好，而且确实使用了很长时间，但是一段时间后很多人在不同的语言下都发现了漏洞，原因是内存读写乱序执行。<code>m_instance = new Singleton()</code>这句话的执行可以表示为下面三个步骤：</p>
+<ol>
+<li>分配Singleton类对象需要的内存</li>
+<li>在分配的内存处构造Singleton类型对象</li>
+<li>把分配的内存地址赋值给m_instance</li>
+</ol>
+<p>　　这三个步骤实际上并不是按照固定顺序执行的，能确定的只有第一步是最先执行的，步骤2和步骤3不一定谁先执行，这会导致如下问题：若线程A在执行<code>m_instance = new Singleton()</code>的时候是按照1、3、2的顺序，那么刚刚执行完步骤3的时候m_instance已经不是nullptr了，而恰好在此时切到了线程B，那么线程B会直接执行<code>return m_instance</code>得到一个还没有被构造的对象，严重bug产生！！！</p>
+<h2 id="54-c11跨平台版本">5.4 C++11跨平台版本</h2>
+<p>　　java和c#为了解决5.3的问题，加入了volatile关键字，声明m_instance变量时加上volatile关键字，编译器到这里就可以知道这个地方不能reorder（一定要先分配内存、再执行构造、最后进行赋值）。</p>
+<p>　　C++在之后也加入了这个关键字，但是只支持微软平台，C++11提供了原子操作的机制来实现跨平台的方案。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">std<span style="color:#f92672">::</span>atomic<span style="color:#f92672">&lt;</span>Singleton<span style="color:#f92672">*&gt;</span> Singleton<span style="color:#f92672">::</span>m_instance;
+std<span style="color:#f92672">::</span>mutex Singleton<span style="color:#f92672">::</span>m_mutex;
+
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">* 下面的两句话保证它们之间的语句不会乱序执行
+</span><span style="color:#75715e">* std::atomic_thread_fence(std::memory_order_acquire);
+</span><span style="color:#75715e">* std::atomic_thread_fence(std::memory_order_release);
+</span><span style="color:#75715e">*/</span>
+
+Singleton<span style="color:#f92672">*</span> Singleton<span style="color:#f92672">::</span>Instance() {
+  Singleton <span style="color:#f92672">*</span>tmp <span style="color:#f92672">=</span> m_instance.load(std<span style="color:#f92672">::</span>memory_order_relaxed);
+  std<span style="color:#f92672">::</span>atomic_thread_fence(std<span style="color:#f92672">::</span>memory_order_acquire); <span style="color:#75715e">//获取内存fence
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">if</span> (tmp <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+    std<span style="color:#f92672">::</span>lock_guard<span style="color:#f92672">&lt;</span>std<span style="color:#f92672">::</span>mutex<span style="color:#f92672">&gt;</span> lock(m_mutex);
+    tmp <span style="color:#f92672">=</span> m_instance.load(std<span style="color:#f92672">::</span>memory_order_relaxed);
+    <span style="color:#66d9ef">if</span> (tmp <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) {
+      tmp <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton;
+      std<span style="color:#f92672">::</span>atomic_thread_fence(std<span style="color:#f92672">::</span>memory_order_release); <span style="color:#75715e">//释放内存fence
+</span><span style="color:#75715e"></span>      m_instance.store(tmp, std<span style="color:#f92672">::</span>memory_order_relaxed);
+    }
+  }
+  <span style="color:#66d9ef">return</span> tmp;
+}
+</code></pre></div><h2 id="55-linux版本">5.5 Linux版本</h2>
+<p>　　在linux中，<code>pthread_once()</code>函数可以保证某个函数只执行一次。</p>
+<blockquote>
+<p><code>int pthread_once(pthread_once_t once_control, void (init_routine) (void)); 功能：函数使用初值为PTHREAD_ONCE_INIT的once_control变量保证</code>init_routine()`函数在本进程执行序列中仅执行一次</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>Instance() {
+    <span style="color:#75715e">// init函数只会执行一次
+</span><span style="color:#75715e"></span>    pthread_once(<span style="color:#f92672">&amp;</span>ponce_, <span style="color:#f92672">&amp;</span>Singleton<span style="color:#f92672">::</span>init);
+    <span style="color:#66d9ef">return</span> m_instance;
+  }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  Singleton();  <span style="color:#75715e">//私有构造函数，不允许使用者外部调用
+</span><span style="color:#75715e"></span>  Singleton(<span style="color:#66d9ef">const</span> Singleton <span style="color:#f92672">&amp;</span>other);
+  <span style="color:#75715e">//写成静态方法是因为类成员函数隐含传递this指针
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">init</span>() { m_instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton(); }
+  <span style="color:#66d9ef">static</span> pthread_once_t ponce_;
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>m_instance;  <span style="color:#75715e">//静态成员变量
+</span><span style="color:#75715e"></span>};
+
+pthread_once_t Singleton<span style="color:#f92672">::</span>ponce_ <span style="color:#f92672">=</span> PTHREAD_ONCE_INIT;
+Singleton <span style="color:#f92672">*</span>Singleton<span style="color:#f92672">::</span>m_instance <span style="color:#f92672">=</span>
+    <span style="color:#66d9ef">nullptr</span>;  <span style="color:#75715e">//静态成员在类内声明，在类外定义与初始化
+</span></code></pre></div><h2 id="56-c11简洁跨平台版本">5.6 C++11简洁跨平台版本</h2>
+<p>　　5.4的方法能跨平台但是有点儿麻烦，5.5的方法只能在linux使用，C++11提供了<code>std::call_once</code>方法来保证函数在多线程环境只被调用一次，它也需要一个once_flag参数，用法和pthread_once类似。</p>
+<p>　　但是，有一种最为简单的方法，即使用局部静态变量：</p>
+<blockquote>
+<p>C++11内存模型中对static local variable(局部静态变量)有如下描述：
+The initialization of such a variable is defined to occur the first time control passes through its declaration; for multiple threads calling the function, this means there&rsquo;s the potential for a race condition to define first.</p>
+</blockquote>
+<p>　　局部静态变量不仅只会初始化一次而且是线程安全的。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>Instance() {
+    <span style="color:#66d9ef">static</span> Singleton m_instance; <span style="color:#75715e">//局部静态变量
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span>m_instance;
+  }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  Singleton();  <span style="color:#75715e">//私有构造函数，不允许使用者外部调用
+</span><span style="color:#75715e"></span>  Singleton(<span style="color:#66d9ef">const</span> Singleton <span style="color:#f92672">&amp;</span>other);
+};
+</code></pre></div><h2 id="6-饿汉单例">6 饿汉单例</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>Instance() { <span style="color:#66d9ef">return</span> m_instance; }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  Singleton(){};  <span style="color:#75715e">//私有构造函数，不允许使用者外部调用
+</span><span style="color:#75715e"></span>  Singleton(<span style="color:#66d9ef">const</span> Singleton <span style="color:#f92672">&amp;</span>other);
+  <span style="color:#66d9ef">static</span> Singleton <span style="color:#f92672">*</span>m_instance;
+};
+
+Singleton <span style="color:#f92672">*</span>Singleton<span style="color:#f92672">::</span>m_instance <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Singleton;
+</code></pre></div><h2 id="7-用模板包装单例">7 用模板包装单例</h2>
+<p>　　我们已经知道了怎样实现一个最佳的单例模式(C++11局部静态变量版本)，但是如果一个程序中有很多需要做成单例模式的类，那么每次都实现一遍感觉有点儿重复劳动，那么，可以使用C++的模板语法来避免这样的重复劳动。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Singleton</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">static</span> T <span style="color:#f92672">*</span>Instance() {
+    <span style="color:#66d9ef">static</span> T value_;
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">&amp;</span>value_;
+  }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  Singleton();  <span style="color:#75715e">//私有构造函数，不允许使用者外部调用
+</span><span style="color:#75715e"></span>  <span style="color:#f92672">~</span>Singleton();
+  Singleton(<span style="color:#66d9ef">const</span> Singleton <span style="color:#f92672">&amp;</span>);
+  Singleton <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">=</span>(<span style="color:#66d9ef">const</span> Singleton <span style="color:#f92672">&amp;</span>);
+};
+</code></pre></div><p>　　假设有两个类Ａ和Ｂ，可以用Singleton类把它们包装为单例。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">A</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  A() { a_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; }
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fun</span>() { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;a: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> a_ <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">int</span> a_;
+};
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">B</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  B() { b_ <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; }
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fun</span>() { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;b: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> b_ <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; }
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">int</span> b_;
+};
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  Singleton<span style="color:#f92672">&lt;</span>A<span style="color:#f92672">&gt;::</span>Instance()<span style="color:#f92672">-&gt;</span>fun();
+  Singleton<span style="color:#f92672">&lt;</span>B<span style="color:#f92672">&gt;::</span>Instance()<span style="color:#f92672">-&gt;</span>fun();
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>　　如果类A的构造函数有参数，上面的写法就不可以，不过可以使用C++11的可变参数模板解决这一问题，但是实际中一般单例类构造函数不会有参数，因为构造只需要一次，每次调用Instance()传个参数岂不是很麻烦。</p>
+<h2 id="8-注意点">8 注意点</h2>
+<p>　　上面所讨论的线程安全都只是指的是Instance()是线程安全的，假如有多个线程都获取A类的对象，如果只是读取操作，那完全没问题，但是如果有线程要修改，有线程要读取，那么A类自身的函数需要自己<strong>加锁</strong>，不是说线程安全的单例也能保证修改和读取该对象自身的资源也是线程安全的。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F/">单例模式</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/066-%E5%8A%A0%E4%B8%80/" data-tooltip="066 加一">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/override%E5%92%8Cfinal%E5%85%B3%E9%94%AE%E5%AD%97/" data-tooltip="Override和final关键字">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/066-%E5%8A%A0%E4%B8%80/" data-tooltip="066 加一">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/07/override%E5%92%8Cfinal%E5%85%B3%E9%94%AE%E5%AD%97/" data-tooltip="Override和final关键字">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

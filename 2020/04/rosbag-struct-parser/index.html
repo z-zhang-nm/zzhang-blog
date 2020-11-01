@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="">
+<meta name="description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+
+
+<meta property="og:description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Rosbag Struct Parser">
+<meta name="twitter:title" content="Rosbag Struct Parser">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/04/rosbag-struct-parser/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/04/rosbag-struct-parser/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+<meta name="twitter:description" content="　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(Format)，对rosbag的结构进行解析。">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-04-30T10:01:03">
+  
+  
+    <meta property="article:modified_time" content="2020-04-30T10:01:03">
+  
+  
+  
+    
+      <meta property="article:section" content="ros">
+    
+  
+  
+    
+      <meta property="article:tag" content="rosbag">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>Rosbag Struct Parser</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/04/rosbag-struct-parser/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Rosbag Struct Parser
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-04-30T10:01:03&#43;08:00">
+        
+  四月 30, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/ros">ros</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(<a href="http://wiki.ros.org/Bags/Format/2.0">Format</a>)，对rosbag的结构进行解析。</p>
+<h1 id="rosbag-结构">Rosbag 结构</h1>
+<p>　　首先参照官方文档介绍rosbag的数据存储结构，一个bag文件由record序列组成，文件第一行为格式标准版本信息，13个字节（含换行符）。</p>
+<pre><code>#ROSBAG V2.0
+&lt;record 1&gt;&lt;record 2&gt;....&lt;record N&gt;
+</code></pre><h2 id="record-format">Record format</h2>
+<p>　　每一个record由以下四个部分组成：</p>
+<pre><code>&lt;header_len&gt;&lt;header&gt;&lt;data_len&gt;&lt;data&gt;
+</code></pre><ul>
+<li>header_len为4字节小端序整数（低地址到高地址的顺序存放数据的低位字节到高位字节），代表后面header的长度</li>
+<li>header存放长度为header_len的数据，数据格式见<a href="#header-format">header结构</a></li>
+<li>data_len为4字节小端序整数，代表后面data的长度</li>
+<li>data存放长度为data_len的数据</li>
+</ul>
+<h2 id="header-format">Header format</h2>
+<p>　　record中的header由一系列<code>&lt;field_len&gt;&lt;field_name&gt;=&lt;field_value&gt;</code>格式的fields构成，如下：</p>
+<pre><code>&lt;field1_len&gt;&lt;field1_name&gt;=&lt;field1_value&gt;&lt;field2_len&gt;&lt;field2_name&gt;=&lt;field2_value&gt;...&lt;fieldN_len&gt;&lt;fieldN_name&gt;=&lt;fieldN_value&gt;
+</code></pre><ul>
+<li>fieldX_len为４字节小端序整数，代表其后fieldX_name和fieldX_value的长度（包括符号'=’）</li>
+<li>fieldX_name为字符串，代表field的名字</li>
+<li>不同field的fieldX_value具有不同类型，有可能是字符串、整数等</li>
+</ul>
+<p>　　每个header都必定包含一个field_name为op的field，用来表明当前record属于哪个类别，当前版本rosbag结构包括以下几种类别，具体格式见<a href="#record%E7%B1%BB%E5%88%AB">record类别</a>：</p>
+<ol>
+<li>Bag header(op=0x03)：存储rosbag中第一个Index data record的偏置、Chunk record的数量和Connection record的数量</li>
+<li>Chunk(op=0x05)：存储（可能被压缩过的）Connection record和Message data record</li>
+<li>Connection(op=0x07)：存储ros结点连接的信息，比如topic名字、消息定义文本等</li>
+<li>Message data(op=0x02)：存储某个连接的序列化消息</li>
+<li>Index data(op=0x04)：存储某一个连接不同时刻的序列化消息在之前一个Chunk record中的偏置</li>
+<li>Chunk info(op=0x06)：存储Chunk record的信息，比如偏置、开始结束时间、连接数量等</li>
+</ol>
+<h2 id="record类别"><strong>record类别</strong></h2>
+<p>　　rosbag中不同类别的record的存储顺序如下所示：</p>
+<pre><code>&lt;Bag header&gt; (&lt;Chunk&gt;(&lt;Index data&gt;*N))*M &lt;Connection&gt;*K &lt;Chunk info&gt;*M
+</code></pre><p>　　N代表前一个Chunk record中连接的数量，M代表rosbag中Chunk record的数量，K代表rosbag中Connection record的数量。</p>
+<p>　　Chunk record比较特殊，它的data中包含Connection record和Message data record。</p>
+<h3 id="bag-header">Bag header</h3>
+<p>　　rosbag中第一个record，具有4096字节的固定长度，不足4096的部分由空白符（0x20）补充，它的header中包含如下field：</p>
+<ul>
+<li>index_pos：8字节小端序整数，代表rosbag中第一个Index data record的偏置</li>
+<li>conn_count：4字节小端序整数，代表rosbag中Connection record的数量（不含Chunk record中的）</li>
+<li>chunk_count：4字节小端序整数，代表rosbag中Chunk record的数量</li>
+</ul>
+<h3 id="chunk">Chunk</h3>
+<p>　　header中包含如下field：</p>
+<ul>
+<li>compression：字符串类型，代表Chunk record中的数据压缩方法，目前支持<code>bz2</code>的压缩方式</li>
+<li>size：4字节小端序整数，代表data未压缩时的大小，压缩后的大小为data_len</li>
+</ul>
+<h3 id="connection">Connection</h3>
+<p>　　header中包含如下field：</p>
+<ul>
+<li>conn：4字节小端序整数，代表连接的标识号</li>
+<li>topic：字符串类型，代表连接的topic</li>
+</ul>
+<p>　　data中包含<a href="#connection-header-%E7%BB%93%E6%9E%84">Connection header</a>，它的格式与record中的header一样，由不同的field组成，<code>topic, type, md5sum, message_definition</code>必须存在于Connection header中。</p>
+<h4 id="connection-header-结构"><strong>Connection header 结构</strong></h4>
+<p>　　在ROS中，结点之间直接进行连接，ROS Master只提供一些映射信息，订阅某一topic的结点从发布该topic的结点请求连接，并通过某一协议建立连接，ROS中常用的协议是TCPROS，它使用标准的TCP/IP sockets。</p>
+<p>　　TCPROS subscriber 会发送如下field:</p>
+<ul>
+<li>message_definition：消息定义文本</li>
+<li>callerid：发送消息的结点名字</li>
+<li>topic：订阅的topic名字</li>
+<li>md5sum：消息类型的md5sum</li>
+<li>type：消息类型</li>
+</ul>
+<p>　　TCPROS publisher连接成功时返回如下field：</p>
+<ul>
+<li>md5sum： 消息类型的md5sum</li>
+<li>type：消息类型</li>
+</ul>
+<h3 id="message-data">Message data</h3>
+<p>　　header中包含如下field：</p>
+<ul>
+<li>conn：4字节小端序整数，代表连接标识号</li>
+<li>time：8字节小端序整数，代表接收消息的时间戳</li>
+</ul>
+<p>　　data中存储序列化的消息序列。</p>
+<p>　　序列化的数据存储时是按照定义中的顺序存放的，存储string和数组时会多占用4个字节记录string的长度和数组的大小。</p>
+<p>　　下面是std_msgs的大小：</p>
+<ul>
+<li>bool : 1</li>
+<li>int8 : 1</li>
+<li>uint8 : 1</li>
+<li>int16 : 2</li>
+<li>uint16 : 2</li>
+<li>int32 : 4</li>
+<li>uint32 : 4</li>
+<li>int64 : 8</li>
+<li>uint64 : 8</li>
+<li>float32 : 4</li>
+<li>float64 : 8</li>
+<li>time : 8(int, int)</li>
+<li>duration : 8(int, int)</li>
+<li>string : 0</li>
+</ul>
+<p>　　怎么定位到Message data Record的位置？</p>
+<blockquote>
+<p>遍历每一个Index data Record，根据header中记录的Connection ID确定topic，根据Index data Record位置定位到属于哪一个chunk，记录chunk的起始位置，然后遍历data，得到每条消息的时间戳和在chunk中偏置位置，根据<code>chunk起始位置+偏置位置</code>定位到记录这条消息的Message data Record在rosbag中的偏置位置。</p>
+</blockquote>
+<h3 id="index-data">Index data</h3>
+<p>　　header中包含如下field：</p>
+<ul>
+<li>ver：4字节小端序整数，代表记录index data的格式版本</li>
+<li>conn：4字节小端序整数，连接标识号</li>
+<li>count：4字节小端序整数，代表当前连接在之前一个Chunk record中的Message data record的数量</li>
+</ul>
+<p>　　当前data记录版本ver为1，data包括不同时刻消息在前一个Chunk record中的偏置：</p>
+<ul>
+<li>time：8字节小端序整数，接收消息的时间戳</li>
+<li>offset：4字节小端序整数，消息在前一个Chunk record中的偏置</li>
+</ul>
+<h3 id="chunk-info">Chunk info</h3>
+<p>　　header中包含如下field：</p>
+<ul>
+<li>ver：4字节小端序整数，代表记录chunk info data的格式版本</li>
+<li>chunk_pos：8字节小端序整数，代表Chunk record在rosbag中的偏置</li>
+<li>start_time：8字节小端序整数，代表Chunk record中最早接收消息的时间戳</li>
+<li>end_time：8字节小端序整数，代表Chunk record中最晚接收消息的时间戳</li>
+<li>count：4字节小端序整数，代表Chunk record中Connection record的数量</li>
+</ul>
+<p>　　当前data记录版本ver为1，data包括不同连接在当前Chunk record中Message data record的数量：</p>
+<ul>
+<li>conn：4字节小端序整数，代表连接标识号</li>
+<li>count：4字节小端序整数，当前连接在当前Chunk record中消息的数量</li>
+</ul>
+<h1 id="实例">实例</h1>
+<h2 id="结构">结构</h2>
+<p><code>&lt;Bag header&gt;[(&lt;Chunk&gt;(&lt;Index data&gt;*M))*N][&lt;Connection&gt;*K][&lt;Chunk info&gt;*N]</code></p>
+<h2 id="bag-headerop0x03">Bag header(op=0x03)</h2>
+<p><code>&lt;header_len=69&gt; &lt;field1_len=16&gt;&lt;field1_name=chunk_count&gt;=&lt;field1_value=30&gt; &lt;15&gt;&lt;conn_count&gt;=&lt;124&gt; &lt;18&gt;&lt;index_pos&gt;=&lt;23588957&gt; &lt;4&gt;&lt;op&gt;=&lt;3&gt; &lt;data_len=4027&gt;&lt;data&gt;</code></p>
+<p><code>&lt;header_len=69&gt; &lt;field1_len=16&gt;&lt;field1_name=chunk_count&gt;=&lt;field1_value=1&gt; &lt;15&gt;&lt;conn_count&gt;=&lt;1&gt; &lt;18&gt;&lt;index_pos&gt;=&lt;112441&gt; &lt;4&gt;&lt;op&gt;=&lt;3&gt; &lt;data_len=4027&gt;&lt;data&gt;</code></p>
+<h2 id="chunkop0x05">Chunk(op=0x05)</h2>
+<p><code>&lt;header_len=41&gt; &lt;field1_len=16&gt;&lt;field1_name=compression&gt;=&lt;field1_value=none&gt; &lt;4&gt;&lt;op&gt;=&lt;5&gt; &lt;9&gt;&lt;size=787020&gt; &lt;data_len=787020&gt;&lt;data&gt;</code></p>
+<p><code>&lt;header_len=41&gt; &lt;field1_len=16&gt;&lt;field1_name=compression&gt;=&lt;field1_value=none&gt; &lt;4&gt;&lt;op&gt;=&lt;5&gt; &lt;9&gt;&lt;size=105400&gt; &lt;data_len=105400&gt;&lt;data&gt;</code></p>
+<h2 id="index-dataop0x04">Index data(op=0x04)</h2>
+<p><code>&lt;header_len=47&gt; &lt;field1_len=9&gt;&lt;field1_name=conn&gt;=&lt;field1_value=0&gt; &lt;10&gt;&lt;count&gt;=&lt;1&gt; &lt;4&gt;&lt;op&gt;=&lt;4&gt; &lt;8&gt;&lt;ver&gt;=&lt;1&gt; &lt;data_len=12&gt;&lt;data&gt;</code></p>
+<p><code>&lt;header_len=47&gt; &lt;field1_len=9&gt;&lt;field1_name=conn&gt;=&lt;field1_value=0&gt; &lt;10&gt;&lt;count&gt;=&lt;235&gt; &lt;4&gt;&lt;op&gt;=&lt;4&gt; &lt;8&gt;&lt;ver&gt;=&lt;1&gt; &lt;data_len=2820&gt;&lt;data&gt;</code></p>
+<h2 id="connectionop0x07">Connection(op=0x07)</h2>
+<p><code>&lt;header_len=83&gt; &lt;field1_len=9&gt;&lt;field1_name=conn&gt;=&lt;field1_value=0&gt; &lt;4&gt;&lt;op&gt;=&lt;7&gt; &lt;58&gt;&lt;topic&gt;=&lt;/longitudinal_controller_desay_cfg/parameter_updates&gt; &lt;data_len=1077&gt; &lt;field1_len=43&gt;&lt;field1_name=callerid&gt;=&lt;field1_value=/longitudinal_controller_desay_cfg&gt; &lt;10&gt;&lt;latching&gt;=&lt;1&gt; &lt;39&gt;&lt;md5sum&gt;=&lt;958f16a05573709014982821e6822580&gt; &lt;872&gt;&lt;message_definition&gt;=&lt;...&gt; &lt;58&gt;&lt;topic&gt;=&lt;/longitudinal_controller_desay_cfg/parameter_updates&gt; &lt;31&gt;&lt;type&gt;=&lt;dynamic_reconfigure/Config&gt;</code></p>
+<p><code>&lt;header_len=52&gt; &lt;field1_len=9&gt;&lt;field1_name=conn&gt;=&lt;field1_value=0&gt; &lt;4&gt;&lt;op&gt;=&lt;7&gt; &lt;27&gt;&lt;topic&gt;=&lt;/fusion/obstacle_list&gt; &lt;data_len=5230&gt; &lt;field1_len=16&gt;&lt;field1_name=callerid&gt;=&lt;field1_value=/pb2ros&gt; &lt;10&gt;&lt;latching&gt;=&lt;0&gt; &lt;39&gt;&lt;md5sum&gt;=&lt;438bf5efdcd3ff12e3b317344780e529&gt; &lt;5078&gt;&lt;message_definition&gt;=&lt;...&gt; &lt;27&gt;&lt;topic&gt;=&lt;/fusion/obstacle_list&gt; &lt;36&gt;&lt;type&gt;=&lt;nullmax_msgs/FusedObstacleArray&gt;</code></p>
+<h2 id="chunk-infoop0x06">Chunk info(op=0x06)</h2>
+<p><code>&lt;header_len=100&gt; &lt;field1_len=18&gt;&lt;field1_name=chunk_pos&gt;=&lt;field1_value=4117&gt; &lt;10&gt;&lt;count&gt;=&lt;96&gt; &lt;17&gt;&lt;end_time&gt;=&lt;&gt; &lt;4&gt;&lt;op&gt;=&lt;6&gt; &lt;19&gt;&lt;start_time&gt;=&lt;&gt; &lt;8&gt;&lt;ver&gt;=&lt;1&gt; &lt;data_len=8&gt;&lt;data&gt;</code></p>
+<p><code>&lt;header_len=100&gt; &lt;field1_len=18&gt;&lt;field1_name=chunk_pos&gt;=&lt;field1_value=4117&gt; &lt;10&gt;&lt;count&gt;=&lt;1&gt; &lt;17&gt;&lt;end_time&gt;=&lt;(secs)+(nsecs)&gt; &lt;4&gt;&lt;op&gt;=&lt;6&gt; &lt;19&gt;&lt;start_time&gt;=&lt;&gt; &lt;8&gt;&lt;ver&gt;=&lt;1&gt; &lt;data_len=8&gt;&lt;data&gt;</code></p>
+<h1 id="rosbag数据结构解析">Rosbag数据结构解析</h1>
+<h2 id="数据结构">数据结构</h2>
+<p>　　首先需要定义一个存储rosbag数据的<strong>数据结构</strong>Bag，初步判断其中需要包括：记录record基本信息（offset,header_len, data_len）的结构Record，存储各个Record的record_list_数组，存储消息结构的数据结构。</p>
+<h2 id="提取record基本信息">提取Record基本信息</h2>
+<blockquote>
+<p>一个字节八个比特,就是八个二进制位，四个二进制数最大表示为15,就是一个16进制数,所以八位可以表示成两个16进制的数，即一个字节为两个用两个16进制数表示</p>
+</blockquote>
+<p>　　读取文件时需要借助字符数组作为Buffer，其大小一般为4*1024=<a href="https://stackoverflow.com/questions/236861/how-do-you-determine-the-ideal-buffer-size-when-using-fileinputstream">4096</a>个字节。</p>
+<p>　　为了方便后续进行record的解析，首先遍历rosbag文件，提取各个record的基本信息，包括各个record的起始位置，header length和data length。解析时使用C++标准库的文件流<code>ifstream</code>。</p>
+<ol>
+<li>定位到文件末尾，记录文件末尾位置，作为遍历结束条件</li>
+<li>跳过rosbag第一行的13个字符，定位到第一个record(Bag header)的位置，开始遍历record
+<ol>
+<li>记录record的offset位置</li>
+<li>读取4个字节，得到header_len</li>
+<li>从当前位置向前定位header_len个字节</li>
+<li>读取4个字节，得到data_len</li>
+<li>从当前位置向前定位data_len个字节</li>
+<li>将当前record放入record_list_</li>
+</ol>
+</li>
+<li>定位到文件开始位置</li>
+</ol>
+<h2 id="解析record-header数据">解析Record Header数据</h2>
+<p>　　<a href="#%E6%8F%90%E5%8F%96record%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF">提取Record基本信息</a>中已经得到rosbag中每一个record的基本信息，下面首先对每一个record的header进行解析，header的格式见<a href="#header-format">Header Format</a>一节。</p>
+<p>　　这里需要解析header的数据，因此需要一个新的<strong>数据结构</strong>存储header data，由于header的格式为<code>&lt;len&gt;&lt;name&gt;=&lt;value&gt;</code>，需要记录每一对name和value的数据对，由此哈希map比较合适。</p>
+<ol>
+<li>定位到record.offset+4的位置，即header data开始的位置</li>
+<li>由于Buffer大小为4096个字节，header_len可能大于4096，因此需要先确定读取的次数</li>
+<li>读取header data并转换为string格式，接下来循环解析这个字符串
+<ol>
+<li>首先读取4个字节，得到field_len</li>
+<li>截取field_len长度的子串，并找到字符<code>=</code>的位置</li>
+<li><code>=</code>前面为field_name，后面为field_value</li>
+<li>将键值对加入Header map</li>
+</ol>
+</li>
+</ol>
+<p>　　利用Record Header解析函数解析第一个record，即Bag header record，得到rosbag中Chunck record和Connection Record的个数。</p>
+<h2 id="消息结构解析">消息结构解析</h2>
+<h3 id="record选取">Record选取</h3>
+<p>　　消息定义在rosbag中有两种record可以获取，即Chunck record和Connection record，由<a href="#%E7%BB%93%E6%9E%84">rosbag结构实例</a>一节可以知道rosbag中records的排列是有顺序的，由于Chunck中的数据可能是被压缩过的且其与Index data record交叉排列，所以选择Connection record作为消息结构解析record。</p>
+<h3 id="存储数据结构选取">存储数据结构选取</h3>
+<p>　　rosbag中含有不同topic的消息，每一个topic中包含不同的消息，消息类型包括ros基本消息类型和用户自定义类型，消息可以包含多个层级，比如<code>header.stamp.secs</code>代表时间戳中的秒，不同消息的结构深度不同，因此考虑使用<strong>树结构</strong>作为<strong>存储消息结构的数据结构</strong>。</p>
+<p>　　树结构应该包含的内容：</p>
+<ol>
+<li>每一个消息都会有名字name，对应的会有类型type，比如<code>string frame_id</code>，<code>frame_id</code>为名字，<code>string</code>为类型</li>
+<li>消息可能由其它消息组成，比如<code>Header</code>由<code>uint32 seq, time stamp, string frame_id</code>组成，因此一个消息结点可能有数个子结点<code>child</code>，存储在<code>TreeNode *</code>数组中</li>
+<li>消息结点也会有一个父结点<code>parent</code></li>
+<li>消息可能是一个数组<code>array</code>，也应该有数组大小<code>array_size</code></li>
+<li>消息是否是ros基本类型<code>std_type</code>，类型大小<code>size</code>，若不是基本类型，大小为-1</li>
+</ol>
+<h3 id="消息结构树的建立">消息结构树的建立</h3>
+<p>　　对每一个Connection record，由于其data部分的结构也是<code>&lt;len&gt;&lt;name&gt;=&lt;value&gt;</code>的形式，首先使用Record Header解析函数解析data部分，得到一个个的键值对map，我们需要的是message_definition和type这两个field，解析完成后用这两个field进行消息结构树的建立。</p>
+<ol>
+<li>message_definition包含了topic中记录的所有消息及其结构，消息之间由多个<code>=</code>组成的分隔符分割，且第一个分隔符之前的消息定义为topic包含的消息，其它的消息定义为topic消息中用户自定义消息的结构，首先将所有的消息定义字符串分割出来，存入一个数组（消息定义数组）</li>
+<li>遍历消息定义数组中的每一个消息块字符串，构建所有子结点，由于遍历时除了可以确定第一个消息块的每个消息结点是根节点的子结点，可以加入根结点的孩子结点数组中，其它消息块的每个消息结点都是根结点的子结点的子结点，由于遍历时还未构建树结构，因此可以先用一个<strong>数据结构</strong>（子消息结构）将每一个消息块的每个消息结点存储起来，最后在构建树的时候从中寻找结点，这个数据结构需要具有能够存储子结点的孩子数组，且要记录这个消息块的类型名字，以便后续构建树的时候可以确定其父结点
+<ol>
+<li>分割字符串的每一行，存入一个数组（具体定义数组），提取时只保留有效的消息定义行，且删除头尾空白符和注释，无效的行包括：
+<ol>
+<li>全是注释的行</li>
+<li>空行</li>
+<li>空白符加注释的行</li>
+</ol>
+</li>
+<li>若不是根结点的子结点，这个消息块的第一行仅包含类型消息，例如<code>MSG: nullmax_msgs/LkaLane</code>，提取出<code>/</code>后的类型作为子消息结构的类型名字</li>
+<li>对每一行有效消息，生成一个子结点
+<ol>
+<li>判断是否是数组类型，分为固定大小数组和动态数组，区别是<code>[]</code>中有无数组大小，若是固定大小数组，提取出数组大小</li>
+<li>提取出类型名和消息名字</li>
+<li>设置是否为数组类型，若不是，数组大小设置为-1</li>
+<li>若为根结点的子结点，将其加入根结点的孩子数组，否则加入子消息结构的孩子数组</li>
+</ol>
+</li>
+<li>设置每一个结点类型的大小，若不是根结点的子结点，将子消息结构放入一个子消息结构数组中</li>
+</ol>
+</li>
+<li>构建消息树
+<ol>
+<li>对根结点的每一个子结点，若其不是基本类型，从子消息结构数组中进行匹配</li>
+<li>遍历子消息结构数组，若根结点的子节点的类型与子消息结构的类型名字一样，则将子消息结构数组的孩子结点都赋予这个子节点</li>
+<li>对子结点的孩子结点，若不是基本类型且其孩子数组为空，则递归进行第二步</li>
+<li>退出循环</li>
+</ol>
+</li>
+<li>查看消息树
+<ol>
+<li>先打印结点层数个<code>tab</code></li>
+<li>若结点为数组，打印<code>type[array_size] name</code>，否则打印<code>type name</code></li>
+<li>结点层数加一</li>
+<li>遍历结点子结点，递归查看</li>
+</ol>
+</li>
+</ol>
+<h1 id="load消息代码生成">Load消息代码生成</h1>
+<h2 id="创建包含所有topic的头文件">创建包含所有topic的头文件</h2>
+<p>　　<code>unistd.h</code>头文件逐路径创建目录与文件（<code>structure.h</code>），并写入<code>#param once\n</code>。</p>
+<h2 id="生成读取不同topic的代码">生成读取不同topic的代码</h2>
+<p>　　遍历不同topic的消息结构树，生成读取topic消息的代码，需要生成的文件包括CMakeLists、以topic名字命名的头文件和cpp代码文件，注意需要将topic中<code>/</code>替换为<code>_</code>，这些文件需要放在与<code>structure.h</code>同一目录下。</p>
+<p>　　首先在<code>structure.h</code>中加入一行包含当前topic的头文件代码，例如<code>#include &quot;fusion_obstacle_list.h&quot;</code>。</p>
+<h3 id="生成头文件">生成头文件</h3>
+<p>　　头文件中包括topic的完整消息结构定义(struct)、LoadData函数和OutputData函数的声明。每个头文件的前四行内容都是固定的，以<code>fusion_obstacle_list</code>为例,如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#param once
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;public_header.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#define FUSIONOBSTACLELIST
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">namespace</span> fusion_obstacle_list{
+</code></pre></div><p>　　遍历消息树根结点的所有子结点，自下向上生成消息结构体（后序遍历）：</p>
+<ol>
+<li>递归遍历子结点的子结点，直到到达叶子结点</li>
+<li>若当前结点为基本类型，不用生成消息结构体，跳过</li>
+<li>将当前节点的类型加入已生成列表，确保不会重复生成相同的结构体</li>
+<li>头文件内容添加<code>struct 结点消息类型_type{\n</code></li>
+<li>遍历当前结点的所有子结点：
+<ol>
+<li>头文件内容加入tab空格字符串</li>
+<li>若子结点为数组：
+<ol>
+<li>若子结点为基本类型：
+<ol>
+<li>若数组大小为-1，用<code>std::vector</code></li>
+<li>若数组大小不为-1，用c风格数组</li>
+</ol>
+</li>
+<li>若子结点为自定义类型，结点类型后面加上<code>_type</code>：
+<ol>
+<li>若数组大小为-1，用<code>std::vector</code></li>
+<li>若数组大小不为-1，用c风格数组</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>若子结点类型为<code>string</code>，类型需要加上<code>std::</code></li>
+<li>若子结点类型为<code>time</code>，变为<code>time_ros</code></li>
+<li>若子结点类型不是基本类型，需要加上<code>_type</code></li>
+</ol>
+</li>
+<li>最后头文件内容加上<code>};\n</code></li>
+</ol>
+<p>　　接下来生成topic消息结构体，统一命名为<code>objet</code>，头文件内容加上<code>struct objet{\n</code>，按照上面第五步的方式处理根结点的所有子节点，并在最后加上<code>};\n</code>。</p>
+<p>　　头文件内容加上<code>}\n</code>与<code>namespace fusion_obstacle_list{</code>组成完整命名空间。</p>
+<p>　　接下来加入LoadData函数和OutputData函数的声明，参数类型为<code>&lt;topic名字&gt;::object</code>，如下例子，其中<code>ToolStream</code>为public_header中的类，用于数据的输入和输出：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">LoadData</span>(ToolStream <span style="color:#f92672">&amp;</span>ss,fusion_obstacle_list<span style="color:#f92672">::</span>object <span style="color:#f92672">&amp;</span>value);
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OutputData</span>(fusion_obstacle_list<span style="color:#f92672">::</span>object <span style="color:#f92672">&amp;</span>value);
+</code></pre></div><h3 id="生成cpp文件">生成cpp文件</h3>
+<p>　　首先增加头文件包含，例如：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;fusion_obstacle_list.h&#34;</span><span style="color:#75715e">
+</span></code></pre></div><h4 id="loaddata函数实现">LoadData函数实现</h4>
+<p>　　加入LoadData函数声明行：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">LoadData</span>(ToolStream <span style="color:#f92672">&amp;</span>ss,fusion_obstacle_list<span style="color:#f92672">::</span>object <span style="color:#f92672">&amp;</span>value){
+</code></pre></div><p>　　用数组<code>load_prefix</code>存放当前遍历到的树的结点名字，并向数组中放入<code>value</code>，遍历根结点的子结点：</p>
+<ol>
+<li>遍历<code>load_prefix</code>数组，生成从根结点到当前结点的结构字符串，由<code>.</code>连接</li>
+<li>若当前结点为基本类型且不是数组：
+<ol>
+<li>若类型为string，序列化字符串会多四个字节来存放字符串的长度，首先需要读取字符串大小，然后resize结点消息字符串大小</li>
+<li>生成读取消息行<code>ss &gt;&gt; &lt;prefix+name&gt;;\n</code></li>
+</ol>
+</li>
+<li>若当前结点为基本类型且是数组，考虑到多维数组，读取数组大小的变量名需要加上序号标志来进行区分
+<ol>
+<li>序列化字符串存储<strong>动态</strong>数组也会多四个字节存放数组的大小，因此需要首先读取数组大小，resize结点消息字符串大小</li>
+<li>若是固定长度数组，直接获取数组大小</li>
+<li>生成读取消息循环</li>
+</ol>
+</li>
+<li>若当前结点为自定义类型且是数组
+<ol>
+<li>与3的处理方式基本一样，不过由于并非基本类型，所以树结构还没到叶子结点，所以需要继续递归遍历，遍历前需要将当前变量名加数组索引名字加入<code>load_prefix</code>数组</li>
+<li>遍历结束后将其弹出</li>
+<li>加上<code>}\n</code>闭合循环</li>
+</ol>
+</li>
+<li>若当前结点为自定义类型且不是数组
+<ol>
+<li>将当前结点变量名加入<code>load_prefix</code>数组</li>
+<li>递归遍历结点子结点</li>
+<li>弹出当前变量名</li>
+</ol>
+</li>
+</ol>
+<p>　　加入<code>}\n</code>闭合函数名义。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//string
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">string_size_0</span>(<span style="color:#ae81ff">0</span>);
+ss <span style="color:#f92672">&gt;&gt;</span> string_size_0;
+value.header.frame_id.resize(string_size_0);
+ss <span style="color:#f92672">&gt;&gt;</span> value.header.frame_id;
+<span style="color:#75715e">//基本类型
+</span><span style="color:#75715e"></span>ss <span style="color:#f92672">&gt;&gt;</span> value.header.seq;
+<span style="color:#75715e">//自定义类型
+</span><span style="color:#75715e"></span>ss <span style="color:#f92672">&gt;&gt;</span> value.center_lane.position_parameter_c0;
+<span style="color:#75715e">//数组
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">array_size_0</span>(<span style="color:#ae81ff">0</span>);
+ss <span style="color:#f92672">&gt;&gt;</span> array_size_0;
+value.center_lane.quality_score.resize(array_size_0);
+<span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> index_0 <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;index_0 <span style="color:#f92672">&lt;</span> array_size_0;<span style="color:#f92672">++</span>index_0){
+ ss <span style="color:#f92672">&gt;&gt;</span> value.center_lane.quality_score[index_0].distance;
+ ss <span style="color:#f92672">&gt;&gt;</span> value.center_lane.quality_score[index_0].score;
+}
+</code></pre></div><h4 id="outputdata函数实现">OutputData函数实现</h4>
+<p>　　与LoadData函数类似，不过将数据流读取变为cout输出而已。</p>
+<h3 id="生成cmakelist文件">生成CMakeList文件</h3>
+<p>　　加入如下固定内容即可：</p>
+<pre><code>SET(CMAKE_BUILD_TYPE &quot;Debug&quot;)
+SET(CMAKE_CXX_FLAGS_DEBUG &quot;$ENV{CXXFLAGS}    -O0 -Wall -g2 -ggdb&quot;) 
+SET(CMAKE_CXX_FLAGS_RELEASE &quot;$ENV{CXXFLAGS} -O3 -Wall&quot;)
+cmake_minimum_required(VERSION 3.2)
+add_compile_options(-std=c++11)
+project(bag_structer_parse)
+file(GLOB sources *.cpp)
+add_library(bag_structer SHARED ${sources})
+</code></pre>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/rosbag/">rosbag</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/" data-tooltip="第一周">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/04/%E7%AC%AC%E4%B8%80%E5%91%A8/" data-tooltip="第一周">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+
