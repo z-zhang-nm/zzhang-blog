@@ -2,8 +2,8 @@
 title: "声明全局std命名空间为什么是一种不好的行为"
 date: 2020-08-26T11:39:22+08:00
 categories:
-- category
-- subcategory
+- C++
+- StackOverflow
 tags:
 - tag1
 - tag2
