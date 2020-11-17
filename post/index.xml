@@ -6,10 +6,100 @@
     <description>Recent content in Posts on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Sun, 01 Nov 2020 12:12:00 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2020 09:36:20 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>145 二叉树后序遍历</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/145-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Fri, 13 Nov 2020 09:36:20 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/145-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-tree-postorder-traversal/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>144 二叉树前序遍历</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/144-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Thu, 12 Nov 2020 18:05:21 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/144-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-tree-preorder-traversal/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>129 求根到叶子节点数字之和</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/129-%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</link>
+      <pubDate>Thu, 12 Nov 2020 09:54:38 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/129-%E6%B1%82%E6%A0%B9%E5%88%B0%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9%E6%95%B0%E5%AD%97%E4%B9%8B%E5%92%8C/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/sum-root-to-leaf-numbers/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>124 二叉树中最大路径和</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/124-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</link>
+      <pubDate>Wed, 11 Nov 2020 10:20:22 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/124-%E4%BA%8C%E5%8F%89%E6%A0%91%E4%B8%AD%E6%9C%80%E5%A4%A7%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-tree-maximum-path-sum/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>117 填充每个节点的下一个右侧节点指针2</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/117-%E5%A1%AB%E5%85%85%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%8F%B3%E4%BE%A7%E8%8A%82%E7%82%B9%E6%8C%87%E9%92%882/</link>
+      <pubDate>Tue, 10 Nov 2020 10:19:55 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/117-%E5%A1%AB%E5%85%85%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%8F%B3%E4%BE%A7%E8%8A%82%E7%82%B9%E6%8C%87%E9%92%882/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node-ii/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>116 填充每个节点的下一个右侧节点指针</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/116-%E5%A1%AB%E5%85%85%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%8F%B3%E4%BE%A7%E8%8A%82%E7%82%B9%E6%8C%87%E9%92%88/</link>
+      <pubDate>Mon, 09 Nov 2020 17:24:24 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/116-%E5%A1%AB%E5%85%85%E6%AF%8F%E4%B8%AA%E8%8A%82%E7%82%B9%E7%9A%84%E4%B8%8B%E4%B8%80%E4%B8%AA%E5%8F%B3%E4%BE%A7%E8%8A%82%E7%82%B9%E6%8C%87%E9%92%88/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/populating-next-right-pointers-in-each-node/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>114 二叉树展开为链表</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/114-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Fri, 06 Nov 2020 09:59:43 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/114-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%B1%95%E5%BC%80%E4%B8%BA%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/flatten-binary-tree-to-linked-list/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>113 路径总和2</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/113-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C2/</link>
+      <pubDate>Thu, 05 Nov 2020 09:40:11 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/113-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/path-sum-ii/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>112 路径总和</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/112-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</link>
+      <pubDate>Wed, 04 Nov 2020 10:05:29 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/112-%E8%B7%AF%E5%BE%84%E6%80%BB%E5%92%8C/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/path-sum/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>111 二叉树的最小深度</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</link>
+      <pubDate>Tue, 03 Nov 2020 09:58:16 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/111-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E5%B0%8F%E6%B7%B1%E5%BA%A6/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/minimum-depth-of-binary-tree/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>110 平衡二叉树</title>
@@ -201,6 +291,15 @@
     </item>
     
     <item>
+      <title>运算符重载</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/</link>
+      <pubDate>Wed, 23 Sep 2020 16:55:25 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/%E8%BF%90%E7%AE%97%E7%AC%A6%E9%87%8D%E8%BD%BD/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/4421706/what-are-the-basic-rules-and-idioms-for-operator-overloading&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>072 编辑距离</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/072-%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB/</link>
       <pubDate>Wed, 23 Sep 2020 09:48:01 +0800</pubDate>
@@ -291,6 +390,15 @@
     </item>
     
     <item>
+      <title>TheRuleOfThree</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/theruleofthree/</link>
+      <pubDate>Wed, 09 Sep 2020 13:30:54 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/theruleofthree/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/4172722/what-is-the-rule-of-three&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>032 最长有效括号</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/032-%E6%9C%80%E9%95%BF%E6%9C%89%E6%95%88%E6%8B%AC%E5%8F%B7/</link>
       <pubDate>Wed, 09 Sep 2020 11:19:31 +0800</pubDate>
@@ -372,6 +480,33 @@
     </item>
     
     <item>
+      <title>C&#43;&#43;四种类型转换运算符的应用场景</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/c-%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/</link>
+      <pubDate>Wed, 26 Aug 2020 16:08:32 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/c-%E5%9B%9B%E7%A7%8D%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/332030/when-should-static-cast-dynamic-cast-const-cast-and-reinterpret-cast-be-used&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>包含头文件尖括号和双引号的区别</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6%E5%B0%96%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Wed, 26 Aug 2020 13:57:22 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%8C%85%E5%90%AB%E5%A4%B4%E6%96%87%E4%BB%B6%E5%B0%96%E6%8B%AC%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/21593/what-is-the-difference-between-include-filename-and-include-filename&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>声明全局std命名空间为什么是一种不好的行为</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%A3%B0%E6%98%8E%E5%85%A8%E5%B1%80std%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E7%A7%8D%E4%B8%8D%E5%A5%BD%E7%9A%84%E8%A1%8C%E4%B8%BA/</link>
+      <pubDate>Wed, 26 Aug 2020 11:39:22 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E5%A3%B0%E6%98%8E%E5%85%A8%E5%B1%80std%E5%91%BD%E5%90%8D%E7%A9%BA%E9%97%B4%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF%E4%B8%80%E7%A7%8D%E4%B8%8D%E5%A5%BD%E7%9A%84%E8%A1%8C%E4%B8%BA/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/1452721/why-is-using-namespace-std-considered-bad-practice&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>012 整数转罗马数字</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/012-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/</link>
       <pubDate>Wed, 26 Aug 2020 09:51:55 +0800</pubDate>
@@ -390,6 +525,33 @@
     </item>
     
     <item>
+      <title>008 全局函数和成员函数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/008-%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0%E5%92%8C%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Thu, 20 Aug 2020 23:13:18 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/008-%E5%85%A8%E5%B1%80%E5%87%BD%E6%95%B0%E5%92%8C%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ecplicit关键字</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/ecplicit%E5%85%B3%E9%94%AE%E5%AD%97/</link>
+      <pubDate>Thu, 20 Aug 2020 17:42:19 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/ecplicit%E5%85%B3%E9%94%AE%E5%AD%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/121162/what-does-the-explicit-keyword-mean&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>遍历string中的单词</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E9%81%8D%E5%8E%86string%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/</link>
+      <pubDate>Tue, 18 Aug 2020 15:26:27 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E9%81%8D%E5%8E%86string%E4%B8%AD%E7%9A%84%E5%8D%95%E8%AF%8D/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/236129/how-do-i-iterate-over-the-words-of-a-string&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>数组</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E6%95%B0%E7%BB%84/</link>
       <pubDate>Sun, 16 Aug 2020 09:32:23 +0800</pubDate>
@@ -405,6 +567,15 @@
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/090-%E5%AD%90%E9%9B%862/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/subsets-ii/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>指针和引用的区别</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Thu, 13 Aug 2020 13:43:22 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/57483/what-are-the-differences-between-a-pointer-variable-and-a-reference-variable-in&#34;&gt;链接&lt;/a&gt;&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -516,6 +687,24 @@
     </item>
     
     <item>
+      <title>007 C&#43;&#43;面向对象模型</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/007-c-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Sat, 01 Aug 2020 14:33:40 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/007-c-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%A8%A1%E5%9E%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>006 静态成员变量和静态成员函数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/006-%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Sat, 01 Aug 2020 11:45:13 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/006-%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E9%9D%99%E6%80%81%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>066 加一</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/066-%E5%8A%A0%E4%B8%80/</link>
       <pubDate>Thu, 30 Jul 2020 09:27:12 +0800</pubDate>
@@ -548,6 +737,15 @@
       <pubDate>Wed, 29 Jul 2020 09:39:49 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/064-%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>005 New和delete</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/005-new%E5%92%8Cdelete/</link>
+      <pubDate>Tue, 28 Jul 2020 21:38:11 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/005-new%E5%92%8Cdelete/</guid>
       <description></description>
     </item>
     
@@ -696,6 +894,15 @@
     </item>
     
     <item>
+      <title>004 对象的构造和析构</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/004-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/</link>
+      <pubDate>Tue, 07 Jul 2020 12:42:15 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/004-%E5%AF%B9%E8%B1%A1%E7%9A%84%E6%9E%84%E9%80%A0%E5%92%8C%E6%9E%90%E6%9E%84/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>034 在排序数组中查找元素的第一个和最后一个位置</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/034-%E5%9C%A8%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84%E4%B8%AD%E6%9F%A5%E6%89%BE%E5%85%83%E7%B4%A0%E7%9A%84%E7%AC%AC%E4%B8%80%E4%B8%AA%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E4%B8%AA%E4%BD%8D%E7%BD%AE/</link>
       <pubDate>Tue, 07 Jul 2020 09:40:06 +0800</pubDate>
@@ -737,6 +944,15 @@
       <pubDate>Wed, 01 Jul 2020 16:33:41 +0800</pubDate>
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/027-%E7%A7%BB%E9%99%A4%E5%85%83%E7%B4%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>003 类的封装</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/003-%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/</link>
+      <pubDate>Wed, 01 Jul 2020 13:00:10 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/003-%E7%B1%BB%E7%9A%84%E5%B0%81%E8%A3%85/</guid>
       <description></description>
     </item>
     
@@ -804,6 +1020,15 @@
     </item>
     
     <item>
+      <title>002-C&#43;&#43;对C语言的增强</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/06/002-c-%E5%AF%B9c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A2%9E%E5%BC%BA/</link>
+      <pubDate>Wed, 17 Jun 2020 23:27:46 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/06/002-c-%E5%AF%B9c%E8%AF%AD%E8%A8%80%E7%9A%84%E5%A2%9E%E5%BC%BA/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>006 Z字形变换</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/06/006-z%E5%AD%97%E5%BD%A2%E5%8F%98%E6%8D%A2/</link>
       <pubDate>Wed, 17 Jun 2020 17:57:07 +0800</pubDate>
@@ -831,11 +1056,11 @@
     </item>
     
     <item>
-      <title>动态参数配置</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/</link>
-      <pubDate>Sat, 30 May 2020 12:53:44 +0800</pubDate>
+      <title>001-类成员变量初始化</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/001-%E7%B1%BB%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/</link>
+      <pubDate>Fri, 29 May 2020 09:48:09 +0800</pubDate>
       
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%8A%A8%E6%80%81%E5%8F%82%E6%95%B0%E9%85%8D%E7%BD%AE/</guid>
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/001-%E7%B1%BB%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%88%9D%E5%A7%8B%E5%8C%96/</guid>
       <description></description>
     </item>
     
@@ -864,6 +1089,15 @@
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/001-%E4%B8%A4%E6%95%B0%E4%B9%8B%E5%92%8C/</guid>
       <description>&lt;p&gt;　　&lt;strong&gt;平生不识 TwoSum，刷尽 LeetCode 也枉然&lt;/strong&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ch01</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/ch01/</link>
+      <pubDate>Fri, 22 May 2020 07:38:49 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/ch01/</guid>
+      <description></description>
     </item>
     
     <item>

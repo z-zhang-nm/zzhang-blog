@@ -6,10 +6,46 @@
     <description>Recent content in 栈 on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 01 Sep 2020 09:56:20 +0800</lastBuildDate>
+    <lastBuildDate>Fri, 13 Nov 2020 09:36:20 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%A0%88/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>145 二叉树后序遍历</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/145-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Fri, 13 Nov 2020 09:36:20 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/145-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-tree-postorder-traversal/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>144 二叉树前序遍历</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/11/144-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Thu, 12 Nov 2020 18:05:21 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/11/144-%E4%BA%8C%E5%8F%89%E6%A0%91%E5%89%8D%E5%BA%8F%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-tree-preorder-traversal/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>103 二叉树锯齿层次遍历</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/10/103-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%94%AF%E9%BD%BF%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</link>
+      <pubDate>Thu, 29 Oct 2020 17:08:58 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/10/103-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%94%AF%E9%BD%BF%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>071 简化路径</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/071-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/</link>
+      <pubDate>Tue, 22 Sep 2020 12:29:37 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/071-%E7%AE%80%E5%8C%96%E8%B7%AF%E5%BE%84/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/simplify-path/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>020 有效的括号</title>
@@ -18,6 +54,33 @@
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/020-%E6%9C%89%E6%95%88%E7%9A%84%E6%8B%AC%E5%8F%B7/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/valid-parentheses/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>085 最大矩形</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/085-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</link>
+      <pubDate>Wed, 12 Aug 2020 17:28:16 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/085-%E6%9C%80%E5%A4%A7%E7%9F%A9%E5%BD%A2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/maximal-rectangle/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>084 柱状图中最大的矩形</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/08/084-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/</link>
+      <pubDate>Tue, 11 Aug 2020 10:00:37 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/084-%E6%9F%B1%E7%8A%B6%E5%9B%BE%E4%B8%AD%E6%9C%80%E5%A4%A7%E7%9A%84%E7%9F%A9%E5%BD%A2/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/largest-rectangle-in-histogram/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>042 接雨水</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/07/042-%E6%8E%A5%E9%9B%A8%E6%B0%B4/</link>
+      <pubDate>Tue, 14 Jul 2020 10:08:40 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/07/042-%E6%8E%A5%E9%9B%A8%E6%B0%B4/</guid>
+      <description></description>
     </item>
     
   </channel>

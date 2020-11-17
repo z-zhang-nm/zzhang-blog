@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>065 有效数字</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/065-%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97/</link>
+      <pubDate>Mon, 21 Sep 2020 11:40:28 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/09/065-%E6%9C%89%E6%95%88%E6%95%B0%E5%AD%97/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/valid-number/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>043 字符串相乘</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/09/043-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9B%B8%E4%B9%98/</link>
       <pubDate>Wed, 16 Sep 2020 14:36:08 +0800</pubDate>
@@ -45,6 +54,24 @@
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/08/012-%E6%95%B4%E6%95%B0%E8%BD%AC%E7%BD%97%E9%A9%AC%E6%95%B0%E5%AD%97/</guid>
       <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/integer-to-roman/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>008 字符串转换整数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/06/008-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0/</link>
+      <pubDate>Fri, 19 Jun 2020 09:24:10 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/06/008-%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%8D%A2%E6%95%B4%E6%95%B0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>整数翻转</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%95%B4%E6%95%B0%E7%BF%BB%E8%BD%AC/</link>
+      <pubDate>Thu, 18 Jun 2020 18:49:02 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/06/%E6%95%B4%E6%95%B0%E7%BF%BB%E8%BD%AC/</guid>
+      <description></description>
     </item>
     
   </channel>
