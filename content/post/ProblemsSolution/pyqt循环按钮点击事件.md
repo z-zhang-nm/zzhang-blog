@@ -4,7 +4,7 @@ date: 2020-07-06T20:14:02+08:00
 categories:
 - 问题解决
 tags:
-- pyqt
+- 拦路虎
 keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg

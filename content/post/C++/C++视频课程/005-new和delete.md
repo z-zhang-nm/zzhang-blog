@@ -5,7 +5,7 @@ categories:
 - C++
 - C++视频课程
 tags:
-- new与delete
+- C++基础
 keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg

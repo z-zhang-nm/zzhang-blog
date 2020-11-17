@@ -4,8 +4,7 @@ date: 2020-07-29T15:18:03+08:00
 categories:
 - C++
 tags:
-- override关键字
-- final关键字
+- C++基础
 keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg

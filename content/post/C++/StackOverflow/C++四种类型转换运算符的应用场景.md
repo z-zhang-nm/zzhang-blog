@@ -5,7 +5,7 @@ categories:
 - C++
 - StackOverflow
 tags:
-- 类型转换运算符
+- C++基础
 keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg

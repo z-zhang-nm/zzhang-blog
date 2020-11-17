@@ -5,7 +5,7 @@ categories:
 - C++
 - StackOverflow
 tags:
-- string
+- C++基础
 keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg
