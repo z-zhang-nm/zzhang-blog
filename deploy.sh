@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git pull
+
 if [[ $(git status -s) ]]
 then
     echo "The working directory is dirty. Now commit pending changes."
