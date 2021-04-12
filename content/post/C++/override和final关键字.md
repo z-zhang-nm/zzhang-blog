@@ -71,7 +71,7 @@ public:
 
 class B:A{
 public:
-    virtual void fun(double) override; //编译错误
+    void fun(double) override; //编译错误
 };
 ```
 ## 4 final关键字
