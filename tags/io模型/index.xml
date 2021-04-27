@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IO模型 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/io%E6%A8%A1%E5%9E%8B/</link>
+    <description>Recent content in IO模型 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 25 Apr 2021 16:30:42 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/io%E6%A8%A1%E5%9E%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>IO 同步 异步 阻塞 非阻塞</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/io-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-%E9%98%BB%E5%A1%9E-%E9%9D%9E%E9%98%BB%E5%A1%9E/</link>
+      <pubDate>Sun, 25 Apr 2021 16:30:42 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/io-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-%E9%98%BB%E5%A1%9E-%E9%9D%9E%E9%98%BB%E5%A1%9E/</guid>
+      <description>&lt;p&gt;　　Linux网络IO模型&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="　　本质上图可以看做多叉树的延伸">
+
+
+<meta property="og:description" content="　　本质上图可以看做多叉树的延伸">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图算法">
+<meta name="twitter:title" content="图算法">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="　　本质上图可以看做多叉树的延伸">
+<meta name="twitter:description" content="　　本质上图可以看做多叉树的延伸">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2021-04-27T09:34:18">
+  
+  
+    <meta property="article:modified_time" content="2021-04-27T09:34:18">
+  
+  
+  
+    
+      <meta property="article:section" content="Leetcode">
+    
+      <meta property="article:section" content="labuladong">
+    
+  
+  
+    
+      <meta property="article:tag" content="图">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>图算法</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      图算法
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-27T09:34:18&#43;08:00">
+        
+  四月 27, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/labuladong">labuladong</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>　　本质上图可以看做多叉树的延伸</p>
+<h1 id="1-图的结构">1. 图的结构</h1>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+<span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  <span style="color:#66d9ef">int</span> val;
+  vector<span style="color:#f92672">&lt;</span>Node <span style="color:#f92672">*&gt;</span> neighbors;
+  Node() {
+    val <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+    neighbors <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span>Node <span style="color:#f92672">*&gt;</span>();
+  }
+  Node(<span style="color:#66d9ef">int</span> _val) {
+    val <span style="color:#f92672">=</span> _val;
+    neighbors <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span>Node <span style="color:#f92672">*&gt;</span>();
+  }
+  Node(<span style="color:#66d9ef">int</span> _val, vector<span style="color:#f92672">&lt;</span>Node <span style="color:#f92672">*&gt;</span> _neighbors) {
+    val <span style="color:#f92672">=</span> _val;
+    neighbors <span style="color:#f92672">=</span> _neighbors;
+  }
+};
+</code></pre></div><p>这个结构和多叉树的结构几乎一样，上面的图表示方法是<strong>逻辑上的</strong>，一般会用<strong>邻接表和邻接矩阵</strong>来实现。</p>
+<p>比如下面这幅图（有向无权图）：
+<img src="https://z-zhang.gitee.io/zzhang-blog/Labuladong/%E5%9B%BE%E7%AE%97%E6%B3%95/1.jpg" alt="图"></p>
+<p>用邻接表和邻接矩阵表示如下：
+<img src="https://z-zhang.gitee.io/zzhang-blog/Labuladong/%E5%9B%BE%E7%AE%97%E6%B3%95/2.jpeg" alt="邻接表和邻接矩阵"></p>
+<ol>
+<li>邻接表把每个节点<code>x</code>的邻居存到一个列表里，然后把<code>x</code>和这个列表关联起来就可以通过一个节点<code>x</code>找到它的所有相邻节点</li>
+<li>邻接矩阵则是一个二维布尔数组<code>matrix</code>，如果节点<code>x</code>和<code>y</code>是相连的，那么就把<code>matrix[x][y]</code>设为true，如果想找节点<code>x</code>的邻居，扫一圈<code>matrix[x][..]</code>就行了</li>
+</ol>
+<p>邻接表相比邻接矩阵占用空间少，但是邻接矩阵可以快速判断两个节点是否相邻。</p>
+<blockquote>
+<p>有向加权图：邻接表不仅仅存储某个节点<code>x</code>的所有邻居节点，还存储<code>x</code>到每个邻居的权重；邻接矩阵<code>matrix[x][y]</code>不再是布尔值，而是一个int值，0 表示没有连接，其他值表示权重</p>
+</blockquote>
+<blockquote>
+<p>无向图：所谓的「无向」，是不是等同于「双向」？邻接矩阵把<code>matrix[x][y]``和</code>matrix[y][x]`都变成true，邻接表也是类似的操作</p>
+</blockquote>
+<h1 id="2-图的遍历">2. 图的遍历</h1>
+<p>参考多叉树，多叉树的遍历框架如下：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">traverse</span>(TreeNode <span style="color:#f92672">*</span>root) {
+  <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> <span style="color:#66d9ef">nullptr</span>) <span style="color:#66d9ef">return</span>;
+  <span style="color:#66d9ef">for</span> (TreeNode <span style="color:#f92672">*</span>child : root<span style="color:#f92672">-&gt;</span>children) {
+    traverse(child);
+  }
+}
+</code></pre></div><p>图和树最大的区别是图可能包含<strong>环</strong>，即从某一节点出发，遍历过程可能回到这个节点，因此需要一个<code>visited</code>进行辅助。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span> visited;
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">traverse</span>(Node <span style="color:#f92672">*</span>node, <span style="color:#66d9ef">int</span> s) {
+  <span style="color:#66d9ef">if</span> (visited[s]) <span style="color:#66d9ef">return</span>;
+  visited[s] <span style="color:#f92672">=</span> true;
+  <span style="color:#66d9ef">for</span> (Node <span style="color:#f92672">*</span>neighbor : node<span style="color:#f92672">-&gt;</span>neighbors) {
+    traverse(neighbor, neighbor<span style="color:#f92672">-&gt;</span>val);
+  }
+  visited[s] <span style="color:#f92672">=</span> false;
+}
+</code></pre></div><p>当<strong>有向图</strong>有<strong>环</strong>的时候才需要<code>visited</code>。</p>
+<h1 id="3-实例">3. 实例</h1>
+<h2 id="31-所有可能的路径">3.1 所有可能的路径</h2>
+<blockquote>
+<p>给定一个有<code>n</code>个结点的有向无环图（邻接矩阵形式），找到所有从<code>0</code>到<code>n-1</code>的路径并输出（不要求按顺序）</p>
+</blockquote>
+<p>以<code>0</code>为起点遍历图，同时记录遍历过的路径，当遍历到终点将路径保存，且图是有向无环的，不需要<code>visited</code>辅助，直接套用图的遍历框架即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> allPathsSourceTarget(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> graph) {
+    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ret;
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> path;
+    helper(graph, <span style="color:#ae81ff">0</span>, ret, path);
+    <span style="color:#66d9ef">return</span> ret;
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">helper</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> graph, <span style="color:#66d9ef">int</span> s, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ret, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>path) {
+    path.push_back(s);
+    <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">==</span> graph.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) {
+        ret.push_back(path);
+        path.pop_back(); <span style="color:#75715e">// 这里也需要pop_back
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span>;
+    }
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> v : graph[s]) {
+        helper(graph, v, ret, path);
+    }
+    path.pop_back();
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%9B%BE/">图</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B7%B1%E5%85%A5/" data-tooltip="后序遍历深入">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" data-tooltip="二叉搜索树">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B7%B1%E5%85%A5/" data-tooltip="后序遍历深入">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/" data-tooltip="二叉搜索树">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

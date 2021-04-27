@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="">
+<meta name="description" content="zzhang blog">
+
+
+<meta property="og:description" content="zzhang blog">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TCP/IP">
+<meta name="twitter:title" content="TCP/IP">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="zzhang blog">
+<meta name="twitter:description" content="zzhang blog">
+<meta property="og:locale" content="zh-cn">
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>TCP/IP</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip/index.xml">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="2">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="2">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+        
+
+      
+      <div id="main" data-behavior="2"
+        class="
+               hasCoverMetaIn
+               ">
+        
+          <section class="postShorten-group main-content-wrap">
+            
+            
+              
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B0%81%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8C%85/">
+          封包与解包
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-09T10:44:14&#43;08:00">
+        
+  四月 9, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c">计算机网络</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip">TCP/IP</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <p>　　TCP是一个流协议，即传输的是没有界限的一串数据，而由于<a href="https://segmentfault.com/a/1190000022929052">Nagle算法</a>可能会造成发送端的粘包或接收端接收不及时可能会造成的接收端的粘包，因此需要对数据包进行封包和拆包。</p>
+      
+      <p>
+        <a href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B0%81%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8C%85/" class="postShorten-excerpt_link link">阅读全文</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+            
+              
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%94%B9%E5%8F%98socket%E9%BB%98%E8%AE%A4%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A4%A7%E5%B0%8F/">
+          改变socket默认缓冲区大小
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-08T10:26:34&#43;08:00">
+        
+  四月 8, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c">计算机网络</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip">TCP/IP</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <p>　　TCP套接字有一个发送缓冲区和一个接收缓冲区，UDP套接字有一个接收缓冲区；使用SO_RCVBUF和SO_SNDBUF这两个套接字选项可以改变默认缓冲区大小。</p>
+      
+      <p>
+        <a href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%94%B9%E5%8F%98socket%E9%BB%98%E8%AE%A4%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A4%A7%E5%B0%8F/" class="postShorten-excerpt_link link">阅读全文</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+            
+              
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/tcp%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4/">
+          TCP头部设置发送和接受超时时间
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-07T18:14:41&#43;08:00">
+        
+  四月 7, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c">计算机网络</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip">TCP/IP</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <p>　　设置socket的发送和接收超时时间。</p>
+      
+      <p>
+        <a href="https://z-zhang.gitee.io/zzhang-blog/2021/04/tcp%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4/" class="postShorten-excerpt_link link">阅读全文</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+            
+              
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E7%AE%80%E5%8D%95tcp_server/">
+          简单TCP_server
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-07T11:55:27&#43;08:00">
+        
+  四月 7, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c">计算机网络</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip">TCP/IP</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      
+        <p>　　用TCP/IP协议编写一个简单服务器、客户端，服务器监听本机端口，若收到连接请求，将接收请求并接收客户端消息。</p>
+      
+      <p>
+        <a href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E7%AE%80%E5%8D%95tcp_server/" class="postShorten-excerpt_link link">阅读全文</a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+            
+            
+
+          </section>
+        
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+
+
+    
+  </body>
+</html>
+

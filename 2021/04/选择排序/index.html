@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="　　最简单的排序、时间复杂度高、不稳定">
+
+
+<meta property="og:description" content="　　最简单的排序、时间复杂度高、不稳定">
+<meta property="og:type" content="article">
+<meta property="og:title" content="选择排序">
+<meta name="twitter:title" content="选择排序">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="　　最简单的排序、时间复杂度高、不稳定">
+<meta name="twitter:description" content="　　最简单的排序、时间复杂度高、不稳定">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2021-04-10T10:24:08">
+  
+  
+    <meta property="article:modified_time" content="2021-04-10T10:24:08">
+  
+  
+  
+    
+      <meta property="article:section" content="算法">
+    
+      <meta property="article:section" content="排序算法">
+    
+  
+  
+    
+      <meta property="article:tag" content="选择排序">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>选择排序</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      选择排序
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-10T10:24:08&#43;08:00">
+        
+  四月 10, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e7%ae%97%e6%b3%95">算法</a>, 
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/%e6%8e%92%e5%ba%8f%e7%ae%97%e6%b3%95">排序算法</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>　　最简单的排序、时间复杂度高、不稳定</p>
+<h1 id="算法思想">算法思想</h1>
+<p>不断过滤数组，每次过滤找到最小数所在的位置，与未排序部分的第一个数交换即可。</p>
+<h1 id="算法题解题过程">算法题解题过程</h1>
+<ol>
+<li>由简单到复杂
+<ol>
+<li>写一个部分就进行验证</li>
+<li>多打印中间结果</li>
+</ol>
+</li>
+<li>先局部后整体
+<ol>
+<li>没思路时先写细分部分</li>
+</ol>
+</li>
+<li>先粗糙后精细
+<ol>
+<li>变量命名有意义</li>
+<li>语句合并</li>
+<li>边界处理</li>
+</ol>
+</li>
+</ol>
+<h1 id="算法实现">算法实现</h1>
+<blockquote>
+<p>首先实现过滤数组找最小值所在位置</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selectionSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">int</span> min_pos <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); <span style="color:#f92672">++</span>i) {
+    <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&lt;</span> nums[min_pos]) {
+      min_pos <span style="color:#f92672">=</span> i;
+    }
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;min pos: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> min_pos <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+</code></pre></div><blockquote>
+<p>然后写交换数组中两个数的函数</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+  <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> nums[i];
+  nums[i] <span style="color:#f92672">=</span> nums[j];
+  nums[j] <span style="color:#f92672">=</span> temp;
+}
+</code></pre></div><blockquote>
+<p>至此已过滤一遍，找到整个数组最小的数并放在数组第一个位置，接下来需要剔除第一个位置的数，在剩下的数组中找第二小的数放在数组第二个位置</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+  <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> nums[i];
+  nums[i] <span style="color:#f92672">=</span> nums[j];
+  nums[j] <span style="color:#f92672">=</span> temp;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selectionSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> min_pos <span style="color:#f92672">=</span> i;
+    <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> nums.size(); j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (nums[j] <span style="color:#f92672">&lt;</span> nums[min_pos]) {
+        min_pos <span style="color:#f92672">=</span> j;
+      }
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;min pos: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> min_pos <span style="color:#f92672">&lt;&lt;</span> endl;
+    swap(nums, i, min_pos);
+  }
+}
+</code></pre></div><h1 id="复杂度分析">复杂度分析</h1>
+<p>第一次循环运行N-1次，第二次循环运行N-2次&hellip;最终为(N-1)+(N-2)+&hellip;+1=N*(N-1)/2，因此时间复杂度为O(N^2)。</p>
+<p>空间复杂度为O(1)。</p>
+<p>最好和最坏的情况下时间复杂度都是O(N^2)。</p>
+<p>算法不稳定，即排序后之前数组中两个相等的数的前后相对顺序可能变化，考虑<code>1,1,0,3,2</code>的情况，第一次交换把第一个1换到数组第三个位置，第二次交换数组没有变化，这样数组中两个1的前后顺序就发生了变化。</p>
+<h1 id="优化">优化</h1>
+<blockquote>
+<p>每次过滤找到最大值和最小值位置，分别与最后一个位置和第一个位置的值交换</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+  <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> nums[i];
+  nums[i] <span style="color:#f92672">=</span> nums[j];
+  nums[j] <span style="color:#f92672">=</span> temp;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printNums</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>each : nums) {
+    cout <span style="color:#f92672">&lt;&lt;</span> each <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selectionSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">int</span> min_pos <span style="color:#f92672">=</span> i, max_pos <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+    <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">-</span> i; j<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (nums[j] <span style="color:#f92672">&lt;</span> nums[min_pos]) {
+        min_pos <span style="color:#f92672">=</span> j;
+      }
+      <span style="color:#66d9ef">if</span> (nums[j] <span style="color:#f92672">&gt;</span> nums[max_pos]) {
+        max_pos <span style="color:#f92672">=</span> j;
+      }
+    }
+    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;min pos: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> min_pos <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; max pos: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> max_pos <span style="color:#f92672">&lt;&lt;</span> endl;
+    <span style="color:#75715e">// 考虑修正的情况，最大值在最小位置，最小值在最大位置
+</span><span style="color:#75715e"></span>    swap(nums, i, min_pos);
+    <span style="color:#66d9ef">if</span> (max_pos <span style="color:#f92672">==</span> i) max_pos <span style="color:#f92672">=</span> min_pos;
+    swap(nums, nums.size() <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, max_pos);
+    printNums(nums);
+  }
+}
+</code></pre></div><blockquote>
+<p>用while实现</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">swap</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+  <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> nums[i];
+  nums[i] <span style="color:#f92672">=</span> nums[j];
+  nums[j] <span style="color:#f92672">=</span> temp;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printNums</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>each : nums) {
+    cout <span style="color:#f92672">&lt;&lt;</span> each <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34; &#34;</span>;
+  }
+  cout <span style="color:#f92672">&lt;&lt;</span> endl;
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">selectionSort</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, right <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">while</span> (left <span style="color:#f92672">&lt;</span> right) {
+    <span style="color:#66d9ef">int</span> min_pos <span style="color:#f92672">=</span> left, max_pos <span style="color:#f92672">=</span> right;
+    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left; i <span style="color:#f92672">&lt;=</span> right; i<span style="color:#f92672">++</span>) {
+      <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&lt;</span> nums[min_pos]) min_pos <span style="color:#f92672">=</span> i;
+      <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&gt;</span> nums[max_pos]) max_pos <span style="color:#f92672">=</span> i;
+    }
+    <span style="color:#75715e">// 考虑修正的情况，最大值在最小位置，最小值在最大位置
+</span><span style="color:#75715e"></span>    swap(nums[max_pos], nums[right]);
+    <span style="color:#66d9ef">if</span> (min_pos <span style="color:#f92672">==</span> right) min_pos <span style="color:#f92672">=</span> max_pos;
+    swap(nums[min_pos], nums[left]);
+    l<span style="color:#f92672">=</span>eft<span style="color:#f92672">++</span>;
+    right<span style="color:#f92672">--</span>;
+  }
+}
+</code></pre></div><h1 id="对数器">对数器</h1>
+<blockquote>
+<p>用来验证自己写的排序算法是否与系统自带的排序算法产生的结果相同。</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generateRandomArray</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> range_left, <span style="color:#66d9ef">int</span> range_right) {
+  assert(range_left <span style="color:#f92672">&lt;=</span> range_right);
+
+  srand(time(NULL));
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+    nums[i] <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> (range_right <span style="color:#f92672">-</span> range_left <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> range_left;
+  }
+}
+
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">checkSort</span>() {
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums(<span style="color:#ae81ff">10000</span>);
+  generateRandomArray(nums, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">10000</span>);
+  sort(nums.begin(), nums.end());
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums_copy(nums);
+  selectionSort(nums_copy);
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+    <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">!=</span> nums_copy[i]) {
+      cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Error !&#34;</span> <span style="color:#f92672">&lt;&lt;</span> endl;
+      <span style="color:#66d9ef">return</span>;
+    }
+  }
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">选择排序</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-tooltip="冒泡排序">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/new%E4%B8%8Edelete%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-tooltip="New与delete的实现方式">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" data-tooltip="冒泡排序">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/new%E4%B8%8Edelete%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/" data-tooltip="New与delete的实现方式">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

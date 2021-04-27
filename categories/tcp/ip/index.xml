@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TCP/IP on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip/</link>
+    <description>Recent content in TCP/IP on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/tcp/ip/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>封包与解包</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B0%81%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8C%85/</link>
+      <pubDate>Fri, 09 Apr 2021 10:44:14 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B0%81%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8C%85/</guid>
+      <description>&lt;p&gt;　　TCP是一个流协议，即传输的是没有界限的一串数据，而由于&lt;a href=&#34;https://segmentfault.com/a/1190000022929052&#34;&gt;Nagle算法&lt;/a&gt;可能会造成发送端的粘包或接收端接收不及时可能会造成的接收端的粘包，因此需要对数据包进行封包和拆包。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>改变socket默认缓冲区大小</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%94%B9%E5%8F%98socket%E9%BB%98%E8%AE%A4%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A4%A7%E5%B0%8F/</link>
+      <pubDate>Thu, 08 Apr 2021 10:26:34 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%94%B9%E5%8F%98socket%E9%BB%98%E8%AE%A4%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A4%A7%E5%B0%8F/</guid>
+      <description>&lt;p&gt;　　TCP套接字有一个发送缓冲区和一个接收缓冲区，UDP套接字有一个接收缓冲区；使用SO_RCVBUF和SO_SNDBUF这两个套接字选项可以改变默认缓冲区大小。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>TCP头部设置发送和接受超时时间</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/tcp%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4/</link>
+      <pubDate>Wed, 07 Apr 2021 18:14:41 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/tcp%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4/</guid>
+      <description>&lt;p&gt;　　设置socket的发送和接收超时时间。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>简单TCP_server</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E7%AE%80%E5%8D%95tcp_server/</link>
+      <pubDate>Wed, 07 Apr 2021 11:55:27 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E7%AE%80%E5%8D%95tcp_server/</guid>
+      <description>&lt;p&gt;　　用TCP/IP协议编写一个简单服务器、客户端，服务器监听本机端口，若收到连接请求，将接收请求并接收客户端消息。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

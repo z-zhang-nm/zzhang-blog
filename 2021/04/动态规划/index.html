@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="　　利用历史记录来避免重复计算">
+
+
+<meta property="og:description" content="　　利用历史记录来避免重复计算">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划">
+<meta name="twitter:title" content="动态规划">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="　　利用历史记录来避免重复计算">
+<meta name="twitter:description" content="　　利用历史记录来避免重复计算">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2021-04-15T09:57:40">
+  
+  
+    <meta property="article:modified_time" content="2021-04-15T09:57:40">
+  
+  
+  
+    
+      <meta property="article:section" content="Leetcode">
+    
+  
+  
+    
+      <meta property="article:tag" content="动态规划">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>动态规划</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      动态规划
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2021-04-15T09:57:40&#43;08:00">
+        
+  四月 15, 2021
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>　　利用历史记录来避免重复计算</p>
+<h1 id="1-三大步骤">1 三大步骤</h1>
+<ol>
+<li>定义<strong>数组元素的含义</strong>，动态规划一般会用一维数组或二维数组来保存历史记录，所以需要规定每个数组元素的含义</li>
+<li>找到<strong>数组元素之间的关系</strong>，一般在更新<code>dp[n]</code>时需要利用<code>dp[n-1],...,dp[1]</code>的信息，即利用历史记录推断新元素的值，因此要找出数组元素之间的关系，这一般是最难的一步</li>
+<li>找出<strong>初始值和边界条件</strong>，有了初始值、边界条件和数组元素的关系，就可以一步步计算<code>dp[n]</code>的值了</li>
+</ol>
+<h1 id="2-实例">2 实例</h1>
+<h2 id="21-一维dp">2.1 一维DP</h2>
+<h3 id="211-实例一">2.1.1 实例一</h3>
+<blockquote>
+<p>跳台阶：假设一次可以跳一级台阶或两级台阶，求出跳上一个N级台阶共有几种跳法？</p>
+</blockquote>
+<ol>
+<li>数组含义：跳上一个<code>i</code>级台阶共有<code>dp[i]</code>种跳法</li>
+<li>数组元素关系：由于一次可以跳一级或两级台阶，那么到达<code>i</code>级台阶可以从<code>i-1</code>级跳上来或从<code>i-2</code>级跳上来，因此<code>dp[i] = dp[i-1]+dp[i-2]</code></li>
+<li>初始值和边界条件：<code>dp[1] = dp[0]+dp[-1]</code>，<code>dp[-1]</code>即为边界条件，因此<code>dp[1]</code>的值需要直接指定，容易得出<code>dp[1] = 1</code>，同样<code>dp[0] = 0</code></li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">step</span>(<span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> n;
+  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+  dp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>i) {
+    dp[i] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>];
+  }
+  <span style="color:#66d9ef">return</span> dp[n];
+}
+</code></pre></div><blockquote>
+<p>上面代码是正确的吗？<br>
+显然不是，因为<code>dp[2] = dp[1]+dp[0] = 1</code>，明显是错误的，这是因为<code>dp[0]</code>的特殊性导致<code>dp[2]</code>不能通过公式计算，实际上<code>dp[2]</code>也是一个初始值，即我们需要<strong>指定不能由公式计算的全部初值</strong></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">step</span>(<span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> n; <span style="color:#75715e">// 区别1
+</span><span style="color:#75715e"></span>  vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+  dp[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  dp[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>i) { <span style="color:#75715e">// 区别2
+</span><span style="color:#75715e"></span>    dp[i] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">2</span>];
+  }
+  <span style="color:#66d9ef">return</span> dp[n];
+}
+</code></pre></div><h2 id="22-二维dp">2.2 二维DP</h2>
+<h3 id="221-实例一">2.2.1 实例一</h3>
+<blockquote>
+<p>一个机器人位于<code>m × n</code>的网格的左上角，每次只能向右或向下移动一格，问机器人要到达右下角的格子有几种走法？</p>
+</blockquote>
+<ol>
+<li>数组含义：到达<code>(i,j)</code>位置共有<code>dp[i][j]</code>种路径</li>
+<li>数组元素关系：由于机器人只能向右或向下移动，所以到达<code>(i,j)</code>位置只能从<code>(i-1,j)</code>或<code>(i,j-1)</code>两个位置过来，因此<code>dp[i][j] = dp[i-1][j]+dp[i][j-1]</code></li>
+<li>初始值和边界条件：由于<code>i,j</code>中有一个为0时就不能使用公式计算，这就是边界条件，需要我们指定这些边界条件的初值
+<ol>
+<li><code>dp[0][1...n-1] = 1</code>，因为只能一直向右移动才能到达这些位置</li>
+<li><code>dp[1...n-1][0] = 1</code>，因为只能一直向下走才能到达这些位置</li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">uniquePaths</span>(<span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n) {
+  <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(m<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>));
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+    dp[<span style="color:#ae81ff">0</span>][i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  }
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) {
+    dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+  }
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+    <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>j) {
+      dp[i][j] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">+</span> dp[i][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+    }
+  }
+  <span style="color:#66d9ef">return</span> dp[m<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+}
+</code></pre></div><blockquote>
+<p>优化</p>
+<p>试想一下，当填充第三行的值的时候，需要用到第一行的值吗？不需要，即当更新当前行的时候，只需要用到当前行的前一行，且在更新当前行某一列值的时候，只需要用到当前位置未更新的值（前一行当前列<code>dp[i-1][j]</code>）和前一个位置已更新的值（当前行前一列<code>dp[i][j-1]</code>）的值。</p>
+<p><strong>用一个一维数组保存记录就可以了！</strong></p>
+<p>相应的状态转移方程变为<code>dp[i]=dp[i]+dp[i-1]</code>，等号右边的<code>dp[i]</code>就代表当前位置未更新的值<code>dp[i-1][j]</code>，<code>dp[i-1]</code>就代表前一个位置已更新的值<code>dp[i][j-1]</code></p>
+<p>优化后空间复杂度由<code>O(m*n)</code>变为<code>O(n)</code></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">uniquePaths</span>(<span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n) {
+    <span style="color:#66d9ef">if</span> (m <span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> n <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>j) {
+        dp[j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+    }
+    <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+        dp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+        <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>j) {
+            dp[j] <span style="color:#f92672">=</span> dp[j] <span style="color:#f92672">+</span> dp[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+        }
+    }
+    <span style="color:#66d9ef">return</span> dp[n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+}
+</code></pre></div><h3 id="222-实例二">2.2.2 实例二</h3>
+<blockquote>
+<p>给定一个包含非负整数的<code>m x n</code>网格，每次只能向右或向下走一步，请找出一条从左上角到右下角的路径，使得路径上的数字总和为最小</p>
+</blockquote>
+<ol>
+<li>数组含义：到达<code>(i,j)</code>位置的最小路径和为<code>dp[i][j]</code></li>
+<li>数组元素关系：由于每次只能向右或向下移动，所以到达<code>(i,j)</code>位置只有从<code>(i-1,j)</code>或<code>(i,j-1)</code>两个位置过来，取两者数值较小的即可，因此<code>dp[i][j] = min(dp[i-1][j],dp[i][j-1]) + nums[i][j]</code></li>
+<li>初始值和边界条件：由于<code>i,j</code>中有一个为0时就不能使用公式计算，这就是边界条件，需要我们指定这些边界条件的初值
+<ol>
+<li><code>dp[0][0] = nums[0][0]</code></li>
+<li><code>dp[0][i] = dp[0][i-1]+nums[0][i] 1 &lt;= i &lt; m</code></li>
+<li><code>dp[j][0] = dp[j-1][0]+nums[j][0] 1 &lt;= j &lt; n</code></li>
+</ol>
+</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">uniquePaths</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
+  <span style="color:#66d9ef">if</span> (nums.size() <span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> nums[<span style="color:#ae81ff">0</span>].size() <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+  <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> nums.size(), n <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>].size();
+  vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(m<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>));
+  dp[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>];
+  <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>j) {
+    dp[<span style="color:#ae81ff">0</span>][j] <span style="color:#f92672">=</span> dp[<span style="color:#ae81ff">0</span>][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[<span style="color:#ae81ff">0</span>][j];
+  }
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+    dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> nums[i][<span style="color:#ae81ff">0</span>];
+  }
+  <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; <span style="color:#f92672">++</span>i) {
+    <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>j) {
+      dp[i][j] <span style="color:#f92672">=</span> min(dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j], dp[i][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) <span style="color:#f92672">+</span> nums[i][j];
+    }
+  }
+  <span style="color:#66d9ef">return</span> dp[m<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+}
+</code></pre></div><h3 id="223-实例三">2.2.3 实例三</h3>
+<blockquote>
+<p>给定两个单词 <code>word1</code> 和 <code>word2</code>，计算出将 <code>word1</code> 转换成 <code>word2</code> 所使用的最少操作数<br>
+你可以对一个单词进行如下三种操作：<br>
+插入一个字符 删除一个字符 替换一个字符</p>
+</blockquote>
+<ol>
+<li>数组含义：若<code>word1</code>长度为<code>i</code>，<code>word2</code>长度为<code>j</code>，将<code>word1</code>转化为<code>word2</code>所用的最少操作次数为<code>dp[i][j]</code></li>
+<li>数组元素关系：
+<ol>
+<li><code>word1[i] == word2[j]</code>，说明两个单词已经相等，不需要任何操作，即<code>dp[i][j] = dp[i-1][j-1]</code></li>
+<li><code>word1[i] ！= word2[j]</code>，分别对应如下操作：
+<ol>
+<li>替换<code>word1[i]</code>：<code>dp[i][j] = dp[i-1][j-1]+1</code></li>
+<li><code>word1[i]</code>后面插入<code>word2[j]</code>：<code>dp[i][j] = dp[i][j-1]+1</code></li>
+<li>删除<code>word1[i]</code>：<code>dp[i][j] = dp[i-1][j]+1</code></li>
+<li>取三种情况最小值加一即可</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>初始值和边界条件：在<code>dp[i][j]</code>中，如果<code>i</code>或<code>j</code>为0，就不能使用公式，因此需要首先计算这些边界条件的值：
+<ol>
+<li><code>dp[0][i] =  i</code>，即直接插入<code>i</code>个字符</li>
+<li><code>dp[i][0] = i</code>，即直接删除<code>i</code>个字符</li>
+</ol>
+</li>
+</ol>
+<blockquote>
+<p>举个例子比较好理解</p>
+<p>若<code>word1</code>为<code>abb</code>，<code>word2</code>为<code>ac</code>，要求<code>dp[3][2] </code>，由于<code>word1[2] != word2[1]</code>，那么在<code>word1</code>后插入一个<code>c</code>，就变为<code>word1</code>为<code>abbc</code>，<code>word2</code>为<code>ac</code>，由于<code>word1[3] == word2[1]</code>，那么问题缩小为<code>dp[3][1]</code>，即<code>dp[3][2]=dp[3][1]+1</code></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minDIs</span>(string word1, string word2) {
+    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> word1.size(), n <span style="color:#f92672">=</span> word2.size();
+    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp[m<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>][n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>];
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m; <span style="color:#f92672">++</span>i) {
+        dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> i;
+    }
+    <span style="color:#66d9ef">for</span>(size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>j) {
+        dp[<span style="color:#ae81ff">0</span>][j] <span style="color:#f92672">=</span> j;
+    }
+    <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m; <span style="color:#f92672">++</span>i) {
+        <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>j) {
+            <span style="color:#66d9ef">if</span> (word1[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> word2[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) {
+                dp[i][j] <span style="color:#f92672">=</span> dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>];
+            } <span style="color:#66d9ef">else</span> {
+                dp[i][j] <span style="color:#f92672">=</span> min(min(dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j], dp[i][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]), dp[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>][j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>])) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+            }
+        }
+    }
+    <span style="color:#66d9ef">return</span> dp[m][n];
+}
+</code></pre></div><blockquote>
+<p>优化</p>
+<p>例2.2.1的<code>dp[i][j]</code>只依赖于<code>dp[i-1][j]</code>和<code>dp[i][j-1]</code>，而本例的<code>dp[i][j]</code>还依赖于<code>dp[i-1][j-1]</code>，而计算<code>dp[i][j]</code>时这个值已经被<code>dp[i][j-1]</code>覆盖，这种情况下需要一个额外的变量pre来保存<code>dp[i-1][j-1]</code>的值，那么状态转移方程就变为<code>dp[i] = min(dp[i-1], dp[i], pre) +１</code></p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minDis</span>(string word1, string word2) {
+    <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> word1.length(), n <span style="color:#f92672">=</span> word2.length();
+    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+    <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>i) {
+        dp[i] <span style="color:#f92672">=</span> i;
+    }
+    <span style="color:#66d9ef">for</span> (size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> m; <span style="color:#f92672">++</span>i) {
+        <span style="color:#66d9ef">int</span> temp <span style="color:#f92672">=</span> dp[<span style="color:#ae81ff">0</span>];
+        dp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> i;
+        <span style="color:#66d9ef">for</span> (size_t j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;=</span> n; <span style="color:#f92672">++</span>j) {
+            <span style="color:#66d9ef">int</span> pre <span style="color:#f92672">=</span> temp;
+            temp <span style="color:#f92672">=</span> dp[j];
+            <span style="color:#66d9ef">if</span> (word1[i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> word2[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>]) {
+                dp[j] <span style="color:#f92672">=</span> pre;
+            } <span style="color:#66d9ef">else</span> {
+                dp[j] <span style="color:#f92672">=</span> min(min(dp[j<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>], dp[j], pre)) <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+            }
+        }
+    }
+    <span style="color:#66d9ef">return</span> dp[n];
+}
+</code></pre></div><h1 id="参考链接">参考链接</h1>
+<ol>
+<li><a href="https://zhuanlan.zhihu.com/p/91582909">告别动态规划，连刷 40 道题，我总结了这些套路，看不懂你打我</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/356804629">肝了好多天-动态规划十连-超细腻解析</a></li>
+</ol>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">动态规划</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%AF%BC%E8%A8%80/" data-tooltip="导言">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/" data-tooltip="静态绑定和动态绑定">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%AF%BC%E8%A8%80/" data-tooltip="导言">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/" data-tooltip="静态绑定和动态绑定">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

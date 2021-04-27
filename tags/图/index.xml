@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>图 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/%E5%9B%BE/</link>
+    <description>Recent content in 图 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 27 Apr 2021 09:34:18 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%9B%BE/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>图算法</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Tue, 27 Apr 2021 09:34:18 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/</guid>
+      <description>&lt;p&gt;　　本质上图可以看做多叉树的延伸&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

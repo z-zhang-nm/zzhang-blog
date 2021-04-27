@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>const类成员函数 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/const%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</link>
+    <description>Recent content in const类成员函数 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 12 Apr 2021 16:30:02 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/const%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Const类成员函数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/const%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Mon, 12 Apr 2021 16:30:02 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/const%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;p&gt;　　只有被声明为const的成员函数才能被const类对象调用&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

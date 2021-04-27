@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>选择排序 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+    <description>Recent content in 选择排序 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sat, 10 Apr 2021 10:24:08 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>选择排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 10:24:08 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　最简单的排序、时间复杂度高、不稳定&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

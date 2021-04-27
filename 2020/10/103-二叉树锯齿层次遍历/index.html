@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="题目链接">
+
+
+<meta property="og:description" content="题目链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="103 二叉树锯齿层次遍历">
+<meta name="twitter:title" content="103 二叉树锯齿层次遍历">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/10/103-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%94%AF%E9%BD%BF%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/10/103-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%94%AF%E9%BD%BF%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="题目链接">
+<meta name="twitter:description" content="题目链接">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-10-29T17:08:58">
+  
+  
+    <meta property="article:modified_time" content="2020-10-29T17:08:58">
+  
+  
+  
+    
+      <meta property="article:section" content="Leetcode">
+    
+  
+  
+    
+      <meta property="article:tag" content="树">
+    
+      <meta property="article:tag" content="栈">
+    
+      <meta property="article:tag" content="广度优先搜索">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>103 二叉树锯齿层次遍历</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/103-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%94%AF%E9%BD%BF%E5%B1%82%E6%AC%A1%E9%81%8D%E5%8E%86/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      103 二叉树锯齿层次遍历
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-10-29T17:08:58&#43;08:00">
+        
+  十月 29, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/leetcode">Leetcode</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><a href="https://leetcode-cn.com/problems/binary-tree-zigzag-level-order-traversal/">题目链接</a></p>
+<h2 id="题目">题目</h2>
+<p>　　给定一个二叉树，返回其节点值的锯齿形层次遍历。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p>
+<p>　　示例：</p>
+<pre><code>给定二叉树 [3,9,20,null,null,15,7],
+    3
+   / \
+  9  20
+    /  \
+   15   7
+返回锯齿形层次遍历如下：
+[
+  [3],
+  [20,9],
+  [15,7]
+]
+</code></pre><h2 id="题解一">题解一</h2>
+<p>　　首先层次遍历得到每层的结点，然后对奇数行的结点进行翻转。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#f92672">*</span> root) {
+    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ret;
+    helper(root, <span style="color:#ae81ff">0</span>, ret);
+    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> ret.size(); <span style="color:#f92672">++</span>i){
+        <span style="color:#66d9ef">if</span>(i<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) reverse(ret[i].begin(), ret[i].end());
+    }
+    <span style="color:#66d9ef">return</span> ret;
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">helper</span>(TreeNode <span style="color:#f92672">*</span>root, <span style="color:#66d9ef">int</span> level, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ret){
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">if</span>(ret.size() <span style="color:#f92672">==</span> level) ret.push_back({});
+    ret[level].push_back(root<span style="color:#f92672">-&gt;</span>val);
+    helper(root<span style="color:#f92672">-&gt;</span>left, level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, ret);
+    helper(root<span style="color:#f92672">-&gt;</span>right, level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, ret);
+}
+</code></pre></div><h2 id="题解二">题解二</h2>
+<p>　　若level为奇数，将结点值插入开头，否则放入尾部。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#f92672">*</span> root) {
+    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ret;
+    helper(root, <span style="color:#ae81ff">0</span>, ret);
+    <span style="color:#66d9ef">return</span> ret;
+}
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">helper</span>(TreeNode <span style="color:#f92672">*</span>root, <span style="color:#66d9ef">int</span> level, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>ret){
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span>;
+    <span style="color:#66d9ef">if</span>(ret.size() <span style="color:#f92672">==</span> level) ret.push_back({});
+    <span style="color:#66d9ef">if</span>(level<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) ret[level].push_back(root<span style="color:#f92672">-&gt;</span>val);
+    <span style="color:#66d9ef">else</span> ret[level].insert(ret[level].begin(), root<span style="color:#f92672">-&gt;</span>val);
+    helper(root<span style="color:#f92672">-&gt;</span>left, level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, ret);
+    helper(root<span style="color:#f92672">-&gt;</span>right, level<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>, ret);
+}
+</code></pre></div><h2 id="题解三">题解三</h2>
+<p>　　也可以用迭代的方法，由于每层的结点数是知道的，就是队列的元素个数，所以可以直接初始化数组的大小，每次用标志位leftToRight记录存储方向。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#f92672">*</span> root) {
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> {};
+    queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> que;
+    que.push(root);
+    TreeNode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ret;
+    <span style="color:#66d9ef">bool</span> leftToRight <span style="color:#f92672">=</span> true;
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>que.empty()){
+        <span style="color:#66d9ef">int</span> que_size <span style="color:#f92672">=</span> que.size();
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> temp(que_size);
+        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> que_size; <span style="color:#f92672">++</span>i){
+            p <span style="color:#f92672">=</span> que.front();
+            que.pop();
+            <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> leftToRight <span style="color:#f92672">?</span>  i : (que_size<span style="color:#f92672">-</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+            temp[idx] <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>val;
+            <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>left) que.push(p<span style="color:#f92672">-&gt;</span>left);
+            <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>right) que.push(p<span style="color:#f92672">-&gt;</span>right);
+        }
+        leftToRight <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>leftToRight;
+        ret.push_back(temp);
+    }
+    <span style="color:#66d9ef">return</span> ret;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#f92672">*</span> root) {
+    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> {};
+    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ret;
+    queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> que{{root}};
+    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">reverse</span>(false);
+    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>que.empty()){
+        queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;::</span>size_type sz <span style="color:#f92672">=</span> que.size();
+        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> temp(sz);
+        <span style="color:#66d9ef">for</span>(size_t i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> sz; <span style="color:#f92672">++</span>i){
+            TreeNode <span style="color:#f92672">*</span>p <span style="color:#f92672">=</span> que.front();
+            que.pop();
+            vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;::</span>size_type idx <span style="color:#f92672">=</span> reverse <span style="color:#f92672">?</span> sz<span style="color:#f92672">-</span>i<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> i;
+            temp[idx] <span style="color:#f92672">=</span> p<span style="color:#f92672">-&gt;</span>val;
+            <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>left) que.push(p<span style="color:#f92672">-&gt;</span>left);
+            <span style="color:#66d9ef">if</span>(p<span style="color:#f92672">-&gt;</span>right) que.push(p<span style="color:#f92672">-&gt;</span>right);
+        }
+        ret.push_back(temp);
+        reverse <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>reverse;
+    }
+    <span style="color:#66d9ef">return</span> ret;
+}
+</code></pre></div>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%A0%91/">树</a>
+
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E6%A0%88/">栈</a>
+
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">广度优先搜索</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/104-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/" data-tooltip="104 二叉树最大深度">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/102-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/" data-tooltip="102 二叉树的层序遍历">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/104-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9C%80%E5%A4%A7%E6%B7%B1%E5%BA%A6/" data-tooltip="104 二叉树最大深度">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/10/102-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%B1%82%E5%BA%8F%E9%81%8D%E5%8E%86/" data-tooltip="102 二叉树的层序遍历">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

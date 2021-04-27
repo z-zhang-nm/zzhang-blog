@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>后序遍历 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/</link>
+    <description>Recent content in 后序遍历 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Tue, 27 Apr 2021 11:02:17 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>后序遍历深入</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B7%B1%E5%85%A5/</link>
+      <pubDate>Tue, 27 Apr 2021 11:02:17 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B7%B1%E5%85%A5/</guid>
+      <description>&lt;p&gt;　　如果当前节点要做的事情需要通过左右子树的计算结果推导出来，就要用到后序遍历&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

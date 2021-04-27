@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>算法 on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/categories/%E7%AE%97%E6%B3%95/</link>
+    <description>Recent content in 算法 on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 12 Apr 2021 13:10:07 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/%E7%AE%97%E6%B3%95/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>快速排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Mon, 12 Apr 2021 13:10:07 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　三数取中快速排序&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>归并排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sun, 11 Apr 2021 16:19:59 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　分治的方法，“分”即将问题分为一些小的问题递归求解，“治”即将各个小问题合在一起&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>希尔排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sun, 11 Apr 2021 12:05:05 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　改进的插入排序&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>插入排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 16:32:54 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　对基本有序的数组最好用（像起扑克牌一样），样本小且基本有序时候效率高&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>冒泡排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 15:25:55 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　顾名思义，像水中的泡泡一样，不断向上（右）浮动，基本不用，太慢&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>选择排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 10:24:08 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　最简单的排序、时间复杂度高、不稳定&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>spin on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/spin/</link>
+    <description>Recent content in spin on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 07 Apr 2021 15:05:14 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/spin/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Spin和spinOnce</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/spin%E5%92%8Cspinonce/</link>
+      <pubDate>Wed, 07 Apr 2021 15:05:14 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/spin%E5%92%8Cspinonce/</guid>
+      <description>&lt;p&gt;　　ros::spin()和ros::spinOnce()之间有什么区别呢？&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

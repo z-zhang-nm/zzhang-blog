@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.69.0 with theme Tranquilpeak 0.4.7-BETA">
+<meta name="author" content="zzhang">
+<meta name="keywords" content="tech">
+<meta name="description" content="参考链接">
+
+
+<meta property="og:description" content="参考链接">
+<meta property="og:type" content="article">
+<meta property="og:title" content="模板类与类模板、函数模板与模板函数的区别">
+<meta name="twitter:title" content="模板类与类模板、函数模板与模板函数的区别">
+<meta property="og:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E6%A8%A1%E6%9D%BF%E7%B1%BB%E4%B8%8E%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/">
+<meta property="twitter:url" content="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E6%A8%A1%E6%9D%BF%E7%B1%BB%E4%B8%8E%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/">
+<meta property="og:site_name" content="zzhang-blog">
+<meta property="og:description" content="参考链接">
+<meta name="twitter:description" content="参考链接">
+<meta property="og:locale" content="zh-cn">
+
+  
+    <meta property="article:published_time" content="2020-08-05T15:33:11">
+  
+  
+    <meta property="article:modified_time" content="2020-08-05T15:33:11">
+  
+  
+  
+    
+      <meta property="article:section" content="C&#43;&#43;">
+    
+  
+  
+    
+      <meta property="article:tag" content="C&#43;&#43;基础">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+  <meta property="twitter:image" content="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg">
+
+
+    <title>模板类与类模板、函数模板与模板函数的区别</title>
+
+    <link rel="icon" href="https://z-zhang.gitee.io/zzhang-blog/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/%E6%A8%A1%E6%9D%BF%E7%B1%BB%E4%B8%8E%E7%B1%BB%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E6%A8%A1%E6%9D%BF%E4%B8%8E%E6%A8%A1%E6%9D%BF%E5%87%BD%E6%95%B0%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="https://z-zhang.gitee.io/zzhang-blog/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="5">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="https://z-zhang.gitee.io/zzhang-blog/">zzhang-blog</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="5">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="https://z-zhang.gitee.io/zzhang-blog/#about">
+          <img class="sidebar-profile-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+        </a>
+        <h4 class="sidebar-profile-name">zzhang</h4>
+        
+          <h5 class="sidebar-profile-bio">Record Your Beautiful Life!!!</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">首页</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/categories">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">分类</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">标签</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/archives">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">归档</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://z-zhang.gitee.io/zzhang-blog/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">关于</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="5"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      模板类与类模板、函数模板与模板函数的区别
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-08-05T15:33:11&#43;08:00">
+        
+  八月 5, 2020
+
+      </time>
+    
+    
+  
+  
+    <span>发布在</span>
+    
+      <a class="category-link" href="https://z-zhang.gitee.io/zzhang-blog/categories/c&#43;&#43;">C&#43;&#43;</a>
+    
+  
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p><a href="https://blog.csdn.net/sunxx1986/article/details/6619144">参考链接</a></p>
+<h1 id="模板类与类模板函数模板与模板函数的区别">模板类与类模板、函数模板与模板函数的区别</h1>
+<h2 id="1-概述">1 概述</h2>
+<p>　　C++中有几个容易混淆的术语，分别为：</p>
+<ol>
+<li>函数指针 &lt;&ndash;&gt; 指针函数</li>
+<li>数组指针 &lt;&ndash;&gt; 指针数组</li>
+<li>类模板 &lt;&ndash;&gt; 模板类</li>
+<li>函数模板 &lt;&ndash;&gt; 模板函数</li>
+</ol>
+<h2 id="2-函数指针与指针函数">2 函数指针与指针函数</h2>
+<p>　　从名字就可以看出来，函数指针的重点是<strong>指针</strong>，表示其为一个指针，指向的是一个函数，而指针函数的重点是<strong>函数</strong>，表示其为一个函数，它的返回类型是指针类型。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp">type (<span style="color:#f92672">*</span>pf)(params); <span style="color:#75715e">//函数指针
+</span><span style="color:#75715e"></span>type <span style="color:#f92672">*</span><span style="color:#a6e22e">fun</span>(params); <span style="color:#75715e">//指针函数
+</span></code></pre></div><h2 id="3-数组指针与指针数组">3 数组指针与指针数组</h2>
+<p>　　数组指针重点是<strong>指针</strong>，表示一个指针，指向的是一个数组，而指针数组重点是<strong>数组</strong>，表示一个数组，它的元素为指针。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">int</span> (<span style="color:#f92672">*</span>pa)[<span style="color:#ae81ff">8</span>]; <span style="color:#75715e">//数组指针
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>ap[<span style="color:#ae81ff">8</span>]; <span style="color:#75715e">//指针数组
+</span></code></pre></div><h2 id="4-类模板与模板类">4 类模板与模板类</h2>
+<p>　　类模板的重点是<strong>模板</strong>，用于产生类的模子。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Vector</span>{
+    ...
+};
+</code></pre></div><p>　　使用这个Vector模板就可以产生很多的类，产生的类叫做模板类，比如<code>Vector&lt;int&gt;, Vector&lt;Vector&lt;int&gt;&gt;, Vector&lt;double&gt;</code>等。</p>
+<blockquote>
+<p><strong>类模板的声明与实现最好放在同一个头文件中</strong></p>
+</blockquote>
+<h3 id="41-尝试以普通类方式实现类模板的分离式编译">4.1 尝试以普通类方式实现类模板的分离式编译</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//test.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  Test(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> t);
+  <span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> read() <span style="color:#66d9ef">const</span>;
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> x);
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  T val;
+};
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//test.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+Test<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Test(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> t) {
+  val <span style="color:#f92672">=</span> t;
+}
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> Test<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>read() <span style="color:#66d9ef">const</span> {
+  <span style="color:#66d9ef">return</span> val;
+}
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> Test<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>write(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> x) {
+  val <span style="color:#f92672">=</span> x;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//main.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  Test<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t1(<span style="color:#ae81ff">1</span>);
+  Test<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> t2(<span style="color:#ae81ff">1.5</span>);
+
+  t1.write(<span style="color:#ae81ff">2</span>);
+  t2.write(<span style="color:#ae81ff">2.5</span>);
+
+  cout <span style="color:#f92672">&lt;&lt;</span> t1.read() <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> t2.read() <span style="color:#f92672">&lt;&lt;</span> endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>　　上面的代码在进行编译时会报<code>undefined reference</code>的错误，首先说下这个错误：</p>
+<blockquote>
+<p>在Linux下用C/C++工作的时候，经常会遇到<code>undefined reference to XXX</code>的问题，直白地说就是在<strong>链接</strong>(从.cpp源代码到可执行的ELF文件，要经过预处理-&gt;编译-&gt;链接三个阶段，此时预处理和编译已经通过了)的时候，链接器找不到XXX这个函数的定义了。</p>
+</blockquote>
+<h3 id="42-番外聊聊undefined-reference这个错误">4.2 番外，聊聊undefined reference这个错误</h3>
+<p>　　假设有如下几段代码:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//foo.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>();
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//foo.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;foo.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">foo</span>() { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is function foo.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; }
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//main.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;foo.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  foo();
+
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><h4 id="421-链接时缺少定义了xxx的源文件或者目标文件或者库文件">4.2.1 链接时缺少定义了XXX的源文件或者目标文件或者库文件</h4>
+<ol>
+<li>缺源文件：若用<code>g++ mian.cpp</code>命令生成可执行文件，会出现<code>undefined reference to foo()</code>的错误，命令行加上<code>foo.cpp</code>即可，<code>g++ main.cpp foo.cpp</code></li>
+<li>缺目标文件：先将<code>foo.cpp</code>编译为目标文件文件<code>foo.o</code>后，也可以用<code>foo.o</code>来编译，<code>g++ -c foo.cpp</code>，直接使用<code>g++ main.cpp</code>也会报&quot;undefined reference to foo()&ldquo;的错误，用<code>g++ main.cpp foo.o</code>即可</li>
+<li>缺库文件：把foo.cpp编译成动态库（静态库一样的）文件<code>foo.so</code>也一样，首先<code>g++ --shared -fPIC -o foo.so foo.cpp</code>生成<code>foo.so</code>，然后<code>g++ main.cpp foo.so</code></li>
+</ol>
+<blockquote>
+<p>上面第三种方法生成动态库文件后需要先链接到<code>/usr/lib</code>或<code>/lib</code>目录下，否则会报<code>cannot open shared object file: No such file or directory</code>的错误</p>
+</blockquote>
+<h4 id="422-链接顺序不对">4.2.2 链接顺序不对</h4>
+<p>　　若上一节中第三条将<code>foo.so</code>和<code>main.cpp</code>文件前后顺序调换<code>g++ foo.so main.cpp</code>，也会出现&quot;undefined reference to foo()&ldquo;的错误，因为给编译器输入源文件、目标文件或动态静态库文件时，若B文件依赖A文件，那么B文件应该放在A文件的<strong>左边</strong>。</p>
+<h4 id="423-函数符号修饰不一样">4.2.3 函数符号修饰不一样</h4>
+<p>　　符号修饰即函数从源代码编译到目标文件时，函数在目标文件中的名字是会改变的，在链接阶段，链接器按照函数改变后的名字来索引函数，函数改变后的名字不一样的函数在链接器看来就是不一样的函数，最开始的时候是没有符号修饰的而是直接使用函数名字在目标文件中表示不同函数的，但是随着语言增加各种特性，再这样的话很容易造成符号冲突，而符号修饰在函数名上加上了命名空间和参数列表等信息，就可以使同名函数不冲突， 且允许函数重载机制。</p>
+<hr>
+<ol>
+<li>函数定义和声明不一致</li>
+</ol>
+<p>　　　一般写代码时都是分离式编程，即头文件写函数的接口声明，源文件写函数的定义，但是如果我们在头文件里的声明和源文件里写的函数定义不一致的话，就会出现<code>undefined reference to XXX</code>的错误。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//bar.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bar</span>();
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//bar.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;bar.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bar</span>(<span style="color:#66d9ef">int</span>) { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is function bar.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; }
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//main.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;bar.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  bar();
+
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>　　编译一下上面的代码<code>g++ main.cpp bar.cpp</code>，会报<code>undefined reference to bar()</code>的错误，将<code>bar()</code>函数的声明和定义整一致就可以了。</p>
+<hr>
+<ol start="2">
+<li>C和C++混合编程</li>
+</ol>
+<p>　　如果代码中使用了某些用C语言编写编译的第三方库或代码，在应用C语言库的时候，要加上<code>extern &quot;C&quot;</code>，告诉C++编译器按照C语言的符号修饰规则去找这些符号。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//baz.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">baz</span>();
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//baz.c
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;baz.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">baz</span>() { printf(<span style="color:#e6db74">&#34;This is function baz.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>); }
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//main.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;baz.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  baz();
+
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>　　先用gcc编译<code>baz.c</code>得到目标文件<code>baz.o</code>，然后用g++编译<code>g++ main.cpp baz.o</code>，会出现<code>undefined reference to baz()</code>的错误，加上<code>extern &quot;C&quot;</code>即可。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//baz.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#ifdef __cplusplus
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">extern</span> <span style="color:#e6db74">&#34;C&#34;</span> {
+<span style="color:#75715e">#endif
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">baz</span>();
+<span style="color:#75715e">#ifdef __cplusplus
+</span><span style="color:#75715e"></span>}
+<span style="color:#75715e">#endif
+</span></code></pre></div><hr>
+<ol start="3">
+<li>编译器版本或编译器选项不一致</li>
+</ol>
+<p>　　不同的编译器版本，或编译器版本和链接器版本不一致，用的运行时库不一样，都不一定兼容，编译器选项不一样，也可能影响到函数签名，因此，团队开发时，最好团队内每个程序员都使用一套标准的编译器和编译器配置。</p>
+<hr>
+<ol start="4">
+<li>把模板函数写进了cpp文件中</li>
+</ol>
+<p>　　如果把模板函数的实现写进了cpp文件中，那么编译器就会认为这是一个独立的单元而进行编译，然而，因为它是模板函数，编译器不能确定到底将它特化到哪个实现（特化为int、float还是其它类型），因此干脆就不特化，所以在链接时就找不到该函数的定义了，即<code>undefined reference to XXX</code>。</p>
+<hr>
+<ol start="5">
+<li>API hidden</li>
+</ol>
+<p>　　如果动态库XX.so确实实现了<code>foo()</code>函数，但是在编译的时候使用了<code>-fvisibility=hidden</code>选项，也会导致使用者链接不了，也会出现<code>undefined reference to foo()</code>这样的错误。这种情况常见于一些开源库里面的不兼容，前面的版本这个api是可以用的，库升级后，这个版本变成了hinden了。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//bar.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;bar.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bar</span>() { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is function bar.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; }
+</code></pre></div><p>　　用<code>g++ --shared -fPIC bar.cpp -o bar.so -fvisibility=hidden</code>生成的动态库文件在编译时<code>g++ main.cpp bar.so</code>时会报<code>undefined reference to bar()</code>的错误。</p>
+<h4 id="424-查看xxso文件中的函数信息">4.2.4 查看XX.so文件中的函数信息</h4>
+<p>　　有时候我们使用第三方的库文件，又找不到相应的文档，或者我们查到了函数修饰后的名字，但是太晦涩难懂，怎么翻译成源代码里面的函数声明呢？</p>
+<hr>
+<ol>
+<li>查看动态库文件里面提供了哪些函数符号</li>
+</ol>
+<p>　　首先将如下cpp文件编译为动态链接库：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//bar.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;bar.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">bar</span>(<span style="color:#66d9ef">int</span>) { std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is function bar.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl; }
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">bar</span>(<span style="color:#66d9ef">double</span>) {
+  std<span style="color:#f92672">::</span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is function bar.&#34;</span> <span style="color:#f92672">&lt;&lt;</span> std<span style="color:#f92672">::</span>endl;
+  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>　　使用<code>nm bar.so</code>命令即可查看这个库里提供了哪些函数符号。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ae81ff">0000000000000</span><span style="color:#ae81ff">930</span> T _Z3bari
+<span style="color:#ae81ff">0000000000000</span><span style="color:#ae81ff">969</span> T _Z3barid
+</code></pre></div><p>　　打印出的消息中有如下两行，表示在<code>bar.so</code>文件的代码段（.Text段），有函数<code>_Z3bari</code>和<code>_Z3barid</code>的定义，这个<code>_Z3bari</code>就是<code>void bar(int)</code>这个函数在名字修饰后在库文件中的名字，链接器就是看这个名字来进行链接活动，使用<code>nm -C</code>可以查看函数名字修饰前的名字。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#ae81ff">0000000000000</span><span style="color:#ae81ff">930</span> T bar(<span style="color:#66d9ef">int</span>)
+<span style="color:#ae81ff">0000000000000</span><span style="color:#ae81ff">969</span> T bar(<span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">double</span>)
+</code></pre></div><hr>
+<ol start="2">
+<li>由函数修饰后的名字推导函数声明
+　　使用<code>c++filt</code>命令即可反推，比如<code>c++filt _Z3bari</code>就可以得到<code>bar(int)</code>。</li>
+</ol>
+<p>　　由修饰后的名字可以知道，函数修饰是不会管函数的返回类型的，因此C++规定，函数只有返回值不一样的话不能算重载函数。</p>
+<p><strong>让我们继续<code>类模板的分离式编译</code>这一话题</strong></p>
+<h3 id="43-增加一个用于模板实例化声明的文件">4.3 增加一个用于模板实例化声明的文件</h3>
+<p>　　4.1节尝试以普通分离式编译的方式实现类模板的分离式编译，但是链接时会出现错误，尝试增加一个用于模板实例化的<code>extend.cpp</code>文件：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test.cpp&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">template</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>;
+<span style="color:#66d9ef">template</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span><span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>;
+</code></pre></div><p>　
+　　注意这里include的是<code>test.cpp</code>文件，再进行编译<code>g++ main.cpp test.cpp extend.cpp</code>即可成功，这是为什么呢？</p>
+<p>　　实际上<code>test.cpp</code>里面并不是函数，而是一个个的模板，可以将其认为是声明一样的东西，include<code>test.cpp</code>而不是<code>test.h</code>文件是因为只有cpp文件里有类模板实例化所需要的全部内容。</p>
+<p><a href="https://blog.csdn.net/imred/article/details/80261632">更生动的解释</a></p>
+<h3 id="44-类模板一体化编译">4.4 类模板一体化编译</h3>
+<p>　　将类模板的接口和实现都放在头文件里：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//test.h
+</span><span style="color:#75715e"></span><span style="color:#75715e">#pragma once
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span> <span style="color:#75715e">//template &lt;typename T = int&gt;，缺省的模板参数
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Test</span> {
+ <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+  Test(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> t);
+  <span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> read() <span style="color:#66d9ef">const</span>;
+  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">write</span>(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> x);
+
+ <span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+  T val;
+};
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+Test<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>Test(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> t) {
+  val <span style="color:#f92672">=</span> t;
+}
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> Test<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>read() <span style="color:#66d9ef">const</span> {
+  <span style="color:#66d9ef">return</span> val;
+}
+
+<span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> Test<span style="color:#f92672">&lt;</span>T<span style="color:#f92672">&gt;::</span>write(<span style="color:#66d9ef">const</span> T<span style="color:#f92672">&amp;</span> x) {
+  val <span style="color:#f92672">=</span> x;
+}
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#75715e">//main.cpp
+</span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;test.h&#34;</span><span style="color:#75715e">
+</span><span style="color:#75715e"></span>
+<span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+
+<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+  Test<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> t1(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">//缺省模板参数，Test&lt;&gt; t1(1)
+</span><span style="color:#75715e"></span>  Test<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> t2(<span style="color:#ae81ff">1.5</span>);
+
+  t1.write(<span style="color:#ae81ff">2</span>);
+  t2.write(<span style="color:#ae81ff">2.5</span>);
+
+  cout <span style="color:#f92672">&lt;&lt;</span> t1.read() <span style="color:#f92672">&lt;&lt;</span> endl;
+  cout <span style="color:#f92672">&lt;&lt;</span> t2.read() <span style="color:#f92672">&lt;&lt;</span> endl;
+
+  <span style="color:#75715e">//   system(&#34;pause&#34;);
+</span><span style="color:#75715e"></span>  <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+}
+</code></pre></div><p>　　直接编译<code>g++ main.cpp</code>即可，没有分离式编译就没有复杂的链接问题，可见，类模板将接口与实现一起放在头文件中，是非常简单并且不容易出错的。</p>
+<h2 id="5-函数模板与模板函数">5 函数模板与模板函数</h2>
+<p>　　函数模板的重点是<strong>模板</strong>，跟类模板一样，专门用来生成函数。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cpp" data-lang="cpp"><span style="color:#66d9ef">template</span> <span style="color:#f92672">&lt;</span><span style="color:#66d9ef">typename</span> T<span style="color:#f92672">&gt;</span>
+<span style="color:#66d9ef">void</span> func(T x){
+<span style="color:#75715e">/*
+</span><span style="color:#75715e">  ...
+</span><span style="color:#75715e">*/</span>
+}
+</code></pre></div><p>　　使用时可以显示实例化，如<code>func&lt;int&gt;(1), func&lt;double&gt;(1.0)</code>等，或者隐式实例化，如<code>func(1), func(1.0)</code>等。</p>
+<p>　　模板函数的重点是<strong>函数</strong>，是由函数模板生成的函数，上面的<code>func&lt;int&gt;(1), func(1)</code>等都是模板函数。</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">标签</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="https://z-zhang.gitee.io/zzhang-blog/tags/c&#43;&#43;%E5%9F%BA%E7%A1%80/">C&#43;&#43;基础</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/078-%E5%AD%90%E9%9B%86/" data-tooltip="078 子集">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/075-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/" data-tooltip="075 颜色分类">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2021 <a href="https://gitee.com/z-zhang/">zzhang</a>. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="5">
+        <div class="post-actions-wrap">
+  
+      <nav >
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/078-%E5%AD%90%E9%9B%86/" data-tooltip="078 子集">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml">下一篇</span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="https://z-zhang.gitee.io/zzhang-blog/2020/08/075-%E9%A2%9C%E8%89%B2%E5%88%86%E7%B1%BB/" data-tooltip="075 颜色分类">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr">上一篇</span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="5">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://z-zhang.gitee.io/zzhang-blog/Profile/profile.jpg" alt="作者的图片" />
+    
+    <h4 id="about-card-name">zzhang</h4>
+    
+      <div id="about-card-bio">Record Your Beautiful Life!!!</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    
+      <div id="cover" style="background-image:url('https://z-zhang.gitee.io/zzhang-blog/Cover/cover.jpg');"></div>
+    
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js" integrity="sha256-/BfiIkHlHoVihZdc6TFuj7MmJ0TWcWsMXkeDFwhi0zw=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="https://z-zhang.gitee.io/zzhang-blog/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight > code, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+  
+    
+  
+
+
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>define与const on zzhang-blog</title>
+    <link>https://z-zhang.gitee.io/zzhang-blog/tags/define%E4%B8%8Econst/</link>
+    <description>Recent content in define与const on zzhang-blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 12 Apr 2021 16:19:59 +0800</lastBuildDate>
+    
+	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/tags/define%E4%B8%8Econst/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Define与const</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/define%E4%B8%8Econst/</link>
+      <pubDate>Mon, 12 Apr 2021 16:19:59 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/define%E4%B8%8Econst/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

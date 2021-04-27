@@ -6,10 +6,343 @@
     <description>Recent content on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 13 Nov 2020 09:36:20 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 27 Apr 2021 11:02:17 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>后序遍历深入</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B7%B1%E5%85%A5/</link>
+      <pubDate>Tue, 27 Apr 2021 11:02:17 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%B7%B1%E5%85%A5/</guid>
+      <description>&lt;p&gt;　　如果当前节点要做的事情需要通过左右子树的计算结果推导出来，就要用到后序遍历&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>图算法</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/</link>
+      <pubDate>Tue, 27 Apr 2021 09:34:18 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%BE%E7%AE%97%E6%B3%95/</guid>
+      <description>&lt;p&gt;　　本质上图可以看做多叉树的延伸&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>二叉搜索树</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</link>
+      <pubDate>Mon, 26 Apr 2021 09:24:05 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91/</guid>
+      <description>&lt;p&gt;　　基于BST的数据结构有AVL树、红黑树等，拥有了自平衡性质就可以提供&lt;code&gt;logN&lt;/code&gt; 级别的增删查改效率&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Select原理和用法</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/select%E5%8E%9F%E7%90%86%E5%92%8C%E7%94%A8%E6%B3%95/</link>
+      <pubDate>Sun, 25 Apr 2021 18:01:11 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/select%E5%8E%9F%E7%90%86%E5%92%8C%E7%94%A8%E6%B3%95/</guid>
+      <description>&lt;p&gt;　　&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Linux文件描述符和文件指针</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/linux%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E5%92%8C%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88/</link>
+      <pubDate>Sun, 25 Apr 2021 17:17:30 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/linux%E6%96%87%E4%BB%B6%E6%8F%8F%E8%BF%B0%E7%AC%A6%E5%92%8C%E6%96%87%E4%BB%B6%E6%8C%87%E9%92%88/</guid>
+      <description>&lt;p&gt;　　Linux基本哲学之一：一切皆文件&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IO 同步 异步 阻塞 非阻塞</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/io-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-%E9%98%BB%E5%A1%9E-%E9%9D%9E%E9%98%BB%E5%A1%9E/</link>
+      <pubDate>Sun, 25 Apr 2021 16:30:42 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/io-%E5%90%8C%E6%AD%A5-%E5%BC%82%E6%AD%A5-%E9%98%BB%E5%A1%9E-%E9%9D%9E%E9%98%BB%E5%A1%9E/</guid>
+      <description>&lt;p&gt;　　Linux网络IO模型&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>二叉树</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E4%BA%8C%E5%8F%89%E6%A0%91/</link>
+      <pubDate>Thu, 22 Apr 2021 14:57:33 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E4%BA%8C%E5%8F%89%E6%A0%91/</guid>
+      <description>&lt;p&gt;　　很多经典算法其实都是树的问题&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>回文链表</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 21 Apr 2021 18:01:08 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%9B%9E%E6%96%87%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;p&gt;　　&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>K个一组反转链表</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/k%E4%B8%AA%E4%B8%80%E7%BB%84%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Wed, 21 Apr 2021 10:09:20 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/k%E4%B8%AA%E4%B8%80%E7%BB%84%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;p&gt;　　迭代方法&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>反转链表</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</link>
+      <pubDate>Tue, 20 Apr 2021 10:39:23 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8/</guid>
+      <description>&lt;p&gt;　　递归思维&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>导言</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%AF%BC%E8%A8%80/</link>
+      <pubDate>Tue, 20 Apr 2021 10:11:09 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%AF%BC%E8%A8%80/</guid>
+      <description>&lt;p&gt;　　学习大牛的算法小抄之路&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>动态规划</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</link>
+      <pubDate>Thu, 15 Apr 2021 09:57:40 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</guid>
+      <description>&lt;p&gt;　　利用历史记录来避免重复计算&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>静态绑定和动态绑定</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/</link>
+      <pubDate>Tue, 13 Apr 2021 11:06:37 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%9D%99%E6%80%81%E7%BB%91%E5%AE%9A%E5%92%8C%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>构造函数或析构函数中调用虚函数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%88%96%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%AD%E8%B0%83%E7%94%A8%E8%99%9A%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Tue, 13 Apr 2021 10:52:53 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%88%96%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E4%B8%AD%E8%B0%83%E7%94%A8%E8%99%9A%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;p&gt;　　不要在类的构造或者析构函数中调用虚函数&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>构造函数不能是虚函数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8D%E8%83%BD%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Tue, 13 Apr 2021 10:22:23 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E4%B8%8D%E8%83%BD%E6%98%AF%E8%99%9A%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;p&gt;　　虚表指针和多态两个角度说明&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>析构函数写为虚函数的原因</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E5%86%99%E4%B8%BA%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9B%A0/</link>
+      <pubDate>Tue, 13 Apr 2021 09:36:55 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%9E%90%E6%9E%84%E5%87%BD%E6%95%B0%E5%86%99%E4%B8%BA%E8%99%9A%E5%87%BD%E6%95%B0%E7%9A%84%E5%8E%9F%E5%9B%A0/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>虚函数表如何实现动态绑定</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/</link>
+      <pubDate>Mon, 12 Apr 2021 22:49:58 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E8%99%9A%E5%87%BD%E6%95%B0%E8%A1%A8%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E5%8A%A8%E6%80%81%E7%BB%91%E5%AE%9A/</guid>
+      <description>&lt;p&gt;　　C++多态的核心是虚函数表&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Const类成员函数</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/const%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Mon, 12 Apr 2021 16:30:02 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/const%E7%B1%BB%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;p&gt;　　只有被声明为const的成员函数才能被const类对象调用&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Define与const</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/define%E4%B8%8Econst/</link>
+      <pubDate>Mon, 12 Apr 2021 16:19:59 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/define%E4%B8%8Econst/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>快速排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Mon, 12 Apr 2021 13:10:07 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　三数取中快速排序&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>归并排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sun, 11 Apr 2021 16:19:59 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　分治的方法，“分”即将问题分为一些小的问题递归求解，“治”即将各个小问题合在一起&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>希尔排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sun, 11 Apr 2021 12:05:05 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　改进的插入排序&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>插入排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 16:32:54 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　对基本有序的数组最好用（像起扑克牌一样），样本小且基本有序时候效率高&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>冒泡排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 15:25:55 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　顾名思义，像水中的泡泡一样，不断向上（右）浮动，基本不用，太慢&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>选择排序</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</link>
+      <pubDate>Sat, 10 Apr 2021 10:24:08 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</guid>
+      <description>&lt;p&gt;　　最简单的排序、时间复杂度高、不稳定&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>New与delete的实现方式</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/new%E4%B8%8Edelete%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</link>
+      <pubDate>Fri, 09 Apr 2021 17:15:32 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/new%E4%B8%8Edelete%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F/</guid>
+      <description>&lt;p&gt;　　new和delete的底层调用是malloc和free。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>堆和栈的区别</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 09 Apr 2021 16:38:36 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%A0%86%E5%92%8C%E6%A0%88%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;p&gt;　　C++存储区分为全局数据区、代码区、堆区和栈区，其中全局数据区存放静态数据、全局变量和常量，代码区存放函数体的二进制代码，栈区存放函数的返回地址、形参、局部变量、返回类型等，堆区存放剩下的内存。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>指针和引用的区别</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+      <pubDate>Fri, 09 Apr 2021 15:58:42 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+      <description>&lt;p&gt;　　经典问题！！！&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>封包与解包</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B0%81%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8C%85/</link>
+      <pubDate>Fri, 09 Apr 2021 10:44:14 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E5%B0%81%E5%8C%85%E4%B8%8E%E8%A7%A3%E5%8C%85/</guid>
+      <description>&lt;p&gt;　　TCP是一个流协议，即传输的是没有界限的一串数据，而由于&lt;a href=&#34;https://segmentfault.com/a/1190000022929052&#34;&gt;Nagle算法&lt;/a&gt;可能会造成发送端的粘包或接收端接收不及时可能会造成的接收端的粘包，因此需要对数据包进行封包和拆包。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>改变socket默认缓冲区大小</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%94%B9%E5%8F%98socket%E9%BB%98%E8%AE%A4%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A4%A7%E5%B0%8F/</link>
+      <pubDate>Thu, 08 Apr 2021 10:26:34 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E6%94%B9%E5%8F%98socket%E9%BB%98%E8%AE%A4%E7%BC%93%E5%86%B2%E5%8C%BA%E5%A4%A7%E5%B0%8F/</guid>
+      <description>&lt;p&gt;　　TCP套接字有一个发送缓冲区和一个接收缓冲区，UDP套接字有一个接收缓冲区；使用SO_RCVBUF和SO_SNDBUF这两个套接字选项可以改变默认缓冲区大小。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>TCP头部设置发送和接受超时时间</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/tcp%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4/</link>
+      <pubDate>Wed, 07 Apr 2021 18:14:41 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/tcp%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE%E5%8F%91%E9%80%81%E5%92%8C%E6%8E%A5%E5%8F%97%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4/</guid>
+      <description>&lt;p&gt;　　设置socket的发送和接收超时时间。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Spin和spinOnce</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/spin%E5%92%8Cspinonce/</link>
+      <pubDate>Wed, 07 Apr 2021 15:05:14 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/spin%E5%92%8Cspinonce/</guid>
+      <description>&lt;p&gt;　　ros::spin()和ros::spinOnce()之间有什么区别呢？&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>简单TCP_server</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E7%AE%80%E5%8D%95tcp_server/</link>
+      <pubDate>Wed, 07 Apr 2021 11:55:27 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/%E7%AE%80%E5%8D%95tcp_server/</guid>
+      <description>&lt;p&gt;　　用TCP/IP协议编写一个简单服务器、客户端，服务器监听本机端口，若收到连接请求，将接收请求并接收客户端消息。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>HTTP</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/03/http/</link>
+      <pubDate>Sun, 21 Mar 2021 16:52:10 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/03/http/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>173 二叉搜索树迭代器</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/03/173-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/</link>
+      <pubDate>Wed, 03 Mar 2021 10:23:16 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/03/173-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E8%BF%AD%E4%BB%A3%E5%99%A8/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/binary-search-tree-iterator/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>155 最小栈</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/03/155-%E6%9C%80%E5%B0%8F%E6%A0%88/</link>
+      <pubDate>Tue, 02 Mar 2021 17:53:58 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/03/155-%E6%9C%80%E5%B0%8F%E6%A0%88/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/min-stack/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>150 逆波兰表达式求值</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2020/12/150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/</link>
+      <pubDate>Wed, 02 Dec 2020 10:12:39 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/12/150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://leetcode-cn.com/problems/evaluate-reverse-polish-notation/&#34;&gt;题目链接&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>145 二叉树后序遍历</title>
@@ -1128,15 +1461,6 @@
     </item>
     
     <item>
-      <title>四元数转欧拉角</title>
-      <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</link>
-      <pubDate>Thu, 07 May 2020 11:49:15 +0800</pubDate>
-      
-      <guid>https://z-zhang.gitee.io/zzhang-blog/2020/05/%E5%9B%9B%E5%85%83%E6%95%B0%E8%BD%AC%E6%AC%A7%E6%8B%89%E8%A7%92/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Cmake编译</title>
       <link>https://z-zhang.gitee.io/zzhang-blog/2020/05/cmake%E7%BC%96%E8%AF%91/</link>
       <pubDate>Wed, 06 May 2020 16:44:12 +0800</pubDate>
@@ -1179,6 +1503,26 @@
       
       <guid>https://z-zhang.gitee.io/zzhang-blog/2020/04/rosbag-struct-parser/</guid>
       <description>&lt;p&gt;　　由于rosbag API解析数据需要包含消息结构体的头文件，而不同时期录制的roabag中消息结构可能会变化，若用API进行bag包的解析对不同的结构需要写不同的代码，因此根据ros官方提供的rosbag存储结构(&lt;a href=&#34;http://wiki.ros.org/Bags/Format/2.0&#34;&gt;Format&lt;/a&gt;)，对rosbag的结构进行解析。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/1/01/</guid>
+      <description>工作原因不知不觉已经三个月没有更新啦，今天开始拾起来吧，加油，打工人！！！</description>
+    </item>
+    
+    <item>
+      <title></title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/1/01/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/1/01/</guid>
+      <description>RVIZ 在每一个运行周期内，会更新每一个agent的状态（新增或删除、更新位置和速度、碰撞检测）
+新增或删除  agent数量小于设定数量，初始化agent（ID、local_map_server），大于设定数量，删除多余的agent 更新agent  若状态为INVALID，初始化agent在本车所在路段的某一车道的某一位置 根据当前agent位置更新local_map_state 更新速度  若发生碰撞，速度设为零 根据agent与本车朝向角更新agent的twist 若与本车距离过近，减速   更新位置  根据时间间隔、当前速度、行进方向（由local_map决定）和键盘控制偏移更新位置 处理键盘换道控制指令 确保agent在车道中线行驶   与本车距离过远，设为INVALID 是否与本车碰撞的判断   两两agent进行碰撞检测  fusion 由于融合可视化软件需要读取不同时期录制的rosbag，且软件不依赖于ros，未使用ros提供的解析头文件（roscpp提供的解析方法需要消息结构体的头文件，然而我们代码仓库里的消息结构体动态变化的，改变后的结构体不能用于解析旧的bag包） 将目录中的rosbag文件解析后生成读取该类bag的方法，融合可视化软件会调用方法析这个文件夹中的所有bag文件
+carmaker 通过共享内存进行数据交互，通过IPC与规划算法模块进行通信，共享内存速度快且不用引入pb，其分为两部分，规划模块的输入和carmaker软件的输出，相当于一个环形消息流通，规划输入控制车辆的油门、刹车和转向，carmaker输出更新本车消息、传感器数据等。</description>
     </item>
     
   </channel>
