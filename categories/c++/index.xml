@@ -6,10 +6,28 @@
     <description>Recent content in C&#43;&#43; on zzhang-blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Tue, 13 Apr 2021 11:06:37 +0800</lastBuildDate>
+    <lastBuildDate>Tue, 27 Apr 2021 22:02:55 +0800</lastBuildDate>
     
 	<atom:link href="https://z-zhang.gitee.io/zzhang-blog/categories/c++/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>02 尽量以const Enum Inline替换宏定义</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2%E5%AE%8F%E5%AE%9A%E4%B9%89/</link>
+      <pubDate>Tue, 27 Apr 2021 22:02:55 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/02-%E5%B0%BD%E9%87%8F%E4%BB%A5const-enum-inline%E6%9B%BF%E6%8D%A2%E5%AE%8F%E5%AE%9A%E4%B9%89/</guid>
+      <description>&lt;p&gt;Prefer consts, enum, inlines to #define&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>01 视C&#43;&#43;为一个语言联邦</title>
+      <link>https://z-zhang.gitee.io/zzhang-blog/2021/04/01-%E8%A7%86c-%E4%B8%BA%E4%B8%80%E4%B8%AA%E8%AF%AD%E8%A8%80%E8%81%94%E9%82%A6/</link>
+      <pubDate>Tue, 27 Apr 2021 21:42:54 +0800</pubDate>
+      
+      <guid>https://z-zhang.gitee.io/zzhang-blog/2021/04/01-%E8%A7%86c-%E4%B8%BA%E4%B8%80%E4%B8%AA%E8%AF%AD%E8%A8%80%E8%81%94%E9%82%A6/</guid>
+      <description>&lt;p&gt;View C++ as a federation of languages&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>静态绑定和动态绑定</title>
