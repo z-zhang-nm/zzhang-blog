@@ -1,5 +1,4 @@
 #!/bin/bash
-
 git pull
 
 if [[ $(git status -s) ]]
