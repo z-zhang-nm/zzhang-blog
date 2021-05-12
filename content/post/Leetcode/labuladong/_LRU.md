@@ -10,7 +10,7 @@ keywords:
 - tech
 #thumbnailImage: //example.com/image.jpg
 ---
-`LRU`的全称是`Least Recently Used`，即最近最少使用缓存
+`LRU`的全称是`Least Recently Used`，即最近最少使用淘汰算法
 <!--more-->
 [Leetcode.146](https://leetcode-cn.com/problems/lru-cache/)题就是要实现一个「LRU缓存机制」的数据结构`LRUCache`类，构造函数接收一个正整数作为容量；类提供两个接口，一个是`void put(key, val)`，如果关键字已经存在，则变更其数据值；如果关键字不存在，则插入该组「关键字-值」。当缓存容量达到上限时，它应该在写入新数据之前删除最久未使用的数据值，从而为新的数据值留出空间；另一个是`int get(int key)`，如果关键字`key`存在于缓存中，则返回关键字的值，否则返回 -1。
 
@@ -68,6 +68,8 @@ cache->put(1, 4);
 3. 怎么建立哈希表元素和链表元素之间的关系？
    1. 链表存储键值对`key-val`作为其节点
    2. 哈希表协助链表元素的定位，因此对应键值`key`存储链表元素的迭代器作为其`val`
+
+![数据结构图]()
 
 ```cpp
 class LRUCache {
