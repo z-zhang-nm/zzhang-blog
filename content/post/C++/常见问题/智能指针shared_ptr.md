@@ -3,6 +3,7 @@ title: "智能指针shared_ptr"
 date: 2020-07-28T14:49:40+08:00
 categories:
 - C++
+- 常见问题
 tags:
 - C++基础
 keywords:
