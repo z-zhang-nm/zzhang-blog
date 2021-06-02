@@ -24,7 +24,7 @@ target ... : prerequisites ...
 
 target就是一个目标文件，可以是中间目标文件也可以是执行文件，prerequisites就是要生成target所需要的文件或目标，command就是make需要执行的命令（任意Shell命令）；即target这一个或多个目标文件依赖于prerequisites中的文件，其生成规则定义在command中，若prerequisites中有一个以上的文件比target新的话，command命令就会被执行，这就是Makefile中最核心的内容。
 
-# 1 一个示例说明makefile的基本概念
+# 1 一个示例说明makefile的概貌
 ## 1.1 书写规则
 以一个示例来说明Makefile的书写规则：
 1. 如果工程未被编译过，那么所有C文件都要编译并被链接
@@ -86,3 +86,104 @@ clean:
 此时若需要加入新的`.o`文件，只需要修改objects变量即可。
 
 ## 1.4 自动推导
+make会自动推导文件及文件依赖关系后面的命令，因此也就没必要去在每一个`.o`文件后面都写上类似的命令，当make看到一个`.o`文件，它就会自动把`.c`文件加在依赖关系中，例如make找到一个`whatever.o`，那么其依赖文件就是`whatever.c`且`cc -c whatever.c`也会被推导出来。
+```
+objects=main.o kbd.o command.o display.o insert.o \
+        serach.o files.o utils.o
+edit: $(objects)
+  cc -o edit $(objects)
+main.o : defs.h
+kbd.o : defs.h command.h
+command.o : defs.h command.h
+display.o : defs.h buffer.h
+insert.o : defs.h buffer.h
+search.o : defs.h buffer.h
+files.o : defs.h buffer.h command.h
+utils.o : defs.h
+
+clean:
+  rm edit $(objects)
+```
+
+
+## 1.5 清空目标文件的规则
+每个makefile都应有清空目标文件（.o和执行文件）的规则，有利于重新编译和保持文件的清洁，一般比较稳健的做法是：
+```
+.PHONY:clean
+clean:
+  -rm edit $(objects)
+```
+
+`.PHONY`表示clean是个伪目标文件，rm前的小减号表示如果某些文件出现问题，但不要管，继续做后面的事儿。
+一般来说**clean都放在文件的最后**，也就不需要这个规则了。
+
+# 2 makefile总述
+## 2.1 makefile里有什么
+## 2.2 makefile的文件名
+## 2.3 引用其它makefile
+## 2.4 环境变量MAKEFILES
+## 2.5 make的工作方式
+
+# 3 书写规则
+## 3.1 规则举例
+## 3.2 规则的语法
+## 3.3 在规则中使用通配符
+## 3.4 文件搜寻
+## 3.5 伪目标
+## 3.6 多目标
+## 3.7 静态模式
+## 3.8 自动生成依赖性
+
+# 4 书写命令
+## 4.1 显示命令
+## 4.2 命令执行
+## 4.3 命令出错
+## 4.4 嵌套执行make
+## 4.5 定义命令包
+
+# 5 使用变量
+## 5.1 变量的基础
+## 5.2 变量中的变量
+## 5.3 变量高级用法
+## 5.4 追加变量值
+## 5.5 override指示符
+## 5.6 多行变量
+## 5.7 环境变量
+## 5.8 目标变量
+## 5.9 模式变量
+
+# 6 使用条件判断
+## 6.1 示例
+## 6.2 语法
+
+# 7 使用函数
+## 7.1 函数的调用语法
+## 7.2 字符串处理函数
+## 7.3 文件名操作函数
+## 7.4 foreach函数
+## 7.5 if函数
+## 7.6 call函数
+## 7.7 origin函数
+## 7.8 shell函数
+
+# 8 make的运行
+## 8.1 make的退出码
+## 8.2 指定makefile
+## 8.3 指定目标
+## 8.4 检查规则
+## 8.5 make的参数
+
+# 9 隐含规则
+## 9.1 使用隐含规则
+## 9.2 隐含规则一览
+## 9.3 隐含规则使用的变量
+## 9.4 隐含规则链
+## 9.5 定义模式规则
+## 9.6 老式风格的后缀规则
+## 9.7 隐含规则搜索算法
+
+# 10 使用make更新函数库文件
+## 10.1 函数库文件的成员
+## 10.2 函数库成员的隐含规则
+## 10.3 函数库文件的后缀规则
+## 10.4 注意事项
