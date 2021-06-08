@@ -121,8 +121,7 @@ clean:
   -rm edit $(objects)
 ```
 
-`.PHONY`表示`clean`是个伪目标文件，rm前的小减号表示如果某些文件出现问题，但不要管，继续做后面的事儿。
-一般来说**clean都放在文件的最后**，也就不需要这个规则了。
+`.PHONY`表示`clean`是个伪目标文件，rm前的小减号表示如果某些文件出现问题，但不要管，继续做后面的事儿，一般来说**clean都放在文件的最后**，也就不需要这个规则了。
 
 # 2 makefile总述
 
@@ -165,11 +164,108 @@ clean:
 7. 执行生成命令
 
 # 3 书写规则
+
+规则包含两个部分，一个是依赖关系，一个是生成目标的方法，规则的顺序很重要，makefile只有一个最终目标，第一条规则中的第一个目标为最终目标。
+
 ## 3.1 规则举例
+
+```
+foo.o: foo.c defs.h
+  cc -c -g foo.c
+```
+
+1. 文件依赖关系：`foo.o`依赖于`foo.c`和`defs.h`，如果`foo.c`和`defs.h`的文件日期比`foo.o`新，或`foo.o`不存在，那么依赖关系发生
+2. 生成命令：说明了如何生成`foo.o`（`foo.c`文件`include`了`defs.h`）
+
 ## 3.2 规则的语法
+
+```
+targets: prerequisites
+  command
+
+或这样写：
+targets: prerequisites;command
+```
+
+`targets`是文件名，可能有多个，以空格分隔，可以使用通配符；`command`是命令行，若不与`targets`写在一行，必须以`Tab`键开头，若与`targets`写在一行，用分号做为分隔；`prerequisites`是目标所依赖的文件。
+
 ## 3.3 在规则中使用通配符
+
+`make`支持三个通配符：`*`、`?`和`...`，波浪号`~`在文件名中也有比较特殊的用途，如`~/test`表示当前用户`$HOME`目录下的`test`目录，`~user/test`表示用户`user`的宿主目录下的`test`目录。
+
+如果文件名中包含通配符，那么需要用转义字符来表示真实的字符。
+
+```
+// 删除所有的`[.c]`文件
+clean:
+  rm -f *.o
+
+// 通配符用在变量中
+objects=*.o
+```
+
+注意若通配符用在变量中，并不是表示`[*.o]`会展开，它表示`objects`的值就是`*.o`；若需要通配符在变量中展开，可以这样写：
+
+```
+objects:=$(wildcard *.o) // 关键字wildcard后面进行介绍
+```
+
 ## 3.4 文件搜寻
+
+大型工程中的源文件一般会分类存放在不同目录下，当`make`需要去寻找文件的依赖关系时，可以把路径告诉`make`，让其自动去找，`make`默认只会在当前目录去找依赖文件和目标文件，若`Makefile`中指明了特殊变量`VPATH`，在当前目录找不到的情况下，会到指定的目录去找。
+
+```
+VPATH=src:../headers
+```
+`make`会顺序在`src`和`../headers`中进行搜索，目录由冒号分隔（当前目录永远是最高优先搜索的目录）。
+
+指定搜索路径的另一种方法是使用`make`的`vpath`关键字，它的使用方法有如下三种：
+1. `vpath <pattern> <directories>`：为符合模式`pattern`的文件指定搜索目录`directories`
+2. `vpath <pattern>`：清除符合模式`pattern`的文件的搜索目录
+3. `vpath`：清除所有已被设置好了的文件搜索目录
+
+`pattern`需要包含`%`字符，表示匹配零个或若干个字符，例如`%.h`表示所有以`.h`结尾的文件。
+
+`vpath`可以连续使用，以指定不同搜索策略，若先后出现相同的`pattern`，会按`vpath`语句的先后顺序执行搜索。
+
+```
+vpath %.c foo
+vpath %.c bar
+
+或：
+
+vpath %.c foo:bar
+```
+
 ## 3.5 伪目标
+
+伪目标不是一个文件，不能和文件名重名，`.PHONY`用来指明一个目标是伪目标，即不管是否有这个文件，这个目标就是伪目标。
+
+可以为伪目标指定依赖文件，且可以作为默认目标，只要将其放在第一个，例如若要生成若干个可执行文件：
+```
+all: prog1 prog2 prog3
+.PHONY: all
+
+prog1: prog1.o utils.o
+  cc -o prog1 prog1.o utils.o
+prog2: prog2.o
+  cc -o prog2 prog2.o
+prog3: prog3.o sort.o utils.o
+  cc -o prog3 prog3.o sort.o utils.o
+```
+
+目标可以成为依赖，伪目标同样可以：
+```
+.PHONY: cleanall cleanobj cleandiff
+
+cleanall: cleanobj cleandiff
+  rm program
+cleanobj:
+  rm *.o
+cleandiff:
+  rm *.diff
+```
+
 ## 3.6 多目标
 ## 3.7 静态模式
 ## 3.8 自动生成依赖性
