@@ -267,8 +267,98 @@ cleandiff:
 ```
 
 ## 3.6 多目标
+
+`make`支持多目标，当多个目标同时依赖于一个文件且其生成的命令大致相同，就可以将它们合并，目标生成命令中需要用自动化变量`$@`，关于自动化变量，将在后面介绍：
+```
+bigoutput littleoutput: text.g
+  generate text.g -$(subst output,,$@)>$@
+```
+
+上面的规则等价于：
+```
+bigoutput: text.g
+  generate text.g -big>bigoutput
+littleoutput: text.g
+  generate text.g -little>littleoutput
+```
+
+其中`-$(subst output,,$@)`中的`$`表示执行一个函数，函数名为`subst`，后面的为参数，关于函数后面再具体介绍，`$@`表示目标的集合，就像一个数组，依次取出目标，并执行命令。
+
 ## 3.7 静态模式
+
+静态模式可以更容易地定义多目标的规则，其语法如下：
+```
+<targets ...>: <target-pattern>:<prereq-patterns ...>
+  <commands>
+  ...
+```
+
+其中`targets`定义了一系列的目标文件；`target-pattern`指明了`targets`的模式，例如`%.o`表明`targets`集合中都是以`.o`结尾的；`prereq-patterns`是目标的依赖模式，它对`target-pattern`形成的模式再进行一次依赖目标的定义，例如`%.c`表明取`target-pattern`模式中的`%`并为其加上`.c`结尾，形成新的集合。
+
+```
+objects=foo.o bar.o
+all: $(objects)
+$(objects): %.o: %.c
+  $(CC) -c $(CFLAGS) $< -o $@
+```
+
+其中自动化变量`$<`和`$@`分别表示依赖目标集（foo.c bar.c）和目标集（foo.o bar.o），上面的规则等价于：
+```
+foo.o: foo.c
+  $(CC) -c $(CFLAGS) foo.c -o foo.o
+bar.o: bar.c
+  $(CC) -c $(CFLAGS) bar.c -o bar.o
+```
+
+再举一个静态模式更灵活用法的例子：
+```
+files=foo.elc bar.o lose.o
+$(filter %.o,$(files)): %.o: %.c
+  $(CC) -c $(CFLAGS) $< -o $@
+$(filter %.elc,$(files)): %.elc: %.el
+  emacs -f batch-byte-compile $<
+```
+
+其中`$(filter %.o,$(files))`表示调用`filter`函数进行过滤，只要`files`中模式为`%.o`的内容。
+
 ## 3.8 自动生成依赖性
+
+如果`main.c`中有一句包含语句`#include "defs.h"`，那`main.o`的依赖关系如下：
+```
+main.o: main.c defs.h
+```
+
+如果是一个比价大的工程，就必须知道哪些文件包含了哪些头文件，且加入和删除头文件时也要小心修改makefile，为了避免这种繁杂又易出错的做法，可以用编译器的`-M`选项，它可以自动寻找源文件中包含的头文件并生成一个依赖关系：
+```
+// 执行命令
+cc -M main.c
+// 输出
+main.o: main.c defs.h
+```
+
+注意若使用`GNU`的`C/C++`编译器，需要使用`-MM`，不然会把一些标准的头文件也包含进来：
+```
+gcc -M main.c
+// 输出
+main.o: main.c defs.h /usr/include/stdio.h ...
+
+gcc -MM main.c
+// 输出
+main.o: main.c defs.h
+```
+
+那么如何将编译器的这个功能应用于`makefile`呢？`GNU`组织建议把编译器为每一个源文件自动生成的依赖关系放到一个文件中，即为每一个`name.c`文件都生成一个`name.d`的`makefile`文件，`.d`文件存放对应`.c`文件的依赖关系；那么就可以让make自动更新或生成`name.d`文件并将其包含在主`makefile`中。
+
+下面是一个生成`.d`文件的模式规则
+```
+%.d: %.c
+  @set -e; rm -f $@; \
+  $(CC) -MM $(CPPFLAGS) $< > $@.$$$$; \
+  sed 's,\($*\)\.o[ :]*,\1.o $@ : ,g' < $@.$$$$ > $@; \
+  rm -f $@.$$$$
+```
+
+其中，`rm -f $@`表示删除所有目标，即`.d`文件；第二行表示为每个依赖文件（`$<`，即`.c`文件）生成依赖关系文件，`$$$$`表示一个随机编号，假设有一个`name.c`文件，那么可能会生成`name.d.12345`；第三行使用`sed`命令做了一个替换，详见[makefile写法详解](https://www.cnblogs.com/jiangzhaowei/p/5450555.html)和[makefile学习](https://www.cnblogs.com/Liu-Jing/p/8290118.html)。
 
 # 4 书写命令
 ## 4.1 显示命令
