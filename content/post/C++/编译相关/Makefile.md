@@ -150,6 +150,7 @@ clean:
 ## 2.4 环境变量MAKEFILES
 
 `make`命令对环境变量`MAKEFILES`的处理类似于`include`，这个变量中的值是其它`makefile`，由空格分隔，与`include`不同的是，从环境变量引入的其它`makefile`不会起作用且发生错误`make`也不会理会。
+
 一般不建议使用环境变量，因为定义之后所有的`makefile`都会受到影响，若有时`makefile`出现莫名其妙的错误，那就要看看是不是环境变量捣的鬼。
 
 ## 2.5 make的工作方式
@@ -406,13 +407,139 @@ exec2:
 
 ## 4.4 嵌套执行make
 
+一般不同模块或不同功能的源文件会放在不同的目录中，那就可以在每个目录都写一个该目录的`makefile`，这样会易于维护，方便模块化编译和分离编译。
 
+假设一个子目录名为`subdir`，那么总控`makefile`可以这样写：
+```
+// MAKE为定义的宏变量，某些情况make需要一些参数，定义为一个变量易于维护
+subsystem:
+  cd subdir && $(MAKE)
+// 等价于
+subsyatem:
+  $(MAKE) -C subdir
+```
+
+总控`makefile`的变量可以传递到下级`makefile`中，但不会覆盖下级`makefile`中的变量，除非指定了`-e`参数：
+```
+// 向下级传递变量
+export <variable ...>
+// 禁止向下传递
+unexport <variable ...>
+
+// 示例1
+export variable = value
+// 等价于（1）
+variable = value
+export variable
+// 等价于（2）
+export variable:=value
+// 等价于（3）
+variable:=value
+export variable
+
+// 示例2
+export variable += value
+// 等价于
+variable += value
+export variable
+
+// 示例3
+export //传递所有变量
+```
+
+`SHELL`和`MAKEFLAGS`这两个变量不管是否`export`都会向下传递，`MAKEFLAGS`包含了`make`的参数信息，若执行总控`makefile`有参数或上层`makefile`中定义了这个变量，那么`MAKEFLAGS`将是这些参数。
+
+若不想向下级传递参数，可以这样写：
+```
+subsystem:
+  cd subdir && MAKEFLAGS=
+```
+
+嵌套执行中若想打印当前工作目录，可以加上`-w`或`--print-directory`参数，注意`-s`会让`-w`失效。
 
 ## 4.5 定义命令包
 
+可以为相同的命令序列定义一个变量，以`define`开始，以`endef`结束：
+```
+define test
+<command1>
+<command2>
+endef
+```
+
 # 5 使用变量
+
+变量名字可以包含字符、数字、下划线（可以是数字开头），不应包含`:`、`#`、`=`或是空字符，大小写敏感，为了避免和系统变量冲突，推荐使用首字母大写的变量名。
+
 ## 5.1 变量的基础
+
+变量声明时需要给予初值，使用时需要在变量名前加`$`符号且最好使用`()`或`{}`把变量括起来，若要使用`$`符号，需要用`$$`表示。
+```
+objects=program.o foo.o utils.o
+program:$(objects)
+  cc -o program $(objects)
+$(objects):defs.h
+```
+
+变量会在使用它的地方精确地展开，就像`C++`中的宏一样。
+
 ## 5.2 变量中的变量
+
+可以使用其它变量的值来构造变量的值，`makefile`中有两种方式。
+
+第一种使用简单的`=`号，等号左侧是变量，右侧是变量的值，右侧变量的值可以定义在文件的任何一处，即可以使用后面定义的值：
+```
+foo = $(bar)
+bar = $(ugh)
+ugh = Huh?
+
+all:
+  echo $(foo) // 打印 Huh?
+```
+
+这种方式可能会有递归定义无限循环的问题，`make`是可以检测出这种错误的：
+```
+CFLAGS = $(CFLAGS) -O
+或：
+A = $(B)
+B = $(A)
+```
+
+第二种方式是使用`:=`操作符，与等号不同的是，这种方法前面的变量不能使用后面的变量，只能使用前面已经定义好的变量：
+```
+y := $(x) bar // y的值为 bar，而不是foo bar
+x := foo
+```
+
+> 定义一个值为一个空格的变量
+
+```
+nullstring:=
+space:=$(nullstring) #end of the line
+```
+
+`nullstring`是一个空变量，啥也没有，由于在操作符右侧很难描述一个空格，所以先用一个空变量来表明变量的值开始了，后面跟一个空格，再由注释表示变量定义的终止，这样就定义了一个空格的变量。
+
+注释的这种用法值得注意：
+```
+dir:=/foo/bar    #directory
+```
+
+`dir`变量后面跟了四个空格，若使用这个变量来指定其它目录，如`$(dir)/file`就会出问题。
+
+> 条件变量操作符
+
+```
+FOO?=bar
+```
+
+上面的例子表示若`FOO`没有被定义，那么变量的值就是`bar`，否则这条语句啥也不做，等价于：
+```
+ifeq ($(origin FOO), undefined)
+  FOO=bar
+endif
+```
+
 ## 5.3 变量高级用法
 ## 5.4 追加变量值
 ## 5.5 override指示符
