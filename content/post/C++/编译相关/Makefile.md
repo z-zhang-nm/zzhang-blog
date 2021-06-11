@@ -630,11 +630,34 @@ variable+=more // 会发生变量的递归定义
 
 ## 5.5 override指示符
 
-若有变量是通过`make`的命令行参数设置的，那么`makefile`中
+若有变量是通过`make`的命令行参数设置的，那么`makefile`中对这个变量的赋值会被忽略，若需要设置这类参数的值，可以使用`override`指示符，也可用于多行变量：
+```
+override <variable> = <value>
+override <variable> := <value>
+```
 
 ## 5.6 多行变量
+
+使用`define`关键字设置变量的值时可以换行，`define`后面跟变量的名字，重起一行定义变量的值，定义以`endef`关键字结束。
+
+变量的值可以包含函数、命令、文字或其它变量，由于`makefile`中命令需要以`[Tab]`键开头，如果用`define`定义命令变量中没有以`[Tab]`键开头，那么`make`就不会将其认为是命令。
+```
+define two-lines
+echo foo
+echo $(bar)
+endef
+```
+
 ## 5.7 环境变量
+
+`makefile`中定义的变量或`make`命令行参数变量会覆盖系统环境变量，若`make`指定了`-e`参数，那么系统环境变量将覆盖`makefile`中定义的变量。
+
+当`make`嵌套调用时，上层`makefile`中定义的变量会以系统环境变量的方式传递到下层`makefile`，默认情况下只有通过命令行设置的变量会被传递，定义在文件中的变量需要使用`export`关键字声明才会传递。
+
 ## 5.8 目标变量
+
+
+
 ## 5.9 模式变量
 
 # 6 使用条件判断
