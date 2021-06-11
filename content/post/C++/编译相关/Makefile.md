@@ -541,8 +541,97 @@ endif
 ```
 
 ## 5.3 变量高级用法
+
+### 5.3.1 变量值的替换
+
+`$(var:a=b)`或`${var:a=b}`意思是将变量`var`中所有以`a`结尾（结尾指的是空格或结束符）的部分的`a`替换为`b`。
+
+```
+foo:=a.o b.o c.o
+bar:=$(foo:.o=.c) // bar的值为a.c b.c c.c
+```
+
+或者使用静态模式进行替换：
+```
+foo:=a.o b.o c.o
+bar:=$(foo:%.o=%.c) // bar的值为a.c b.c c.c
+```
+
+### 把变量的值再当成变量
+
+```
+x = y // 注意是 x=y 而不是 x=$(y)
+y = z
+a:=$($(x)) // 等价于 a:=$(y) 即 a:=z
+```
+
+```
+x = $(y)
+y = z
+a:=$($(x)) // 等价于 a:=$($(y)) 即 a:=$(z)
+```
+
+```
+x=var1
+var2:=Hello
+y=$(subst 1,2,$(x))
+z=y
+a:=$($($(z)))
+```
+
+上例中，首先将`$($($(z)))`扩展为`$($(y))`，再次扩展为`$($(subst 1,2$(x)))`，而`$(subst 1,2$(x))`的值为`var2`，则再次扩展为`$(var)`即`Hello`。
+
+甚至可以用多个变量组成一个变量的名字：
+```
+first_second = Hello
+a = first
+b = second
+all = $($(a)_$(b)) // all 的值为 Hello
+```
+
+结合变量值替换技术的一个例子：
+```
+1_objects:=a.o b.o c.o
+2_objects:=d.o e.o f.o
+sources:=$($(x)_objects:.o=.c)
+```
+
+上例中若`$(x)`的值为`1`，那么`sources`的值为`a.c b.c c.c`，若`$(x)`的值为`2`，那么`sources`的值为`d.c e.c f.c`。
+
+> 把变量的值再当成变量的技术也可用在操作符左边
+
 ## 5.4 追加变量值
+
+使用`+=`操作符给变量追加值：
+```
+objects=main.o foo.o bar.o utils.o
+objects+=another.o
+```
+
+等价于：
+```
+objects=main.o foo.o bar.o utils.o
+objects:=$(objects) another.o // 注意是用的 := 赋值符
+```
+
+若变量之前未定义过，那么`+=`会自动变为`=`，若变量之前有定义，那么`+=`会继承定义时的赋值符：
+```
+variable:=value
+variable+=more
+
+// 等价于
+variable:=value
+variable:=$(variable) more
+
+// 若这样写
+variable=value
+variable+=more // 会发生变量的递归定义
+```
+
 ## 5.5 override指示符
+
+若有变量是通过`make`的命令行参数设置的，那么`makefile`中
+
 ## 5.6 多行变量
 ## 5.7 环境变量
 ## 5.8 目标变量
