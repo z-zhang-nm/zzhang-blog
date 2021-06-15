@@ -656,17 +656,202 @@ endef
 
 ## 5.8 目标变量
 
+除了自动化变量，`makefile`中定义的变量都是全局变量，也可以为某个目标设置局部变量，可以和全局变量同名，作用范围只在这条规则以及连带规则中：
+```
+<target ...> : <variable-assignment> // 赋值表达式
+// 针对make命令行带入的变量或系统环境变量
+<target ...> : override <variable-assignment>
+```
 
+当设置了一个局部变量，它会作用到这个目标所引发的所有规则中：
+```
+prog : CFLAGS = -g
+prog : prog.o foo.o bar.o
+  $(CC) $(CFLAGS) prog.o foo.o bar.o
+prog.o : prog.c
+  $(CC) $(CFLAGS) prog.c
+foo.o : foo.c
+  $(CC) $(CFLAGS) foo.c
+bar.o : bar.c
+  $(CC) $(CFLAGS) bar.c
+```
+
+上例中不管全局的`$(CFLAGS)`是什么，在`prog`目标及其引发的所有规则中，`$(CFLAGS)`都是`-g`。
 
 ## 5.9 模式变量
 
+模式变量可以把变量定义在符合这种模式的所有目标上，例如，可用如下方式给所有以`.o`结尾的目标定义目标变量：
+```
+%.o : CFLAGS = -o
+```
+
+模式变量的语法和目标变量一样：
+```
+<pattern ...> : <variable-assignment>
+<pattern ...> override <variable-assignment>
+```
+
 # 6 使用条件判断
 ## 6.1 示例
+
+```
+libs_for_gcc = -lgnu
+normal_libs =
+
+foo:$(objects)
+ifeq ($(CC),gcc)
+  $(CC) -o foo $(objects) $(libs_for_gcc)
+else
+  $(CC) -o foo $(objects) $(normal_libs)
+endif
+```
+
 ## 6.2 语法
 
+条件表达式的语法为：
+```
+<conditional-directive> //可以有多余的空格，但不能以[Tab]键开始
+<text-if-true>
+endif
+
+// 或
+<conditional-directive>
+<text-if-true>
+else
+<text-if-false>
+endif
+```
+
+其中`<conditional-directive>`表示条件关键字，有如下四个：
+
+### 6.2.1 ifeq
+
+```
+ifeq (<arg1>, <arg2>)
+ifeq '<arg1>' `<arg2>`
+ifeq "<arg1>" "<arg2>"
+ifeq '<arg1>' "<arg2>"
+```
+比较参数`arg1`和`arg2`的值是否相同，参数值可以使用`make`的函数。
+
+```
+ifeq ($(strip $(foo)),) // 如果函数返回值为空
+<text-if-empty>
+endif
+```
+
+### 6.2.2 ifneq
+
+```
+ifneq (<arg1>, <arg2>)
+ifneq '<arg1>' `<arg2>`
+ifneq "<arg1>" "<arg2>"
+ifneq '<arg1>' "<arg2>"
+```
+比较参数`arg1`和`arg2`的值是否相同，若不同为真
+
+### 6.2.3 ifdef
+
+```
+ifdef <variable-name>
+```
+
+如果变量`<variable-name>`的值非空，表达式为真；注意`ifdef`只是测试一个变量是否有值，并不会把变量扩展到当前位置：
+```
+// 示例1
+bar=
+foo=$(bar)
+ifdef foo
+frobozz=tes
+else
+forbozz=no
+endif
+
+// 示例2
+foo=
+ifdef foo
+frobozz=tes
+else
+forbozz=no
+endif
+```
+
+上例中示例1`$frobozz`的值为`yes`，示例2为`no`。
+
+### 6.2.4 ifndef
+
+与`ifdef`相反。
+
+注意`make`在读取`makefile`时就计算条件表达式的值，并根据其值选择语句，因此最好不要把自动化变量加入条件表达式，因为自动化变量是在运行时才有的。
+
 # 7 使用函数
+
+函数调用后，函数的返回值可以当做变量来使用。
+
 ## 7.1 函数的调用语法
+
+函数调用以`$`来标识，语法如下：
+```
+$(<function> <arguments>) // 参数间以逗号隔开，函数名和参数间以空格隔开
+// 或
+${<function> <arguments>}
+```
+
 ## 7.2 字符串处理函数
+
+### 7.2.1 字符串替换函数subst
+
+```
+$(subst <from>,<to>,<text>)
+```
+
+把字串`<text>`中的`<from>`替换为`<to>`，函数返回被替换过后的字符串。
+
+### 7.2.2 模式字符串替换函数patsubst
+
+```
+$(patsubst <pattern>,<replacement>,<text>)
+```
+
+查找`<text>`中的单词（以空格、Tab、回车或换行分隔）是否符合模式`<pattern>`，若匹配的话以`<replacement>`替换，`<pattern>`可以包括通配符`%`，表示任意长度的字串，如果`<replacement>`中也包含`%`，那么它将是`<pattern>`中的那个`%`所代表的字串；函数返回被替换过后的字符串。
+
+和`5.3.1 变量的替换`类似：
+```
+$(var:<pattern>=<replacement>)
+// 相当于
+$(patsubst <pattern>,<replacement>,$(var))
+```
+
+### 7.2.3 去空格函数strip
+
+```
+$(strip <string>)
+```
+
+去掉`<string>`开头和结尾的空字符，返回被去掉空格的字符串。
+
+### 7.2.4 查找字符串函数findstring
+
+```
+$(findstring <find>,<in>)
+```
+
+在字符串`<in>`中查找`<find>`字串，若找到返回`<find>`，否则返回空串。
+
+### 7.2.5 过滤函数filter
+
+```
+$(filter <pattern ...>,<text>)
+```
+
+以`<pattern>`模式过滤`<text>`字符串中的单词，返回符合模式的单词，可以有多个模式。
+
+### 7.2.6 反过滤函数filter-out
+
+```
+
+```
+
 ## 7.3 文件名操作函数
 ## 7.4 foreach函数
 ## 7.5 if函数
