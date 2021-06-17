@@ -883,9 +883,29 @@ $(wordlist <s>,<e>,<text>)
 $(words <text>)
 ```
 
+统计`<text>`中单词的个数，如果要取`<text>`中最后一个单词，可以这样写：
+```
+$(word $(words <text>), <text>)
+```
 
+### 7.2.11 首单词函数firstword
+
+```
+$(firstword <text>)
+```
+
+取字符串`<text>`中的第一个单词，与`$(word 1,<text>)`功能一样。
 
 ## 7.3 文件名操作函数
+
+### 7.3.1 取目录函数dir
+
+```
+$(dir <names ...>)
+```
+
+
+
 ## 7.4 foreach函数
 ## 7.5 if函数
 ## 7.6 call函数
